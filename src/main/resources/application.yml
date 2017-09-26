@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: paasta-delivery-pipeline-common-api
+
+---
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:mysql://SPRING-DATASOURCE-URL
+    username: SPRING-DATASOURCE-USER-NAME
+    password: SPRING-DATASOURCE-PASSWORD
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        strategy: org.hibernate.cfg.EJB3NamingStrategy
+    generate-ddl: false
+
+server:
+  port: {SERVER-PORT}
+
+logging:
+  level:
+    ROOT: INFO
+  path: classpath:logback-spring.xml
+  file: logs/application.log
+
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://SPRING-DATASOURCE-URL
+    username: SPRING-DATASOURCE-USER-NAME
+    password: SPRING-DATASOURCE-PASSWORD
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        strategy: org.hibernate.cfg.EJB3NamingStrategy
+    generate-ddl: false
+
+server:
+  port: {SERVER-PORT}
+
+logging:
+  level:
+    ROOT: DEBUG
+  path: classpath:logback-spring.xml
+  file: logs/application.log

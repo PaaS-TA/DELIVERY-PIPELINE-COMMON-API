@@ -11,10 +11,11 @@ import java.util.List;
 
 @Repository
 public interface GrantedAuthorityRepository extends JpaRepository<GrantedAuthority, String> {
-    //    GrantedAuthority findByInstanceUseIdAndAuthorityId(long instanceUseId, String authorityId);
+
     GrantedAuthority findTopByInstanceUseIdOrAuthority(Long instanceUseId, Authority authority);
 
     List<GrantedAuthority> findByInstanceUseId(Long instanceUseId);
 
-    //GrantedAuthority findOneByInstanceUseId(Long instanceUseId);
+    List<GrantedAuthority> findByAuthCode(Long pipelineId);
+
 }

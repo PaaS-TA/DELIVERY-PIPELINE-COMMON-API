@@ -47,9 +47,6 @@ public class GrantedAuthorityService {
         return grantedAuthorityRepository.findAll();
     }
 
-    /*public void deleteGrantedAuthorityRows(GrantedAuthority grantedAuthority){
-        grantedAuthorityRepository.delete(grantedAuthority);
-    }*/
 
 
     public List<GrantedAuthority> findByInstanceUseId(Long instanceUseId) {
@@ -58,6 +55,10 @@ public class GrantedAuthorityService {
 
     public void deleteGrantedAuthorityRows(List<GrantedAuthority> grantedAuthorities) {
         grantedAuthorityRepository.delete(grantedAuthorities);
+    }
+
+    public List<GrantedAuthority> findByAuthCode(Long pipelineId){
+        return grantedAuthorityRepository.findByAuthCode(pipelineId);
     }
 
 

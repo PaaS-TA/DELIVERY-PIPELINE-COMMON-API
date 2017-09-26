@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import paasta.delivery.pipeline.common.api.common.CommonService;
 import paasta.delivery.pipeline.common.api.common.Constants;
+import paasta.delivery.pipeline.common.api.domain.common.authority.GrantedAuthority;
+import paasta.delivery.pipeline.common.api.domain.common.authority.GrantedAuthorityService;
+
+import java.util.List;
 
 /**
  * Created by user on 2017-05-18.
@@ -19,19 +23,15 @@ public class PipelineService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PipelineService.class);
     private final CommonService commonService;
     private final PipelineRepository pipelineRepository;
+    private final GrantedAuthorityService grantedAuthorityService;
 
     @Autowired
-    public PipelineService(CommonService commonService, PipelineRepository pipelineRepository) {
+    public PipelineService(CommonService commonService, PipelineRepository pipelineRepository, GrantedAuthorityService grantedAuthorityService) {
         this.commonService = commonService;
         this.pipelineRepository = pipelineRepository;
+        this.grantedAuthorityService = grantedAuthorityService;
     }
 
-   /* public List<Pipeline> getPipelineList(String name) {
-        List<Pipeline> pipelineList = pipelineRepository.findAll(PipelineSpecifications.hasName(name));
-        //List<Pipeline> pipelineList = pipelineRepository.findAll();
-        logger.info("##### {}", pipelineList);
-        return pipelineList;
-    }*/
 
     public PipelineList getPipelineList(String suid, String reqName, Pageable pageable) {
         LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -76,6 +76,10 @@ public class PipelineService {
     }
 
     public String deletePipeline(Long id) {
+
+        List<GrantedAuthority> deleteGrantedAuthorities = grantedAuthorityService.findByAuthCode(id);
+        grantedAuthorityService.deleteGrantedAuthorityRows(deleteGrantedAuthorities);
+
         pipelineRepository.delete(id);
         return Constants.RESULT_STATUS_SUCCESS;
     }

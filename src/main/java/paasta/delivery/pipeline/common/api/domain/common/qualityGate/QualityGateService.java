@@ -42,7 +42,8 @@ public class QualityGateService {
 //    }
 
     public List<QualityGate> getQualityGateList(String serviceInstancesId) {
-        return qualityGateRepository.findAllByserviceInstancesId(serviceInstancesId);
+//        return qualityGateRepository.findAllByserviceInstancesId(serviceInstancesId);
+        return qualityGateRepository.findAll();
     }
 
     public QualityGate copyQualityGate(QualityGate qualityGate) {

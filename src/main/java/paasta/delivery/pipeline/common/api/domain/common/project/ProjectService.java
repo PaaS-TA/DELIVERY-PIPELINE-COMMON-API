@@ -51,9 +51,8 @@ public class ProjectService {
 //    }
 
     //시연후 수정
-    public List getProjectsList() {
-//        return projectRepository.findAllByserviceInstancesId();
-        return projectRepository.findAll();
+    public List getProjectsList(Project project) {
+        return projectRepository.findByserviceInstancesId(project.getServiceInstancesId());
     }
 
     public Project createProjects(Project project) {
@@ -85,7 +84,7 @@ public class ProjectService {
     public Project qualityGateProjectLiked(Project project) {
         Project result = new Project();
         if (project.getLinked().equals(false)) {
-            project.setQualityGateId("0");
+            project.setQualityGateId(0);
         }
 
         result = projectRepository.findOne(project.getId());
@@ -98,7 +97,7 @@ public class ProjectService {
     public Project qualityProfileProjectLiked(Project project) {
         Project result = new Project();
         if (project.getLinked().equals(false)) {
-            project.setQualityProfileId("0");
+            project.setQualityProfileId(0);
         }
 
         result = projectRepository.findOne(project.getId());
@@ -109,13 +108,13 @@ public class ProjectService {
 
     public String qualityProfileDelete(Project project){
         List<Project> result = new ArrayList<>();
-
-        project.setQualityProfileId(project.getId().toString());
+        int profileId = (int)(long)project.getId();
+        project.setQualityProfileId(profileId);
         result = projectRepository.findByServiceInstancesIdAndQualityProfileId(project.getServiceInstancesId(), project.getQualityProfileId());
 
         if(result.size() > 0){
             for(int i=0;i<result.size();i++){
-                result.get(i).setQualityProfileId("0");
+                result.get(i).setQualityProfileId(0);
                 projectRepository.save(result.get(i));
             }
         }
@@ -125,14 +124,14 @@ public class ProjectService {
 
     public String qualityGateDelete(Project project){
         List<Project> result = new ArrayList<>();
-
-        project.setQualityGateId(project.getId().toString());
+        int gateId = (int)(long)project.getId();
+        project.setQualityGateId(gateId);
 
         result = projectRepository.findByServiceInstancesIdAndQualityGateId(project.getServiceInstancesId(), project.getQualityGateId());
 
         if(result.size() > 0){
             for(int i = 0; i<result.size(); i++){
-                result.get(i).setQualityGateId("0");
+                result.get(i).setQualityGateId(0);
                 projectRepository.save(result.get(i));
             }
         }

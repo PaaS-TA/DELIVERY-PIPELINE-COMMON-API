@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-    List<Project> findAllByserviceInstancesId(String serviceInstancesId);
+    List<Project> findByserviceInstancesId(String serviceInstancesId);
 
 
     /**
@@ -21,7 +21,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
      * @param serviceInstancesId , qualityProfileId
      * @return the list
      */
-    List<Project> findByServiceInstancesIdAndQualityProfileId(String serviceInstancesId, String qualityProfileId);
+    List<Project> findByServiceInstancesIdAndQualityProfileId(String serviceInstancesId, int qualityProfileId);
 
 
     /**
@@ -30,5 +30,5 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
      * @param serviceInstancesId , qualityGateId
      * @return the list
      */
-    List<Project> findByServiceInstancesIdAndQualityGateId(String serviceInstancesId, String qualityGateId);
+    List<Project> findByServiceInstancesIdAndQualityGateId(String serviceInstancesId, int qualityGateId);
 }

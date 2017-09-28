@@ -49,10 +49,10 @@ public class Project {
     private String userGuid;
 
     @Column(name = "quality_profile_id")
-    private String qualityProfileId;
+    private int qualityProfileId;
 
     @Column(name = "quality_gate_id")
-    private String qualityGateId;
+    private int qualityGateId;
 
     @Column(name = "service_instances_id")
     private String serviceInstancesId;
@@ -134,19 +134,19 @@ public class Project {
         this.userGuid = userGuid;
     }
 
-    public String getQualityProfileId() {
+    public int getQualityProfileId() {
         return qualityProfileId;
     }
 
-    public void setQualityProfileId(String qualityProfileId) {
+    public void setQualityProfileId(int qualityProfileId) {
         this.qualityProfileId = qualityProfileId;
     }
 
-    public String getQualityGateId() {
+    public int getQualityGateId() {
         return qualityGateId;
     }
 
-    public void setQualityGateId(String qualityGateId) {
+    public void setQualityGateId(int qualityGateId) {
         this.qualityGateId = qualityGateId;
     }
 
@@ -196,8 +196,8 @@ public class Project {
                 ", orgGuid='" + orgGuid + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userGuid='" + userGuid + '\'' +
-                ", qualityProfileId='" + qualityProfileId + '\'' +
-                ", qualityGateId='" + qualityGateId + '\'' +
+                ", qualityProfileId=" + qualityProfileId +
+                ", qualityGateId=" + qualityGateId +
                 ", serviceInstancesId='" + serviceInstancesId + '\'' +
                 '}';
     }

@@ -144,9 +144,9 @@ public class ProjectController {
 //        return projectService.getProjectsList(serviceInstancesId);
 //    }
     //시연후 수정
-    @RequestMapping(value = "/projectsList", method = RequestMethod.GET)
-    public List getProjectsList() {
-        return projectService.getProjectsList();
+    @RequestMapping(value = "/projectsList", method = RequestMethod.POST)
+    public List getProjectsList(@RequestBody Project project) {
+        return projectService.getProjectsList(project);
     }
 
 

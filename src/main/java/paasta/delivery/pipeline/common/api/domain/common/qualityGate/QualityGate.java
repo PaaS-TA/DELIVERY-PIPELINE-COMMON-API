@@ -67,6 +67,7 @@ public class QualityGate {
     private String lastModifiedString;
 
 
+
     public Long getId() {
         return id;
     }

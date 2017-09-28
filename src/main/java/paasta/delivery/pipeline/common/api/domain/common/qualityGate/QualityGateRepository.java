@@ -20,5 +20,11 @@ public interface QualityGateRepository extends JpaRepository<QualityGate, Long> 
      */
     List<QualityGate> findByserviceInstancesIdOrDefaultYn(String serviceInstancesId,String defaultYn);
 
+    /**
+     * Find all by service instances id  order by  list.
+     *
+     * @param serviceInstancesId
+     * @return the QualityGate
+     */
     QualityGate findByServiceInstancesIdAndDefaultYn(String serviceInstancesId,String defaultYn);
 }

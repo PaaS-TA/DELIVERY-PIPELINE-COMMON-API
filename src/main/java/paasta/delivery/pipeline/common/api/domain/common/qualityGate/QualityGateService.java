@@ -17,7 +17,6 @@ public class QualityGateService {
 
     private final QualityGateRepository qualityGateRepository;
 
-
     @Autowired
     public QualityGateService(QualityGateRepository qualityGateRepository) {
         this.qualityGateRepository = qualityGateRepository;
@@ -81,7 +80,7 @@ public class QualityGateService {
     }
 
     public String qualityGateDefaultSetting(QualityGate qualityGate){
-
+        //삭제예정
         QualityGate result = new QualityGate();
         result.setDefaultYn("Y");
         result.setServiceInstancesId(qualityGate.getServiceInstancesId());

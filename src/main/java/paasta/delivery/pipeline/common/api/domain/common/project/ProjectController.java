@@ -202,7 +202,7 @@ public class ProjectController {
      * @param project
      * @return
      */
-    @RequestMapping(value = "/qualityProfileProjectLiked", method = RequestMethod.POST)
+    @RequestMapping(value = "/qualityProfileProjectLiked", method = RequestMethod.PUT)
     public Project qualityProfileProjectLiked(@RequestBody Project project) {
         return projectService.qualityProfileProjectLiked(project);
     }

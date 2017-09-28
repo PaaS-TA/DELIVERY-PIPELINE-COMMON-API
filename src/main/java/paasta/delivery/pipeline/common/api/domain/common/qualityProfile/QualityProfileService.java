@@ -62,9 +62,10 @@ public class QualityProfileService {
 //    }
     //시연후 수정
     public List getQualityProfileList(String serviceInstancesId) {
-/*        int qualityProfileDefault = 2;
-        List<QualityProfile> result = new ArrayList<>();*/
-        return qualityProfileRepository.findAllByserviceInstancesId(serviceInstancesId);
+        QualityProfile qualityProfile = new QualityProfile();
+        qualityProfile.setDefaultYn("Y");
+        qualityProfile.setServiceInstancesId(serviceInstancesId);
+        return qualityProfileRepository.findAllByserviceInstancesIdOrDefaultYn(qualityProfile.getServiceInstancesId(), qualityProfile.getDefaultYn());
     }
 
 
@@ -110,12 +111,12 @@ public class QualityProfileService {
 
         result.setDefaultYn("Y");
         result.setServiceInstancesId(qualityProfile.getServiceInstancesId());
-        result = qualityProfileRepository.findByServiceInstancesIdAndDefaultYn(result.getServiceInstancesId(),result.getDefaultYn());
+/*        result = qualityProfileRepository.findAllByserviceInstancesIdOrDefaultYn(result.getServiceInstancesId(),result.getDefaultYn());
 
         if(result != null){
             result.setDefaultYn("N");
             qualityProfileRepository.save(result);
-        }
+        }*/
 
         result = qualityProfileRepository.findOne(qualityProfile.getId());
         result.setDefaultYn("N");

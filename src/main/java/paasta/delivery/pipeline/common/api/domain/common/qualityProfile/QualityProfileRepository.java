@@ -13,21 +13,6 @@ import java.util.List;
 @Repository
 public interface QualityProfileRepository extends JpaRepository<QualityProfile, Long> {
 
-    /**
-     * Find all by service instances id  order by  list.
-     *
-     * @param serviceInstancesId
-     * @return the list
-     */
-    List<QualityProfile> findAllByserviceInstancesId(String serviceInstancesId);
-
-    /**
-     * Find all by quality profile default order by  list.
-     *
-     * @param qualityProfileDefault
-     * @return the list
-     */
-//    List<QualityProfile> findAllByQualityProfileDefault(int qualityProfileDefault);
 
     /**
      * Find all by service instances id and quality profile default order by  list.
@@ -35,7 +20,7 @@ public interface QualityProfileRepository extends JpaRepository<QualityProfile, 
      * @param serviceInstancesId
      * @return the list
      */
-    QualityProfile findByServiceInstancesIdAndDefaultYn(String serviceInstancesId, String defaultYn);
+    List<QualityProfile> findAllByserviceInstancesIdOrDefaultYn(String serviceInstancesId, String defaultYn);
 
 }
 

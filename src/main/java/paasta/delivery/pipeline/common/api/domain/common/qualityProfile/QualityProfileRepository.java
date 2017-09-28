@@ -21,6 +21,13 @@ public interface QualityProfileRepository extends JpaRepository<QualityProfile, 
      */
     List<QualityProfile> findAllByserviceInstancesId(String serviceInstancesId);
 
+    /**
+     * Find all by quality profile default order by  list.
+     *
+     * @param qualityProfileDefault
+     * @return the list
+     */
+//    List<QualityProfile> findAllByQualityProfileDefault(int qualityProfileDefault);
 
     /**
      * Find all by service instances id and quality profile default order by  list.
@@ -28,7 +35,7 @@ public interface QualityProfileRepository extends JpaRepository<QualityProfile, 
      * @param serviceInstancesId
      * @return the list
      */
-    QualityProfile findByServiceInstancesIdAndQualityProfileDefault(String serviceInstancesId, int qualityProfileDefault);
+    QualityProfile findByServiceInstancesIdAndDefaultYn(String serviceInstancesId, String defaultYn);
 
 }
 

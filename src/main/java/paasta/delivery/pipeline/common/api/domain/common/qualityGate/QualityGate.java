@@ -28,8 +28,8 @@ public class QualityGate {
 
     /*@Column(nullable = false)
     private Long sonarQgId;*/
-    @Column(name = "quality_gate_default")
-    private int qualityGateDefault;
+    @Column(name = "default_yn")
+    private String defaultYn;
 
     @Column(name = "org_name")
     private String orgName;
@@ -163,12 +163,12 @@ public class QualityGate {
         this.lastModifiedString = lastModifiedString;
     }
 
-    public int getQualityGateDefault() {
-        return qualityGateDefault;
+    public String getDefaultYn() {
+        return defaultYn;
     }
 
-    public void setQualityGateDefault(int qualityGateDefault) {
-        this.qualityGateDefault = qualityGateDefault;
+    public void setDefaultYn(String defaultYn) {
+        this.defaultYn = defaultYn;
     }
 
     @Override
@@ -176,7 +176,7 @@ public class QualityGate {
         return "QualityGate{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", qualityGateDefault=" + qualityGateDefault +
+                ", defaultYn='" + defaultYn + '\'' +
                 ", orgName='" + orgName + '\'' +
                 ", orgGuid='" + orgGuid + '\'' +
                 ", userName='" + userName + '\'' +

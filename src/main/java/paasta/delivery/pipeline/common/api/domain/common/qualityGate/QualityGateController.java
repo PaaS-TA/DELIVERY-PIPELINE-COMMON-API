@@ -50,8 +50,8 @@ public class QualityGateController {
 //        List<QualityGate> getList = qualityGateService.getQualityGateList(serviceInstancesId);
 //        return getList;
 //    }
-    @RequestMapping(value = "/qualityGateList/{serviceInstancesId:.+}", method = RequestMethod.GET)
-    public List getQualityGateList(@PathVariable String serviceInstancesId) {
+    @RequestMapping(value = "/qualityGateList", method = RequestMethod.GET)
+    public List getQualityGateList(@RequestParam String serviceInstancesId) {
         List<QualityGate> getList = qualityGateService.getQualityGateList(serviceInstancesId);
         return getList;
     }

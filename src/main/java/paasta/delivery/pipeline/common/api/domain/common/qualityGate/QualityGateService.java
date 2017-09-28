@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import paasta.delivery.pipeline.common.api.common.Constants;
 import paasta.delivery.pipeline.common.api.domain.common.projectRelation.ProjectRelationRepository;
 import paasta.delivery.pipeline.common.api.domain.common.projectRelation.ProjectRelationService;
+import paasta.delivery.pipeline.common.api.domain.common.qualityProfile.QualityProfile;
 
 import java.util.List;
 
@@ -15,14 +16,12 @@ import java.util.List;
 public class QualityGateService {
 
     private final QualityGateRepository qualityGateRepository;
-    private final ProjectRelationRepository projectRelationRepository;
-    private final ProjectRelationService projectRelationService;
+
 
     @Autowired
-    public QualityGateService(QualityGateRepository qualityGateRepository, ProjectRelationRepository projectRelationRepository, ProjectRelationService projectRelationService) {
+    public QualityGateService(QualityGateRepository qualityGateRepository) {
         this.qualityGateRepository = qualityGateRepository;
-        this.projectRelationRepository = projectRelationRepository;
-        this.projectRelationService = projectRelationService;
+
     }
 
 
@@ -42,8 +41,9 @@ public class QualityGateService {
 //    }
 
     public List<QualityGate> getQualityGateList(String serviceInstancesId) {
-//        return qualityGateRepository.findAllByserviceInstancesId(serviceInstancesId);
-        return qualityGateRepository.findAll();
+        QualityGate param = new QualityGate();
+        param.setDefaultYn("Y");
+        return qualityGateRepository.findByserviceInstancesIdOrDefaultYn(serviceInstancesId, param.getDefaultYn());
     }
 
     public QualityGate copyQualityGate(QualityGate qualityGate) {
@@ -51,7 +51,10 @@ public class QualityGateService {
     }
 
     public QualityGate updateQualityGate(QualityGate qualityGate) {
-        return qualityGateRepository.save(qualityGate);
+        QualityGate result = new QualityGate();
+        result = qualityGateRepository.findOne(qualityGate.getId());
+        result.setName(qualityGate.getName());
+        return qualityGateRepository.save(result);
     }
 
 
@@ -80,18 +83,18 @@ public class QualityGateService {
     public String qualityGateDefaultSetting(QualityGate qualityGate){
 
         QualityGate result = new QualityGate();
-        result.setQualityGateDefault(1);
+        result.setDefaultYn("Y");
         result.setServiceInstancesId(qualityGate.getServiceInstancesId());
-        result = qualityGateRepository.findByServiceInstancesIdAndQualityGateDefault(result.getServiceInstancesId(),result.getQualityGateDefault());
+        result = qualityGateRepository.findByServiceInstancesIdAndDefaultYn(result.getServiceInstancesId(),result.getDefaultYn());
 
         if(result != null){
-            result.setQualityGateDefault(0);
+            result.setDefaultYn("N");
             qualityGateRepository.save(result);
         }
 
 
         result = qualityGateRepository.findOne(qualityGate.getId());
-        result.setQualityGateDefault(1);
+        result.setDefaultYn("Y");
         qualityGateRepository.save(result);
 
         return Constants.RESULT_STATUS_SUCCESS;

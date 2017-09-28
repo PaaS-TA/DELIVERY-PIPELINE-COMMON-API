@@ -40,8 +40,8 @@ public class QualityProfile {
     @Column(name = "language_name", nullable = false)
     private String languageName;
 
-    @Column(name = "quality_profile_default", nullable = false)
-    private int qualityProfileDefault;
+    @Column(name = "default_yn")
+    private String defaultYn;
 
     @Column(name = "service_instances_id", nullable = false)
     private String serviceInstancesId;
@@ -183,12 +183,12 @@ public class QualityProfile {
         this.resultStatus = resultStatus;
     }
 
-    public int getQualityProfileDefault() {
-        return qualityProfileDefault;
+    public String getDefaultYn() {
+        return defaultYn;
     }
 
-    public void setQualityProfileDefault(int qualityProfileDefault) {
-        this.qualityProfileDefault = qualityProfileDefault;
+    public void setDefaultYn(String defaultYn) {
+        this.defaultYn = defaultYn;
     }
 
     @Override
@@ -200,7 +200,7 @@ public class QualityProfile {
                 ", sonarKey='" + sonarKey + '\'' +
                 ", language='" + language + '\'' +
                 ", languageName='" + languageName + '\'' +
-                ", qualityProfileDefault=" + qualityProfileDefault +
+                ", defaultYn='" + defaultYn + '\'' +
                 ", serviceInstancesId='" + serviceInstancesId + '\'' +
                 ", projectIdList=" + projectIdList +
                 ", activeRuleCount=" + activeRuleCount +

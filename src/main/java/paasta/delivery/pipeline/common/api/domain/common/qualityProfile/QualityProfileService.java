@@ -7,6 +7,7 @@ import paasta.delivery.pipeline.common.api.domain.common.projectRelation.Project
 import paasta.delivery.pipeline.common.api.domain.common.projectRelation.ProjectRelationRepository;
 import paasta.delivery.pipeline.common.api.domain.common.projectRelation.ProjectRelationService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,8 +61,10 @@ public class QualityProfileService {
 //        return qualityProfileRepository.findAllByserviceInstancesId(serviceInstancesId);
 //    }
     //시연후 수정
-    public List getQualityProfileList() {
-        return qualityProfileRepository.findAll();
+    public List getQualityProfileList(String serviceInstancesId) {
+/*        int qualityProfileDefault = 2;
+        List<QualityProfile> result = new ArrayList<>();*/
+        return qualityProfileRepository.findAllByserviceInstancesId(serviceInstancesId);
     }
 
 
@@ -105,17 +108,17 @@ public class QualityProfileService {
     public String qualityProfileDefaultSetting(QualityProfile qualityProfile){
         QualityProfile result = new QualityProfile();
 
-        result.setQualityProfileDefault(1);
+        result.setDefaultYn("Y");
         result.setServiceInstancesId(qualityProfile.getServiceInstancesId());
-        result = qualityProfileRepository.findByServiceInstancesIdAndQualityProfileDefault(result.getServiceInstancesId(),result.getQualityProfileDefault());
+        result = qualityProfileRepository.findByServiceInstancesIdAndDefaultYn(result.getServiceInstancesId(),result.getDefaultYn());
 
         if(result != null){
-            result.setQualityProfileDefault(0);
+            result.setDefaultYn("N");
             qualityProfileRepository.save(result);
         }
 
         result = qualityProfileRepository.findOne(qualityProfile.getId());
-        result.setQualityProfileDefault(1);
+        result.setDefaultYn("N");
         qualityProfileRepository.save(result);
         return Constants.RESULT_STATUS_SUCCESS;
     }

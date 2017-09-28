@@ -84,8 +84,8 @@ public class QualityProfileController {
 //    }
     //시연후 수정
     @RequestMapping(value = "/qualityProfileList", method = RequestMethod.GET)
-    public List getQualityProfileList() {
-        return qualityProfileService.getQualityProfileList();
+    public List getQualityProfileList(String serviceInstancesId) {
+        return qualityProfileService.getQualityProfileList(serviceInstancesId);
     }
 
 

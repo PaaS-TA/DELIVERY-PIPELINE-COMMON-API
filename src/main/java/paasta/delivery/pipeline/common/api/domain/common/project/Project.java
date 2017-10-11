@@ -59,6 +59,7 @@ public class Project {
     @Column(name = "pipeline_id")
     private int pipelineId;
 
+
     @Column(name = "job_id")
     private Long jobId;
 

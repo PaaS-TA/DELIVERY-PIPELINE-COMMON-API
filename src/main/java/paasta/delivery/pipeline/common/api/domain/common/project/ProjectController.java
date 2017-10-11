@@ -156,7 +156,7 @@ public class ProjectController {
      * @param project
      * @return project
      */
-    @RequestMapping(value = "/projectsCreate", method = RequestMethod.PUT)
+    @RequestMapping(value = "/projectsCreate", method = RequestMethod.POST)
     public Project createProjects(@RequestBody Project project) {
         return projectService.createProjects(project);
     }

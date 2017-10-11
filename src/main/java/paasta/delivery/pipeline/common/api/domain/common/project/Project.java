@@ -57,6 +57,12 @@ public class Project {
     @Column(name = "service_instances_id")
     private String serviceInstancesId;
 
+    @Column(name = "pipeline_id")
+    private int pipelineId;
+
+    @Column(name = "job_id")
+    private Long jobId;
+
     /*@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ProjectQualityGate> projectQualityGateList;*/
@@ -182,6 +188,22 @@ public class Project {
         this.linked = linked;
     }
 
+    public int getPipelineId() {
+        return pipelineId;
+    }
+
+    public void setPipelineId(int pipelineId) {
+        this.pipelineId = pipelineId;
+    }
+
+    public Long getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(Long jobId) {
+        this.jobId = jobId;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
@@ -199,6 +221,8 @@ public class Project {
                 ", qualityProfileId=" + qualityProfileId +
                 ", qualityGateId=" + qualityGateId +
                 ", serviceInstancesId='" + serviceInstancesId + '\'' +
+                ", pipelineId=" + pipelineId +
+                ", jobId=" + jobId +
                 '}';
     }
 

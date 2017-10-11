@@ -137,16 +137,16 @@ public class ProjectController {
     }
 
 
-    /////////////////////////////////////////
 
-    //    @RequestMapping(value = "/projectsList", method = RequestMethod.GET)
-//    public List getProjectsList(@RequestParam String serviceInstancesId){
-//        return projectService.getProjectsList(serviceInstancesId);
-//    }
-    //시연후 수정
     @RequestMapping(value = "/projectsList", method = RequestMethod.POST)
     public List getProjectsList(@RequestBody Project project) {
         return projectService.getProjectsList(project);
+    }
+
+
+    @RequestMapping(value = "/getProject", method = RequestMethod.POST)
+    public List getProject(@RequestBody Project project){
+        return projectService.getProject(project);
     }
 
 
@@ -156,7 +156,7 @@ public class ProjectController {
      * @param project
      * @return project
      */
-    @RequestMapping(value = "/projectsCreate", method = RequestMethod.POST)
+    @RequestMapping(value = "/projectsCreate", method = RequestMethod.PUT)
     public Project createProjects(@RequestBody Project project) {
         return projectService.createProjects(project);
     }
@@ -168,7 +168,7 @@ public class ProjectController {
      * @param project
      * @return project
      */
-    @RequestMapping(value = "/projectsDelete", method = RequestMethod.POST)
+    @RequestMapping(value = "/projectsDelete", method = RequestMethod.DELETE)
     public Project deleteProjects(@RequestBody Project project) {
         return projectService.deleteProject(project);
     }
@@ -179,7 +179,7 @@ public class ProjectController {
      * @param project
      * @return project
      */
-    @RequestMapping(value = "/projectsUpdate", method = RequestMethod.POST)
+    @RequestMapping(value = "/projectsUpdate", method = RequestMethod.PUT)
     public Project updateProjects(@RequestBody Project project) {
         return projectService.updateProject(project);
     }

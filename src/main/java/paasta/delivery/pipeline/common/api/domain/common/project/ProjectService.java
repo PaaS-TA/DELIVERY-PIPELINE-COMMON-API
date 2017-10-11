@@ -55,6 +55,10 @@ public class ProjectService {
         return projectRepository.findByserviceInstancesId(project.getServiceInstancesId());
     }
 
+    public List getProject(Project project){
+        return projectRepository.findByserviceInstancesIdAndPipelineId(project.getServiceInstancesId(), project.getPipelineId());
+    }
+
     public Project createProjects(Project project) {
         return projectRepository.save(project);
     }
@@ -69,14 +73,9 @@ public class ProjectService {
         Project result = new Project();
         result = projectRepository.findOne(project.getId());
         result.setName(project.getName());
+        result.setQualityGateId(project.getQualityGateId());
+        result.setQualityProfileId(project.getQualityProfileId());
 
-/*        if(!project.getQualityProfileId().equals("")){
-            result.setQualityGateId(project.getQualityGateId());
-        }
-
-        if(!project.getQualityProfileId().equals("")){
-            result.setQualityProfileId(project.getQualityProfileId());
-        }*/
         return projectRepository.save(result);
     }
 

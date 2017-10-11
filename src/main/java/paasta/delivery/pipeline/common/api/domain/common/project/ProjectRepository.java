@@ -31,4 +31,14 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
      * @return the list
      */
     List<Project> findByServiceInstancesIdAndQualityGateId(String serviceInstancesId, int qualityGateId);
+
+
+    /**
+     * Find all by service instances id and pipeline id order by  project.
+     *
+     * @param serviceInstancesId , pipelineId, jobId
+     * @return the Project
+     */
+    List<Project> findByserviceInstancesIdAndPipelineId(String serviceInstancesId, int pipelineId);
+
 }

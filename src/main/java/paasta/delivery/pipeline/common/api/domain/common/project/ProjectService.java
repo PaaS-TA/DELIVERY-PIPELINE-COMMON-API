@@ -137,5 +137,10 @@ public class ProjectService {
         return Constants.RESULT_STATUS_SUCCESS;
     }
 
+    //projectKey 값 가져오기
+    public Project getProjectKey(Project project){
+        return projectRepository.findOne(project.getId());
+    }
+
 
 }

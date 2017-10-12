@@ -196,11 +196,11 @@ public class Project {
         this.pipelineId = pipelineId;
     }
 
-    public Long getJobId() {
+    public long getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long jobId) {
+    public void setJobId(long jobId) {
         this.jobId = jobId;
     }
 

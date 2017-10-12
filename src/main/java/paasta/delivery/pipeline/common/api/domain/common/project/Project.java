@@ -25,11 +25,18 @@ public class Project {
     @Column(name = "id")
     private Long id;
 
+
     @JsonProperty("sonarKey")
     @Column(name = "sonar_key", nullable = false)
     private String sonarKey; // sonarqube의 key 값
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "project_name")
+    private String projectName;
+
+    @Column(name = "sonar_name")
+    private String sonarName;
+
+    @Column(name = "name")
     private String name;
 
     @Column(name = "qualifier")
@@ -76,12 +83,20 @@ public class Project {
     private QualityProfile qualityProfile;*/
 
 
-    public String getName() {
-        return name;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getSonarName() {
+        return sonarName;
+    }
+
+    public void setSonarName(String sonarName) {
+        this.sonarName = sonarName;
     }
 
     public Long getId() {
@@ -204,6 +219,14 @@ public class Project {
         this.jobId = jobId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
@@ -212,6 +235,8 @@ public class Project {
                 ", linked=" + linked +
                 ", id=" + id +
                 ", sonarKey='" + sonarKey + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", sonarName='" + sonarName + '\'' +
                 ", name='" + name + '\'' +
                 ", qualifier='" + qualifier + '\'' +
                 ", orgName='" + orgName + '\'' +

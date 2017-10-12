@@ -121,20 +121,20 @@ public class ProjectController {
 */
 
 
-    /**
+/*    *//**
      * Project 수정
      *
-     * @param id
-     * @param reqProject
+     * @param
+     * @param
      * @return
-     */
+     *//*
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Project updateProject(@PathVariable Long id, @RequestBody Project reqProject) {
         Project project = projectService.getProject(id);
         project.setId(id);
         project.setName(reqProject.getName());
         return projectService.updateProject(project);
-    }
+    }*/
 
 
 
@@ -190,7 +190,7 @@ public class ProjectController {
      * @param project
      * @return
      */
-    @RequestMapping(value = "/qualityGateProjectLiked", method = RequestMethod.POST)
+    @RequestMapping(value = "/qualityGateProjectLiked", method = RequestMethod.PUT)
     public Project qualityGateProjectLiked(@RequestBody Project project) {
         return projectService.qualityGateProjectLiked(project);
     }

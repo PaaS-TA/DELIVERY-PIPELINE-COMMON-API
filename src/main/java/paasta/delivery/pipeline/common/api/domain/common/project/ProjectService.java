@@ -74,6 +74,7 @@ public class ProjectService {
         result = projectRepository.findOne(project.getId());
 
         result.setName(project.getName());
+//        result.setProjectName(project.getProjectName());
         result.setQualityGateId(project.getQualityGateId());
         result.setQualityProfileId(project.getQualityProfileId());
         result.setJobId(project.getJobId());
@@ -90,6 +91,7 @@ public class ProjectService {
 
         result = projectRepository.findOne(project.getId());
         result.setQualityGateId(project.getQualityGateId());
+
 
         return projectRepository.save(result);
     }

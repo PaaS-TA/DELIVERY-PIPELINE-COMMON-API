@@ -114,6 +114,9 @@ public class Job {
     @Column(name = "inspection_project_id")
     private String inspectionProjectId;
 
+    @Column(name = "inspection_project_key")
+    private String inspectionProjectKey;
+
     @Column(name = "inspection_profile_id")
     private String inspectionProfileId;
 
@@ -408,6 +411,14 @@ public class Job {
         this.inspectionProjectId = inspectionProjectId;
     }
 
+    public String getInspectionProjectKey() {
+        return inspectionProjectKey;
+    }
+
+    public void setInspectionProjectKey(String inspectionProjectKey) {
+        this.inspectionProjectKey = inspectionProjectKey;
+    }
+
     public String getInspectionProfileId() {
         return inspectionProfileId;
     }
@@ -534,57 +545,6 @@ public class Job {
 
     public void setPreviousJobNumberCount(String previousJobNumberCount) {
         this.previousJobNumberCount = previousJobNumberCount;
-    }
-
-    @Override
-    public String toString() {
-        return "Job{" +
-                "id=" + id +
-                ", serviceInstancesId='" + serviceInstancesId + '\'' +
-                ", pipelineId=" + pipelineId +
-                ", jobType='" + jobType + '\'' +
-                ", jobName='" + jobName + '\'' +
-                ", jobGuid='" + jobGuid + '\'' +
-                ", groupOrder=" + groupOrder +
-                ", jobOrder=" + jobOrder +
-                ", builderType='" + builderType + '\'' +
-                ", buildJobId=" + buildJobId +
-                ", jobTrigger='" + jobTrigger + '\'' +
-                ", postActionYn='" + postActionYn + '\'' +
-                ", repositoryType='" + repositoryType + '\'' +
-                ", repositoryUrl='" + repositoryUrl + '\'' +
-                ", repositoryId='" + repositoryId + '\'' +
-                ", repositoryAccountId='" + repositoryAccountId + '\'' +
-                ", repositoryBranch='" + repositoryBranch + '\'' +
-                ", repositoryCommitRevision='" + repositoryCommitRevision + '\'' +
-                ", cfInfoId=" + cfInfoId +
-                ", cfApiUrl='" + cfApiUrl + '\'' +
-                ", appName='" + appName + '\'' +
-                ", appUrl='" + appUrl + '\'' +
-                ", deployType='" + deployType + '\'' +
-                ", blueGreenDeployStatus='" + blueGreenDeployStatus + '\'' +
-                ", deployTargetOrg='" + deployTargetOrg + '\'' +
-                ", deployTargetSpace='" + deployTargetSpace + '\'' +
-                ", manifestUseYn='" + manifestUseYn + '\'' +
-                ", manifestScript='" + manifestScript + '\'' +
-                ", inspectionProjectId='" + inspectionProjectId + '\'' +
-                ", inspectionProfileId='" + inspectionProfileId + '\'' +
-                ", inspectionGateId='" + inspectionGateId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                ", createdString='" + createdString + '\'' +
-                ", lastModifiedString='" + lastModifiedString + '\'' +
-                ", buildJobName='" + buildJobName + '\'' +
-                ", lastJobStatus='" + lastJobStatus + '\'' +
-                ", lastJobModified='" + lastJobModified + '\'' +
-                ", lastSuccessJobNumber='" + lastSuccessJobNumber + '\'' +
-                ", lastGroupOrder='" + lastGroupOrder + '\'' +
-                ", lastJobOrder='" + lastJobOrder + '\'' +
-                ", lastJobNumber='" + lastJobNumber + '\'' +
-                ", pipelineName='" + pipelineName + '\'' +
-                ", previousJobNumberCount=" + previousJobNumberCount +
-                '}';
     }
 
 }

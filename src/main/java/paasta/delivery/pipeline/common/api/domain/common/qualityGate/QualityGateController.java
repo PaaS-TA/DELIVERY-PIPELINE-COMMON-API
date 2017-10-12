@@ -76,7 +76,7 @@ public class QualityGateController {
      * @param qualityGate
      * @return
      */
-    @RequestMapping(value = "/qualityGateCopy", method = RequestMethod.PUT)
+    @RequestMapping(value = "/qualityGateCopy", method = RequestMethod.POST)
     public QualityGate copyQualityGate(@RequestBody QualityGate qualityGate) {
         return qualityGateService.copyQualityGate(qualityGate);
     }
@@ -88,7 +88,7 @@ public class QualityGateController {
      * @param reqQualityGate
      * @return QualityGate
      */
-    @RequestMapping(value = "/qualityGateCreate", method = RequestMethod.PUT)
+    @RequestMapping(value = "/qualityGateCreate", method = RequestMethod.POST)
     public QualityGate createQualityGate(@RequestBody QualityGate reqQualityGate) {
         QualityGate newQualityGate = qualityGateService.createQualityGate(reqQualityGate);
         return newQualityGate;

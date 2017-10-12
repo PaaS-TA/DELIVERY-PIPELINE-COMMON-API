@@ -61,7 +61,7 @@ public class Project {
 
 
     @Column(name = "job_id")
-    private Long jobId;
+    private long jobId;
 
     /*@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @JsonIgnore

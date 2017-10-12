@@ -52,8 +52,7 @@ public class QualityGateController {
 //    }
     @RequestMapping(value = "/qualityGateList", method = RequestMethod.GET)
     public List getQualityGateList(@RequestParam String serviceInstancesId) {
-        List<QualityGate> getList = qualityGateService.getQualityGateList(serviceInstancesId);
-        return getList;
+        return qualityGateService.getQualityGateList(serviceInstancesId);
     }
 
 
@@ -115,11 +114,6 @@ public class QualityGateController {
      * @param
      * @return delete success message
      */
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    public String deleteQualityGate(@PathVariable Long id){
-//        return qualityGateService.deleteQualityGate(id);
-//    }
-    //시연후 수정
     @RequestMapping(value = "/qualityGateDelete", method = RequestMethod.DELETE)
     public String deleteQualityGate(@RequestBody QualityGate qualityGate) {
         return qualityGateService.deleteQualityGate(qualityGate);

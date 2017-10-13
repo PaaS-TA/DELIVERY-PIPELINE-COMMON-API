@@ -114,6 +114,9 @@ public class Job {
     @Column(name = "inspection_project_id")
     private String inspectionProjectId;
 
+    @Column(name = "inspection_project_name")
+    private String inspectionProjectName;
+
     @Column(name = "inspection_project_key")
     private String inspectionProjectKey;
 
@@ -409,6 +412,14 @@ public class Job {
 
     public void setInspectionProjectId(String inspectionProjectId) {
         this.inspectionProjectId = inspectionProjectId;
+    }
+
+    public String getInspectionProjectName() {
+        return inspectionProjectName;
+    }
+
+    public void setInspectionProjectName(String inspectionProjectName) {
+        this.inspectionProjectName = inspectionProjectName;
     }
 
     public String getInspectionProjectKey() {

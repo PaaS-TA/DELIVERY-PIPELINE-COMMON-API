@@ -364,10 +364,11 @@ public class JobServiceTest {
     public void getJobById_Valid_phase_2_ReturnModel() throws Exception {
         gTestResultJobModel.setJobType(String.valueOf(Constants.JobType.DEPLOY));
         gTestResultJobModel.setLastSuccessJobNumber(null);
-
+        gTestResultJobModel.setLastJobNumber(null);
 
         when(jobRepository.findOne(JOB_ID)).thenReturn(gTestResultJobModel);
         when(commonService.setPasswordByAES256(Constants.AES256Type.DECODE, gTestResultJobModel.getRepositoryAccountPassword())).thenReturn(DECODED_STRING);
+
 
         // TEST
         Job resultModel = jobService.getJobById((int) JOB_ID);
@@ -375,6 +376,24 @@ public class JobServiceTest {
         assertThat(resultModel).isNotNull();
         assertEquals(JOB_GUID, resultModel.getJobGuid());
         assertEquals("0", resultModel.getLastSuccessJobNumber());
+        assertEquals("0", resultModel.getLastJobNumber());
+    }
+
+
+    /**
+     * Gets job by id valid phase 3 return model.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void getJobById_Valid_phase_3_ReturnModel() throws Exception {
+        when(jobRepository.findOne(JOB_ID)).thenReturn(null);
+
+
+        // TEST
+        Job resultModel = jobService.getJobById((int) JOB_ID);
+
+        assertThat(resultModel).isNull();
     }
 
 

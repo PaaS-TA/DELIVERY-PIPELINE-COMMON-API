@@ -18,6 +18,7 @@ import paasta.delivery.pipeline.common.api.common.CommonService;
 import paasta.delivery.pipeline.common.api.common.Constants;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,12 +51,14 @@ public class CfInfoServiceTest {
     private static final String CF_API_URL = "test-cf-api-url";
     private static final String TEST_DESCRIPTION = "test-description";
     private static final String USER_ID = "test-user-id";
+    private static final Date TEST_CREATED = new Date();
     private static final String TEST_CREATED_STRING = "test-created-string";
+    private static final Date TEST_LAST_MODIFIED = new Date();
     private static final String TEST_LAST_MODIFIED_STRING = "test-last-modified-string";
     private static final String ENCODED_STRING = "test-cf-password-encoded";
     private static final String DECODED_STRING = "test-cf-password-decoded";
 
-    private static CfInfo gTestModel = null;
+    private static CfInfo gTestCfInfoModel = null;
     private static CfInfo gTestResultCfInfoModel = null;
     private static Pageable gTestPageable = null;
     private static CfInfoList gTestCfInfoList = null;
@@ -124,14 +127,17 @@ public class CfInfoServiceTest {
             }
         };
 
+        gTestCfInfoModel = new CfInfo();
+        gTestResultCfInfoModel = new CfInfo();
         gTestCfInfoList = new CfInfoList();
         gTestResultList = new ArrayList<>();
 
-        gTestModel = new CfInfo();
-        gTestResultCfInfoModel = new CfInfo();
-
-        gTestModel.setCfId(CF_INFO_ID);
-        gTestModel.setCfPassword(CF_INFO_PASSWORD);
+        gTestCfInfoModel.setCfId(CF_INFO_ID);
+        gTestCfInfoModel.setCfPassword(CF_INFO_PASSWORD);
+        gTestCfInfoModel.setCreated(TEST_CREATED);
+        gTestCfInfoModel.setLastModified(TEST_LAST_MODIFIED);
+        gTestCfInfoModel.setCreatedString(TEST_CREATED_STRING);
+        gTestCfInfoModel.setLastModifiedString(TEST_LAST_MODIFIED_STRING);
 
         gTestResultCfInfoModel.setId(CF_ID);
         gTestResultCfInfoModel.setServiceInstancesId(SERVICE_INSTANCES_ID);
@@ -146,7 +152,7 @@ public class CfInfoServiceTest {
         gTestResultCfInfoModel.setCreatedString(TEST_CREATED_STRING);
         gTestResultCfInfoModel.setLastModifiedString(TEST_LAST_MODIFIED_STRING);
 
-        gTestResultList.add(gTestModel);
+        gTestResultList.add(gTestCfInfoModel);
 
         cfInfoPage = new PageImpl<>(gTestResultList);
 
@@ -290,12 +296,12 @@ public class CfInfoServiceTest {
 
 
     /**
-     * Gets cf info by id valid return model.
+     * Gets cf info by id valid phase 1 return model.
      *
      * @throws Exception the exception
      */
     @Test
-    public void getCfInfoById_Valid_ReturnModel() throws Exception {
+    public void getCfInfoById_Valid_phase_1_ReturnModel() throws Exception {
         when(cfInfoRepository.findOne(CF_ID)).thenReturn(gTestResultCfInfoModel);
         when(commonService.setPasswordByAES256(Constants.AES256Type.DECODE, gTestResultCfInfoModel.getCfPassword())).thenReturn(DECODED_STRING);
 
@@ -316,6 +322,39 @@ public class CfInfoServiceTest {
         assertEquals(null, resultModel.getLastModified());
         assertEquals(null, resultModel.getCreatedString());
         assertEquals(null, resultModel.getLastModifiedString());
+    }
+
+
+    /**
+     * Gets cf info by id valid phase 2 return model.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void getCfInfoById_Valid_phase_2_ReturnModel() throws Exception {
+        gTestResultCfInfoModel.setCreated(gTestCfInfoModel.getCreated());
+        gTestResultCfInfoModel.setLastModified(gTestCfInfoModel.getLastModified());
+        gTestResultCfInfoModel.setCreatedString(gTestCfInfoModel.getCreatedString());
+        gTestResultCfInfoModel.setLastModifiedString(gTestCfInfoModel.getLastModifiedString());
+
+        when(cfInfoRepository.findOne(CF_ID)).thenReturn(gTestResultCfInfoModel);
+        when(commonService.setPasswordByAES256(Constants.AES256Type.DECODE, gTestResultCfInfoModel.getCfPassword())).thenReturn(DECODED_STRING);
+
+
+        // TEST
+        CfInfo resultModel = cfInfoService.getCfInfoById((int) CF_ID);
+
+        assertThat(resultModel).isNotNull();
+        assertEquals(CF_ID, resultModel.getId());
+        assertEquals(SERVICE_INSTANCES_ID, resultModel.getServiceInstancesId());
+        assertEquals(CF_INFO_ID, resultModel.getCfId());
+        assertEquals(CF_INFO_NAME, resultModel.getCfName());
+        assertEquals(DECODED_STRING, resultModel.getCfPassword());
+        assertEquals(CF_API_URL, resultModel.getCfApiUrl());
+        assertEquals(TEST_DESCRIPTION, resultModel.getDescription());
+        assertEquals(USER_ID, resultModel.getUserId());
+        assertEquals(TEST_CREATED, resultModel.getCreated());
+        assertEquals(TEST_LAST_MODIFIED, resultModel.getLastModified());
     }
 
 
@@ -345,11 +384,11 @@ public class CfInfoServiceTest {
     @Test
     public void createCfInfo_Valid_ReturnModel() throws Exception {
         when(commonService.setPasswordByAES256(Constants.AES256Type.ENCODE, gTestResultCfInfoModel.getCfPassword())).thenReturn(ENCODED_STRING);
-        when(cfInfoRepository.save(gTestModel)).thenReturn(gTestResultCfInfoModel);
+        when(cfInfoRepository.save(gTestCfInfoModel)).thenReturn(gTestResultCfInfoModel);
 
 
         // TEST
-        CfInfo resultModel = cfInfoService.createCfInfo(gTestModel);
+        CfInfo resultModel = cfInfoService.createCfInfo(gTestCfInfoModel);
 
         assertThat(resultModel).isNotNull();
         assertEquals(CF_ID, resultModel.getId());
@@ -364,14 +403,14 @@ public class CfInfoServiceTest {
      */
     @Test
     public void updateCfInfo_Valid_ReturnModel() throws Exception {
-        gTestModel.setId(CF_ID);
+        gTestCfInfoModel.setId(CF_ID);
 
         when(commonService.setPasswordByAES256(Constants.AES256Type.ENCODE, gTestResultCfInfoModel.getCfPassword())).thenReturn(ENCODED_STRING);
-        when(cfInfoRepository.save(gTestModel)).thenReturn(gTestResultCfInfoModel);
+        when(cfInfoRepository.save(gTestCfInfoModel)).thenReturn(gTestResultCfInfoModel);
 
 
         // TEST
-        CfInfo resultModel = cfInfoService.updateCfInfo(gTestModel);
+        CfInfo resultModel = cfInfoService.updateCfInfo(gTestCfInfoModel);
 
         assertThat(resultModel).isNotNull();
         assertEquals(CF_ID, resultModel.getId());

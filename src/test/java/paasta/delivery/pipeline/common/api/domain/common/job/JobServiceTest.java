@@ -83,6 +83,7 @@ public class JobServiceTest {
     private static final String LAST_SUCCESS_JOB_NUMBER = "test-last-success-job-number";
     private static final String LAST_GROUP_ORDER = "1";
     private static final String LAST_JOB_ORDER = "1";
+    private static final String LAST_JOB_NUMBER = "1";
     private static final String PIPELINE_NAME = "test-pipeline-name";
     private static final String PREVIOUS_JOB_NUMBER_COUNT = "test-previous-job-number";
     private static final String ENCODED_STRING = "test-job-repository-password-encoded";
@@ -161,15 +162,16 @@ public class JobServiceTest {
         gTestResultJobModel.setInspectionGateId(INSPECTION_GATE_ID);
         gTestResultJobModel.setUserId(USER_ID);
         gTestResultJobModel.setCreated(gTestJobModel.getCreated());
-        gTestResultJobModel.setCreatedString(TEST_CREATED_STRING);
+        gTestResultJobModel.setCreatedString(gTestJobModel.getCreatedString());
         gTestResultJobModel.setLastModified(gTestJobModel.getLastModified());
-        gTestResultJobModel.setLastModifiedString(TEST_LAST_MODIFIED_STRING);
+        gTestResultJobModel.setLastModifiedString(gTestJobModel.getLastModifiedString());
         gTestResultJobModel.setBuildJobName(BUILD_JOB_NAME);
         gTestResultJobModel.setLastJobStatus(LAST_JOB_STATUS);
         gTestResultJobModel.setLastJobModified(LAST_JOB_MODIFIED);
         gTestResultJobModel.setLastSuccessJobNumber(LAST_SUCCESS_JOB_NUMBER);
         gTestResultJobModel.setLastGroupOrder(LAST_GROUP_ORDER);
         gTestResultJobModel.setLastJobOrder(LAST_JOB_ORDER);
+        gTestResultJobModel.setLastJobNumber(LAST_JOB_NUMBER);
         gTestResultJobModel.setPipelineName(PIPELINE_NAME);
         gTestResultJobModel.setPreviousJobNumberCount(PREVIOUS_JOB_NUMBER_COUNT);
 
@@ -347,6 +349,7 @@ public class JobServiceTest {
         assertEquals(LAST_SUCCESS_JOB_NUMBER, resultModel.getLastSuccessJobNumber());
         assertEquals(LAST_GROUP_ORDER, resultModel.getLastGroupOrder());
         assertEquals(LAST_JOB_ORDER, resultModel.getLastJobOrder());
+        assertEquals(LAST_JOB_NUMBER, resultModel.getLastJobNumber());
         assertEquals(PIPELINE_NAME, resultModel.getPipelineName());
         assertEquals(PREVIOUS_JOB_NUMBER_COUNT, resultModel.getPreviousJobNumberCount());
     }
@@ -360,6 +363,7 @@ public class JobServiceTest {
     @Test
     public void getJobById_Valid_phase_2_ReturnModel() throws Exception {
         gTestResultJobModel.setJobType(String.valueOf(Constants.JobType.DEPLOY));
+        gTestResultJobModel.setLastSuccessJobNumber(null);
 
 
         when(jobRepository.findOne(JOB_ID)).thenReturn(gTestResultJobModel);
@@ -370,6 +374,7 @@ public class JobServiceTest {
 
         assertThat(resultModel).isNotNull();
         assertEquals(JOB_GUID, resultModel.getJobGuid());
+        assertEquals("0", resultModel.getLastSuccessJobNumber());
     }
 
 

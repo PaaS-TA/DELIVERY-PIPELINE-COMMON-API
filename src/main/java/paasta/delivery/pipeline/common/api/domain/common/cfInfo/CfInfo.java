@@ -159,21 +159,4 @@ public class CfInfo {
         this.lastModifiedString = lastModifiedString;
     }
 
-    @Override
-    public String toString() {
-        return "CfInfo{" +
-                "id=" + id +
-                ", serviceInstancesId='" + serviceInstancesId + '\'' +
-                ", cfName='" + cfName + '\'' +
-                ", cfId='" + cfId + '\'' +
-                ", cfApiUrl='" + cfApiUrl + '\'' +
-                ", description='" + description + '\'' +
-                ", userId='" + userId + '\'' +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                ", createdString='" + createdString + '\'' +
-                ", lastModifiedString='" + lastModifiedString + '\'' +
-                '}';
-    }
-
 }

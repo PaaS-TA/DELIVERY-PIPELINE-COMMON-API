@@ -44,7 +44,7 @@ public class CfInfoService {
      * @param cfName             the cf name
      * @return the cf info list pageable
      */
-    public CfInfoList getCfInfoListPageable(Pageable pageable, String serviceInstancesId, String cfName) {
+    CfInfoList getCfInfoListPageable(Pageable pageable, String serviceInstancesId, String cfName) {
         LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         LOGGER.info("  - PageNumber :: {}", pageable.getPageNumber());
         LOGGER.info("  - PageSize :: {}", pageable.getPageSize());
@@ -79,7 +79,7 @@ public class CfInfoService {
      * @param id the id
      * @return the cf info by id
      */
-    public CfInfo getCfInfoById(int id) {
+    CfInfo getCfInfoById(int id) {
         CfInfo resultModel = cfInfoRepository.findOne((long) id);
         resultModel.setCfPassword(commonService.setPasswordByAES256(Constants.AES256Type.DECODE, resultModel.getCfPassword()));
         return resultModel;
@@ -93,7 +93,7 @@ public class CfInfoService {
      * @param cfName             the cf name
      * @return the cf info count by service instances id and cf name
      */
-    public int getCfInfoCountByServiceInstancesIdAndCfName(String serviceInstancesId, String cfName) {
+    int getCfInfoCountByServiceInstancesIdAndCfName(String serviceInstancesId, String cfName) {
         return cfInfoRepository.countByServiceInstancesIdAndCfName(serviceInstancesId, cfName);
     }
 
@@ -104,7 +104,7 @@ public class CfInfoService {
      * @param cfInfo the cf info
      * @return the cf info
      */
-    public CfInfo createCfInfo(CfInfo cfInfo) {
+    CfInfo createCfInfo(CfInfo cfInfo) {
         cfInfo.setCfPassword(commonService.setPasswordByAES256(Constants.AES256Type.ENCODE, cfInfo.getCfPassword()));
         return cfInfoRepository.save(cfInfo);
     }
@@ -116,7 +116,7 @@ public class CfInfoService {
      * @param cfInfo the cf info
      * @return the cf info
      */
-    public CfInfo updateCfInfo(CfInfo cfInfo) {
+    CfInfo updateCfInfo(CfInfo cfInfo) {
         cfInfo.setCfPassword(commonService.setPasswordByAES256(Constants.AES256Type.ENCODE, cfInfo.getCfPassword()));
         return cfInfoRepository.save(cfInfo);
     }
@@ -128,7 +128,7 @@ public class CfInfoService {
      * @param id the id
      * @return the string
      */
-    public String deleteCfInoById(int id) {
+    String deleteCfInoById(int id) {
         cfInfoRepository.delete((long) id);
         return Constants.RESULT_STATUS_SUCCESS;
     }

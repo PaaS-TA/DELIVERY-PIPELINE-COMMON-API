@@ -37,7 +37,7 @@ public class JobHistoryService {
      * @param jobId    the job id
      * @return the job history list by job id
      */
-    public List<JobHistory> getJobHistoryListByJobId(Pageable pageable, int jobId) {
+    List<JobHistory> getJobHistoryListByJobId(Pageable pageable, int jobId) {
         return jobHistoryRepository.findByJobId(pageable, jobId).getContent();
     }
 
@@ -49,7 +49,7 @@ public class JobHistoryService {
      * @param status the status
      * @return the first job history by job id and status
      */
-    public JobHistory getFirstJobHistoryByJobIdAndStatus(int jobId, String status) {
+    JobHistory getFirstJobHistoryByJobIdAndStatus(int jobId, String status) {
         JobHistory jobHistory;
         JobHistory resultModel = new JobHistory();
 
@@ -73,7 +73,7 @@ public class JobHistoryService {
      * @param id the id
      * @return the job history
      */
-    public JobHistory getJobHistoryById(int id) {
+    JobHistory getJobHistoryById(int id) {
         return jobHistoryRepository.findOne(Long.valueOf(id));
     }
 
@@ -84,7 +84,7 @@ public class JobHistoryService {
      * @param jobHistory the custom job history
      * @return the custom job history
      */
-    public JobHistory createJobHistory(JobHistory jobHistory) {
+    JobHistory createJobHistory(JobHistory jobHistory) {
         return jobHistoryRepository.save(jobHistory);
     }
 
@@ -106,7 +106,7 @@ public class JobHistoryService {
      * @param jobId the job id
      * @return the string
      */
-    public String deleteJobHistoryByJobId(int jobId) {
+    String deleteJobHistoryByJobId(int jobId) {
         jobHistoryRepository.deleteByJobId(jobId);
         return Constants.RESULT_STATUS_SUCCESS;
     }

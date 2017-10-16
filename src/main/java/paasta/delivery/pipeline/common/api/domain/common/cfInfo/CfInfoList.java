@@ -68,16 +68,4 @@ public class CfInfoList {
         isLast = last;
     }
 
-    @Override
-    public String toString() {
-        return "CfInfoList{" +
-                "cfInfos=" + cfInfos +
-                ", page=" + page +
-                ", size=" + size +
-                ", totalPages=" + totalPages +
-                ", totalElements=" + totalElements +
-                ", isLast=" + isLast +
-                '}';
-    }
-
 }

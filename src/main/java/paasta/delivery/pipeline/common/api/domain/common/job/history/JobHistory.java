@@ -188,24 +188,4 @@ public class JobHistory {
         this.previousJobName = previousJobName;
     }
 
-    @Override
-    public String toString() {
-        return "JobHistory{" +
-                "id=" + id +
-                ", jobId=" + jobId +
-                ", previousJobNumber=" + previousJobNumber +
-                ", jobNumber=" + jobNumber +
-                ", duration=" + duration +
-                ", status='" + status + '\'' +
-                ", fileId=" + fileId +
-                ", triggerType='" + triggerType + '\'' +
-                ", userId='" + userId + '\'' +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                ", createdString='" + createdString + '\'' +
-                ", lastModifiedString='" + lastModifiedString + '\'' +
-                ", previousJobName='" + previousJobName + '\'' +
-                '}';
-    }
-
 }

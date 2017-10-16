@@ -40,7 +40,7 @@ public class JobService {
      * @param pipelineId the pipeline id
      * @return the job list by pipeline id order by group order asc job order asc
      */
-    public List<Job> getJobListByPipelineIdOrderByGroupOrderAscJobOrderAsc(int pipelineId) {
+    List<Job> getJobListByPipelineIdOrderByGroupOrderAscJobOrderAsc(int pipelineId) {
         return jobRepository.findAllByPipelineIdOrderByGroupOrderAscJobOrderAsc(pipelineId);
     }
 
@@ -53,7 +53,7 @@ public class JobService {
      * @param jobType    the job type
      * @return the job list pageable
      */
-    public List<Job> getJobListPageable(Pageable pageable, int pipelineId, String jobType) {
+    List<Job> getJobListPageable(Pageable pageable, int pipelineId, String jobType) {
         List<Job> resultList;
 
         if (pipelineId > 0) {
@@ -72,7 +72,7 @@ public class JobService {
      * @param id the id
      * @return the job by id
      */
-    public Job getJobById(int id) {
+    Job getJobById(int id) {
         Job resultModel = jobRepository.findOne((long) id);
         String jobType;
 
@@ -95,7 +95,7 @@ public class JobService {
      * @param jobName    the job name
      * @return the job count by job name
      */
-    public int getJobCountByJobName(int pipelineId, String jobName) {
+    int getJobCountByJobName(int pipelineId, String jobName) {
         return jobRepository.countByPipelineIdAndJobName(pipelineId, jobName);
     }
 
@@ -106,7 +106,7 @@ public class JobService {
      * @param pipelineId the pipeline id
      * @return the job max group order by pipeline id
      */
-    public int getJobMaxGroupOrderByPipelineId(int pipelineId) {
+    int getJobMaxGroupOrderByPipelineId(int pipelineId) {
         Job tempModel = jobRepository.findDistinctTopByPipelineId(pipelineId);
         int resultCount = 0;
 
@@ -124,7 +124,7 @@ public class JobService {
      * @param job the custom job
      * @return the custom job
      */
-    public Job createJob(Job job) {
+    Job createJob(Job job) {
         if (String.valueOf(Constants.JobType.BUILD).equals(job.getJobType())) {
             job.setRepositoryAccountPassword(commonService.setPasswordByAES256(Constants.AES256Type.ENCODE, job.getRepositoryAccountPassword()));
         }
@@ -139,7 +139,7 @@ public class JobService {
      * @param job the job
      * @return the job
      */
-    public Job updateJob(Job job) {
+    Job updateJob(Job job) {
         if (String.valueOf(Constants.JobType.BUILD).equals(job.getJobType())) {
             job.setRepositoryAccountPassword(commonService.setPasswordByAES256(Constants.AES256Type.ENCODE, job.getRepositoryAccountPassword()));
         }
@@ -154,7 +154,7 @@ public class JobService {
      * @param id the id
      * @return the string
      */
-    public String deleteJob(int id) {
+    String deleteJob(int id) {
         jobRepository.delete((long) id);
         return Constants.RESULT_STATUS_SUCCESS;
     }

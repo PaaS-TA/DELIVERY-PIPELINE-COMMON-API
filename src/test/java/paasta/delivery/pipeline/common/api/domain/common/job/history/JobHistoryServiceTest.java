@@ -1,4 +1,4 @@
-package paasta.delivery.pipeline.common.api.job.history;
+package paasta.delivery.pipeline.common.api.domain.common.job.history;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,11 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import paasta.delivery.pipeline.common.api.common.Constants;
-import paasta.delivery.pipeline.common.api.domain.common.job.history.JobHistory;
-import paasta.delivery.pipeline.common.api.domain.common.job.history.JobHistoryRepository;
-import paasta.delivery.pipeline.common.api.domain.common.job.history.JobHistoryService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,9 +40,21 @@ public class JobHistoryServiceTest {
 
     private static final int JOB_HISTORY_ID = 1;
     private static final int JOB_ID = 1;
+    private static final int PREVIOUS_JOB_NUMBER = 1;
+    private static final int JOB_NUMBER = 1;
+    private static final long TEST_DURATION = 1;
+    private static final String TEST_STATUS = Constants.RESULT_STATUS_SUCCESS;
+    private static final long FILE_ID = 1;
+    private static final String TRIGGER_TYPE = "test-trigger-type";
+    private static final String USER_ID = "test-user-id";
+    private static final Date TEST_CREATED = new Date();
+    private static final String TEST_CREATED_STRING = "test-created-string";
+    private static final Date TEST_LAST_MODIFIED = new Date();
+    private static final String TEST_LAST_MODIFIED_STRING = "test-last-modified-string";
+    private static final String PREVIOUS_JOB_NAME = "test-previous-job-name";
 
-    private static JobHistory gTestModel = null;
-    private static JobHistory gTestResultModel = null;
+    private static JobHistory gTestJobHistoryModel = null;
+    private static JobHistory gTestResultJobHistoryModel = null;
 
 
     @Mock
@@ -61,13 +71,29 @@ public class JobHistoryServiceTest {
      */
     @Before
     public void setUp() throws Exception {
-        gTestModel = new JobHistory();
-        gTestResultModel = new JobHistory();
+        gTestJobHistoryModel = new JobHistory();
+        gTestResultJobHistoryModel = new JobHistory();
 
-        gTestModel.setJobId(JOB_ID);
+        gTestJobHistoryModel.setJobId(JOB_ID);
+        gTestJobHistoryModel.setCreated(TEST_CREATED);
+        gTestJobHistoryModel.setLastModified(TEST_LAST_MODIFIED);
+        gTestJobHistoryModel.setCreatedString(TEST_CREATED_STRING);
+        gTestJobHistoryModel.setLastModifiedString(TEST_LAST_MODIFIED_STRING);
 
-        gTestResultModel.setId(JOB_HISTORY_ID);
-        gTestResultModel.setJobId(JOB_ID);
+        gTestResultJobHistoryModel.setId(JOB_HISTORY_ID);
+        gTestResultJobHistoryModel.setJobId(JOB_ID);
+        gTestResultJobHistoryModel.setPreviousJobNumber(PREVIOUS_JOB_NUMBER);
+        gTestResultJobHistoryModel.setJobNumber(JOB_NUMBER);
+        gTestResultJobHistoryModel.setDuration(TEST_DURATION);
+        gTestResultJobHistoryModel.setStatus(TEST_STATUS);
+        gTestResultJobHistoryModel.setFileId(FILE_ID);
+        gTestResultJobHistoryModel.setTriggerType(TRIGGER_TYPE);
+        gTestResultJobHistoryModel.setUserId(USER_ID);
+        gTestResultJobHistoryModel.setCreated(gTestJobHistoryModel.getCreated());
+        gTestResultJobHistoryModel.setLastModified(gTestJobHistoryModel.getLastModified());
+        gTestResultJobHistoryModel.setCreatedString(gTestJobHistoryModel.getCreatedString());
+        gTestResultJobHistoryModel.setLastModifiedString(gTestJobHistoryModel.getLastModifiedString());
+        gTestResultJobHistoryModel.setPreviousJobName(PREVIOUS_JOB_NAME);
     }
 
 
@@ -94,7 +120,7 @@ public class JobHistoryServiceTest {
     @Test
     public void getJobHistoryListByJobId_Valid_ReturnList() throws Exception {
         List<JobHistory> testList = new ArrayList<>();
-        testList.add(gTestModel);
+        testList.add(gTestJobHistoryModel);
 
         Page<JobHistory> testPage = new PageImpl<>(testList);
 
@@ -153,13 +179,13 @@ public class JobHistoryServiceTest {
 
 
     /**
-     * Gets first job history by job id and status valid return model.
+     * Gets first job history by job id and status valid phase 1 return model.
      *
      * @throws Exception the exception
      */
     @Test
-    public void getFirstJobHistoryByJobIdAndStatus_Valid_ReturnModel() throws Exception {
-        when(jobHistoryRepository.findFirstByJobIdOrderByCreatedDesc(JOB_HISTORY_ID)).thenReturn(gTestResultModel);
+    public void getFirstJobHistoryByJobIdAndStatus_Valid_phase_1_ReturnModel() throws Exception {
+        when(jobHistoryRepository.findFirstByJobIdOrderByCreatedDesc(JOB_HISTORY_ID)).thenReturn(gTestResultJobHistoryModel);
 
 
         // TEST
@@ -168,6 +194,52 @@ public class JobHistoryServiceTest {
         assertThat(resultModel).isNotNull();
         assertEquals(JOB_HISTORY_ID, resultModel.getId());
         assertEquals(JOB_ID, resultModel.getJobId());
+        assertEquals(PREVIOUS_JOB_NUMBER, resultModel.getPreviousJobNumber());
+        assertEquals(JOB_NUMBER, resultModel.getJobNumber());
+        assertEquals(TEST_DURATION, resultModel.getDuration());
+        assertEquals(TEST_STATUS, resultModel.getStatus());
+        assertEquals(FILE_ID, resultModel.getFileId());
+        assertEquals(TRIGGER_TYPE, resultModel.getTriggerType());
+        assertEquals(USER_ID, resultModel.getUserId());
+        assertEquals(TEST_CREATED, resultModel.getCreated());
+        assertEquals(TEST_LAST_MODIFIED, resultModel.getLastModified());
+        assertEquals(PREVIOUS_JOB_NAME, resultModel.getPreviousJobName());
+    }
+
+
+    /**
+     * Gets first job history by job id and status valid phase 2 return model.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void getFirstJobHistoryByJobIdAndStatus_Valid_phase_2_ReturnModel() throws Exception {
+        when(jobHistoryRepository.findFirstByJobIdAndStatusOrderByCreatedDesc(JOB_HISTORY_ID, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gTestResultJobHistoryModel);
+
+
+        // TEST
+        JobHistory resultModel = jobHistoryService.getFirstJobHistoryByJobIdAndStatus(JOB_HISTORY_ID, Constants.RESULT_STATUS_SUCCESS);
+
+        assertThat(resultModel).isNotNull();
+        assertEquals(JOB_HISTORY_ID, resultModel.getId());
+        assertEquals(JOB_ID, resultModel.getJobId());
+    }
+
+
+    /**
+     * Gets first job history by job id and status valid phase 3 return model.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void getFirstJobHistoryByJobIdAndStatus_Valid_phase_3_ReturnModel() throws Exception {
+        when(jobHistoryRepository.findFirstByJobIdAndStatusOrderByCreatedDesc(JOB_HISTORY_ID, Constants.RESULT_STATUS_SUCCESS)).thenReturn(null);
+
+
+        // TEST
+        JobHistory resultModel = jobHistoryService.getFirstJobHistoryByJobIdAndStatus(JOB_HISTORY_ID, Constants.RESULT_STATUS_SUCCESS);
+
+        assertThat(resultModel).isNotNull();
     }
 
 
@@ -178,7 +250,7 @@ public class JobHistoryServiceTest {
      */
     @Test
     public void getJobHistoryById_Valid_ReturnModel() throws Exception {
-        when(jobHistoryRepository.findOne(Long.valueOf(JOB_HISTORY_ID))).thenReturn(gTestResultModel);
+        when(jobHistoryRepository.findOne(Long.valueOf(JOB_HISTORY_ID))).thenReturn(gTestResultJobHistoryModel);
 
 
         // TEST
@@ -196,11 +268,11 @@ public class JobHistoryServiceTest {
      */
     @Test
     public void createJobHistory_ValidModel_ReturnModel() throws Exception {
-        when(jobHistoryRepository.save(gTestModel)).thenReturn(gTestResultModel);
+        when(jobHistoryRepository.save(gTestJobHistoryModel)).thenReturn(gTestResultJobHistoryModel);
 
 
         // TEST
-        JobHistory resultModel = jobHistoryService.createJobHistory(gTestModel);
+        JobHistory resultModel = jobHistoryService.createJobHistory(gTestJobHistoryModel);
 
         assertThat(resultModel).isNotNull();
         assertEquals(JOB_HISTORY_ID, resultModel.getJobId());
@@ -214,13 +286,13 @@ public class JobHistoryServiceTest {
      */
     @Test
     public void updateJobHistory_ValidModel_ReturnModel() throws Exception {
-        gTestModel.setId(JOB_HISTORY_ID);
+        gTestJobHistoryModel.setId(JOB_HISTORY_ID);
 
-        when(jobHistoryRepository.save(gTestModel)).thenReturn(gTestResultModel);
+        when(jobHistoryRepository.save(gTestJobHistoryModel)).thenReturn(gTestResultJobHistoryModel);
 
 
         // TEST
-        JobHistory resultModel = jobHistoryService.createJobHistory(gTestModel);
+        JobHistory resultModel = jobHistoryService.updateJobHistory(gTestJobHistoryModel);
 
         assertThat(resultModel).isNotNull();
         assertEquals(JOB_HISTORY_ID, resultModel.getJobId());

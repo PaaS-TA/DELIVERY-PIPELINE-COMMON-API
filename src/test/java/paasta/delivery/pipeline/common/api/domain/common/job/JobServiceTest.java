@@ -86,6 +86,7 @@ public class JobServiceTest {
     private static final String LAST_JOB_NUMBER = "1";
     private static final String PIPELINE_NAME = "test-pipeline-name";
     private static final String PREVIOUS_JOB_NUMBER_COUNT = "test-previous-job-number";
+    private static final String BLUD_DEPLOYED_COUNT = "0";
     private static final String ENCODED_STRING = "test-job-repository-password-encoded";
     private static final String DECODED_STRING = "test-cf-password-decoded";
 
@@ -174,6 +175,7 @@ public class JobServiceTest {
         gTestResultJobModel.setLastJobNumber(LAST_JOB_NUMBER);
         gTestResultJobModel.setPipelineName(PIPELINE_NAME);
         gTestResultJobModel.setPreviousJobNumberCount(PREVIOUS_JOB_NUMBER_COUNT);
+        gTestResultJobModel.setBlueDeployedCount(BLUD_DEPLOYED_COUNT);
 
         gTestResultJobList.add(gTestJobModel);
 
@@ -352,6 +354,7 @@ public class JobServiceTest {
         assertEquals(LAST_JOB_NUMBER, resultModel.getLastJobNumber());
         assertEquals(PIPELINE_NAME, resultModel.getPipelineName());
         assertEquals(PREVIOUS_JOB_NUMBER_COUNT, resultModel.getPreviousJobNumberCount());
+        assertEquals(BLUD_DEPLOYED_COUNT, resultModel.getBlueDeployedCount());
     }
 
 

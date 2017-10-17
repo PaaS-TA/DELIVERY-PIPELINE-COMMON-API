@@ -174,6 +174,9 @@ public class Job {
             " AND jh.id <= (SELECT jh3.id FROM job_history jh3 WHERE jh3.job_id = id AND jh3.status = 'SUCCESS' ORDER BY jh3.last_modified DESC LIMIT 1))")
     private String previousJobNumberCount;
 
+    @Formula("(SELECT COUNT(1) FROM job_history jh WHERE jh.job_id = id AND jh.status = 'BLUE_DEPLOY_SUCCESS')")
+    private String blueDeployedCount;
+
     public long getId() {
         return id;
     }
@@ -558,4 +561,11 @@ public class Job {
         this.previousJobNumberCount = previousJobNumberCount;
     }
 
+    public String getBlueDeployedCount() {
+        return blueDeployedCount;
+    }
+
+    public void setBlueDeployedCount(String blueDeployedCount) {
+        this.blueDeployedCount = blueDeployedCount;
+    }
 }

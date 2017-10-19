@@ -20,7 +20,7 @@ public interface QualityProfileRepository extends JpaRepository<QualityProfile, 
      * @param serviceInstancesId
      * @return the list
      */
-    List<QualityProfile> findAllByserviceInstancesIdOrDefaultYn(String serviceInstancesId, String defaultYn);
+    List<QualityProfile> findAllByserviceInstancesIdOrProfileDefaultYn(String serviceInstancesId, String defaultYn);
 
 }
 

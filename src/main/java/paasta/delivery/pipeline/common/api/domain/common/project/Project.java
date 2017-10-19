@@ -1,8 +1,12 @@
 package paasta.delivery.pipeline.common.api.domain.common.project;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by hrjin on 2017-06-23.
@@ -20,6 +24,15 @@ public class Project {
     @Transient
     private Boolean linked;
 
+
+
+
+    @Transient
+    private String gateDefaultYn;
+
+    @Transient
+    private String profileDefaultYn;
+
     // sonarqube에서 자동증가 되는 값을 리턴해주는데 이 값을 id 에 넣어줌.
     @Id
     @Column(name = "id")
@@ -35,6 +48,7 @@ public class Project {
 
     @Column(name = "sonar_name")
     private String sonarName;
+
 
     @Column(name = "name")
     private String name;
@@ -69,6 +83,17 @@ public class Project {
 
     @Column(name = "job_id")
     private long jobId;
+
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
+
+    @UpdateTimestamp
+    @Column(name = "last_modified", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModified;
+
 
     /*@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -227,12 +252,48 @@ public class Project {
         this.name = name;
     }
 
+
+    public String getGateDefaultYn() {
+        return gateDefaultYn;
+    }
+
+    public String getProfileDefaultYn() {
+        return profileDefaultYn;
+    }
+
+    public void setProfileDefaultYn(String profileDefaultYn) {
+        this.profileDefaultYn = profileDefaultYn;
+    }
+
+    public void setGateDefaultYn(String gateDefaultYn) {
+        this.gateDefaultYn = gateDefaultYn;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
+    }
+
+
     @Override
     public String toString() {
         return "Project{" +
                 "key='" + key + '\'' +
                 ", resultStatus='" + resultStatus + '\'' +
                 ", linked=" + linked +
+                ", gateDefaultYn='" + gateDefaultYn + '\'' +
+                ", profileDefaultYn='" + profileDefaultYn + '\'' +
                 ", id=" + id +
                 ", sonarKey='" + sonarKey + '\'' +
                 ", projectName='" + projectName + '\'' +
@@ -248,6 +309,8 @@ public class Project {
                 ", serviceInstancesId='" + serviceInstancesId + '\'' +
                 ", pipelineId=" + pipelineId +
                 ", jobId=" + jobId +
+                ", created=" + created +
+                ", lastModified=" + lastModified +
                 '}';
     }
 

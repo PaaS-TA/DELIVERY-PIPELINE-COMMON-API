@@ -21,15 +21,15 @@ public class QualityGate {
     // sonarqube에서 자동증가 되는 값을 리턴해주는데 이 값을 id 에 넣어줌.
     @Id
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
     /*@Column(nullable = false)
     private Long sonarQgId;*/
-    @Column(name = "default_yn")
-    private String defaultYn;
+    @Column(name = "gate_default_yn")
+    private String gateDefaultYn;
 
     @Column(name = "org_name")
     private String orgName;
@@ -67,12 +67,15 @@ public class QualityGate {
     private String lastModifiedString;
 
 
+    //삭제 예정
+    @Column(name = "default_yn")
+    private String defaultYn;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -164,6 +167,14 @@ public class QualityGate {
         this.lastModifiedString = lastModifiedString;
     }
 
+    public String getGateDefaultYn() {
+        return gateDefaultYn;
+    }
+
+    public void setGateDefaultYn(String gateDefaultYn) {
+        this.gateDefaultYn = gateDefaultYn;
+    }
+
     public String getDefaultYn() {
         return defaultYn;
     }
@@ -177,7 +188,7 @@ public class QualityGate {
         return "QualityGate{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", defaultYn='" + defaultYn + '\'' +
+                ", gateDefaultYn='" + gateDefaultYn + '\'' +
                 ", orgName='" + orgName + '\'' +
                 ", orgGuid='" + orgGuid + '\'' +
                 ", userName='" + userName + '\'' +
@@ -188,6 +199,7 @@ public class QualityGate {
                 ", lastModified=" + lastModified +
                 ", createdString='" + createdString + '\'' +
                 ", lastModifiedString='" + lastModifiedString + '\'' +
+                ", defaultYn='" + defaultYn + '\'' +
                 '}';
     }
 

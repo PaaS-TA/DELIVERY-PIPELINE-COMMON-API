@@ -29,7 +29,7 @@ public class QualityGateService {
     }
 
 
-    public QualityGate getQualityGate(Long id) {
+    public QualityGate getQualityGate(long id) {
         return qualityGateRepository.findOne(id);
     }
 
@@ -41,8 +41,8 @@ public class QualityGateService {
 
     public List<QualityGate> getQualityGateList(String serviceInstancesId) {
         QualityGate param = new QualityGate();
-        param.setDefaultYn("Y");
-        return qualityGateRepository.findByserviceInstancesIdOrDefaultYn(serviceInstancesId, param.getDefaultYn());
+        param.setGateDefaultYn("Y");
+        return qualityGateRepository.findByserviceInstancesIdOrGateDefaultYn(serviceInstancesId, param.getGateDefaultYn());
     }
 
     public QualityGate copyQualityGate(QualityGate qualityGate) {
@@ -82,21 +82,23 @@ public class QualityGateService {
     public String qualityGateDefaultSetting(QualityGate qualityGate){
         //삭제예정
         QualityGate result = new QualityGate();
-        result.setDefaultYn("Y");
+        result.setGateDefaultYn("Y");
         result.setServiceInstancesId(qualityGate.getServiceInstancesId());
-        result = qualityGateRepository.findByServiceInstancesIdAndDefaultYn(result.getServiceInstancesId(),result.getDefaultYn());
+        result = qualityGateRepository.findByServiceInstancesIdAndGateDefaultYn(result.getServiceInstancesId(),result.getGateDefaultYn());
 
         if(result != null){
-            result.setDefaultYn("N");
+            result.setGateDefaultYn("N");
             qualityGateRepository.save(result);
         }
 
 
         result = qualityGateRepository.findOne(qualityGate.getId());
-        result.setDefaultYn("Y");
+        result.setGateDefaultYn("Y");
         qualityGateRepository.save(result);
 
         return Constants.RESULT_STATUS_SUCCESS;
     }
+
+
 
 }

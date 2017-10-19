@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paasta.delivery.pipeline.common.api.common.Constants;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * Created by hrjin on 2017-06-23.
@@ -74,7 +75,7 @@ public class ProjectService {
         result = projectRepository.findOne(project.getId());
 
         result.setName(project.getName());
-//        result.setProjectName(project.getProjectName());
+        result.setProjectName(project.getProjectName());
         result.setQualityGateId(project.getQualityGateId());
         result.setQualityProfileId(project.getQualityProfileId());
         result.setJobId(project.getJobId());
@@ -91,7 +92,6 @@ public class ProjectService {
 
         result = projectRepository.findOne(project.getId());
         result.setQualityGateId(project.getQualityGateId());
-
 
         return projectRepository.save(result);
     }

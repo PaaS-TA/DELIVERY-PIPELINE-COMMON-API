@@ -25,7 +25,7 @@ public class QualityProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
@@ -40,8 +40,8 @@ public class QualityProfile {
     @Column(name = "language_name", nullable = false)
     private String languageName;
 
-    @Column(name = "default_yn")
-    private String defaultYn;
+    @Column(name = "profile_default_yn")
+    private String profileDefaultYn;
 
     @Column(name = "service_instances_id", nullable = false)
     private String serviceInstancesId;
@@ -71,11 +71,15 @@ public class QualityProfile {
     @Transient
     private String lastModifiedString;
 
-    public Long getId() {
+    //삭제 예정
+    @Column(name = "default_yn")
+    private String defaultYn;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -183,6 +187,14 @@ public class QualityProfile {
         this.resultStatus = resultStatus;
     }
 
+    public String getProfileDefaultYn() {
+        return profileDefaultYn;
+    }
+
+    public void setProfileDefaultYn(String profileDefaultYn) {
+        this.profileDefaultYn = profileDefaultYn;
+    }
+
     public String getDefaultYn() {
         return defaultYn;
     }
@@ -200,7 +212,7 @@ public class QualityProfile {
                 ", sonarKey='" + sonarKey + '\'' +
                 ", language='" + language + '\'' +
                 ", languageName='" + languageName + '\'' +
-                ", defaultYn='" + defaultYn + '\'' +
+                ", profileDefaultYn='" + profileDefaultYn + '\'' +
                 ", serviceInstancesId='" + serviceInstancesId + '\'' +
                 ", projectIdList=" + projectIdList +
                 ", activeRuleCount=" + activeRuleCount +
@@ -209,6 +221,7 @@ public class QualityProfile {
                 ", lastModified=" + lastModified +
                 ", createdString='" + createdString + '\'' +
                 ", lastModifiedString='" + lastModifiedString + '\'' +
+                ", defaultYn='" + defaultYn + '\'' +
                 '}';
     }
 

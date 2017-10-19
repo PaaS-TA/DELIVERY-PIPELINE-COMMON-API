@@ -141,4 +141,11 @@ public class QualityProfileController {
         return qualityProfileService.qualityProfileDefaultSetting(qualityProfile);
     }
 
+
+    @RequestMapping(value = "/getQualityProfile" ,method = RequestMethod.GET)
+    public QualityProfile getQualityProfile(long id){
+        return qualityProfileService.getQualityProfile(id);
+    }
+
+
 }

@@ -124,4 +124,9 @@ public class QualityGateController {
         return qualityGateService.qualityGateDefaultSetting(qualityGate);
     }
 
+    @RequestMapping(value = "/getQualityGate" , method = RequestMethod.GET)
+    public QualityGate getQualityGate(long id){
+        return qualityGateService.getQualityGate(id);
+    }
+
 }

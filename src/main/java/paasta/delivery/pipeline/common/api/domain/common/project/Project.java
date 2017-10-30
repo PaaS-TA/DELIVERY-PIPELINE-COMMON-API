@@ -53,21 +53,6 @@ public class Project {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "qualifier")
-    private String qualifier;
-
-    @Column(name = "org_name")
-    private String orgName;
-
-    @Column(name = "org_guid")
-    private String orgGuid;
-
-    @Column(name = "user_name")
-    private String userName;
-
-    @Column(name = "user_guid")
-    private String userGuid;
-
     @Column(name = "quality_profile_id")
     private int qualityProfileId;
 
@@ -138,46 +123,6 @@ public class Project {
 
     public void setSonarKey(String sonarKey) {
         this.sonarKey = sonarKey;
-    }
-
-    public String getQualifier() {
-        return qualifier;
-    }
-
-    public void setQualifier(String qualifier) {
-        this.qualifier = qualifier;
-    }
-
-    public String getOrgName() {
-        return orgName;
-    }
-
-    public void setOrgName(String orgName) {
-        this.orgName = orgName;
-    }
-
-    public String getOrgGuid() {
-        return orgGuid;
-    }
-
-    public void setOrgGuid(String orgGuid) {
-        this.orgGuid = orgGuid;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserGuid() {
-        return userGuid;
-    }
-
-    public void setUserGuid(String userGuid) {
-        this.userGuid = userGuid;
     }
 
     public int getQualityProfileId() {
@@ -299,11 +244,6 @@ public class Project {
                 ", projectName='" + projectName + '\'' +
                 ", sonarName='" + sonarName + '\'' +
                 ", name='" + name + '\'' +
-                ", qualifier='" + qualifier + '\'' +
-                ", orgName='" + orgName + '\'' +
-                ", orgGuid='" + orgGuid + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userGuid='" + userGuid + '\'' +
                 ", qualityProfileId=" + qualityProfileId +
                 ", qualityGateId=" + qualityGateId +
                 ", serviceInstancesId='" + serviceInstancesId + '\'' +

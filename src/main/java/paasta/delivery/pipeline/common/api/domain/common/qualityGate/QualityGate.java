@@ -31,18 +31,6 @@ public class QualityGate {
     @Column(name = "gate_default_yn")
     private String gateDefaultYn;
 
-    @Column(name = "org_name")
-    private String orgName;
-
-    @Column(name = "org_guid")
-    private String orgGuid;
-
-    @Column(name = "user_name")
-    private String userName;
-
-    @Column(name = "user_guid")
-    private String userGuid;
-
     @Transient
     private List<Long> projectIdList;
     //게이트 추가
@@ -85,38 +73,6 @@ public class QualityGate {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getOrgName() {
-        return orgName;
-    }
-
-    public void setOrgName(String orgName) {
-        this.orgName = orgName;
-    }
-
-    public String getOrgGuid() {
-        return orgGuid;
-    }
-
-    public void setOrgGuid(String orgGuid) {
-        this.orgGuid = orgGuid;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserGuid() {
-        return userGuid;
-    }
-
-    public void setUserGuid(String userGuid) {
-        this.userGuid = userGuid;
     }
 
     public List<Long> getProjectIdList() {
@@ -189,10 +145,6 @@ public class QualityGate {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", gateDefaultYn='" + gateDefaultYn + '\'' +
-                ", orgName='" + orgName + '\'' +
-                ", orgGuid='" + orgGuid + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userGuid='" + userGuid + '\'' +
                 ", projectIdList=" + projectIdList +
                 ", serviceInstancesId='" + serviceInstancesId + '\'' +
                 ", created=" + created +

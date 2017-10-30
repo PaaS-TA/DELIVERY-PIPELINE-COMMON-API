@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import paasta.delivery.pipeline.common.api.common.CommonService;
 import paasta.delivery.pipeline.common.api.common.Constants;
@@ -69,7 +68,7 @@ public class UserService {
     }
 
 
-    public User updateUser(@PathVariable String id, @RequestBody User reqUser) {
+    public User updateUser(@RequestBody User reqUser) {
         //reqUser.setId(id);
         User modifyUser = userRepository.save(reqUser);
         return modifyUser;

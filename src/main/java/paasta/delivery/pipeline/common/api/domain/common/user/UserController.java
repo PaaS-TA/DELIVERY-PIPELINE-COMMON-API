@@ -86,7 +86,7 @@ public class UserController {
         User modifyUser = userService.getUser(id);
         // CHECK REQUEST ID
         modifyUser.setDescription(reqUser.getDescription());
-        return userService.updateUser(id, modifyUser);
+        return userService.updateUser(modifyUser);
     }
 
 

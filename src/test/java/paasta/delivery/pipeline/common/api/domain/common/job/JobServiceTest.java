@@ -147,7 +147,6 @@ public class JobServiceTest {
         gTestResultJobModel.setRepositoryBranch(REPOSITORY_BRANCH);
         gTestResultJobModel.setRepositoryCommitRevision(REPOSITORY_COMMIT_REVISION);
         gTestResultJobModel.setCfInfoId(CF_INFO_ID);
-        gTestResultJobModel.setCfApiUrl(CF_API_URL);
         gTestResultJobModel.setAppName(APP_NAME);
         gTestResultJobModel.setAppUrl(APP_URL);
         gTestResultJobModel.setDeployType(DEPLOY_TYPE);
@@ -328,7 +327,6 @@ public class JobServiceTest {
         assertEquals(REPOSITORY_BRANCH, resultModel.getRepositoryBranch());
         assertEquals(REPOSITORY_COMMIT_REVISION, resultModel.getRepositoryCommitRevision());
         assertEquals(CF_INFO_ID, resultModel.getCfInfoId());
-        assertEquals(CF_API_URL, resultModel.getCfApiUrl());
         assertEquals(APP_NAME, resultModel.getAppName());
         assertEquals(APP_URL, resultModel.getAppUrl());
         assertEquals(DEPLOY_TYPE, resultModel.getDeployType());

@@ -31,7 +31,7 @@ public class ServiceInstances {
     private String owner;
 
     @Column(name = "ci_server_url")
-    private String ciServerUrl = "http://115.68.46.29";
+    private String ciServerUrl;
 
     public String getId() {
         return id;

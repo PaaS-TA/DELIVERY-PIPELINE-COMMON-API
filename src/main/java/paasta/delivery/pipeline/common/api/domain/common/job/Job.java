@@ -84,9 +84,6 @@ public class Job {
     @Column(name = "cf_info_id")
     private int cfInfoId;
 
-    @Column(name = "cf_api_url")
-    private String cfApiUrl;
-
     @Column(name = "app_name")
     private String appName;
 
@@ -335,14 +332,6 @@ public class Job {
 
     public void setCfInfoId(int cfInfoId) {
         this.cfInfoId = cfInfoId;
-    }
-
-    public String getCfApiUrl() {
-        return cfApiUrl;
-    }
-
-    public void setCfApiUrl(String cfApiUrl) {
-        this.cfApiUrl = cfApiUrl;
     }
 
     public String getAppName() {

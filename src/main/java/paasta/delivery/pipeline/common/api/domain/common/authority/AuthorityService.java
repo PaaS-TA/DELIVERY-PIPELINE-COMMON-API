@@ -2,6 +2,7 @@ package paasta.delivery.pipeline.common.api.domain.common.authority;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import paasta.delivery.pipeline.common.api.common.Constants;
 
 import java.util.List;
 
@@ -38,15 +39,17 @@ public class AuthorityService {
 
     public Authority updateAuthority(String id, Authority updateAuthority) {
         updateAuthority.setId(id);
-        return authorityRepository.save(updateAuthority);
+        Authority authority = authorityRepository.save(updateAuthority);
+        return authority;
     }
 
     public Authority getAuthorityByCode(String code) {
         return authorityRepository.findByCode(code);
     }
 
-    public void deleteAuthority(String id) {
+    public String deleteAuthority(String id) {
         authorityRepository.delete(id);
+        return Constants.RESULT_STATUS_SUCCESS;
     }
 
     public List<Authority> getAuthorityByAuthType(String authType) {

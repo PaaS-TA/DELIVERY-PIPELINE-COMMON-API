@@ -3,7 +3,6 @@ package paasta.delivery.pipeline.common.api.domain.common.qualityProfile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import paasta.delivery.pipeline.common.api.domain.common.projectRelation.ProjectRelationRepository;
 import paasta.delivery.pipeline.common.api.domain.common.qualityGate.QualityGate;
 
 import java.util.List;
@@ -16,73 +15,21 @@ import java.util.List;
 @RequestMapping("/qualityProfile")
 public class QualityProfileController {
     private final QualityProfileService qualityProfileService;
-    private final ProjectRelationRepository projectRelationRepository;
+
 
     @Autowired
-    public QualityProfileController(QualityProfileService qualityProfileService, ProjectRelationRepository projectRelationRepository) {
+    public QualityProfileController(QualityProfileService qualityProfileService) {
         this.qualityProfileService = qualityProfileService;
-        this.projectRelationRepository = projectRelationRepository;
+
     }
 
 
-
-
-
-    /**
-     * QualityProfile 상세 조회
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public QualityProfile getQualityProfile(@PathVariable Long id) {
-        QualityProfile getQualityProfile = qualityProfileService.getQualityProfile(id);
-        List<Long> projectIdList = projectRelationRepository.findIdByQualityProfileId(id);
-        getQualityProfile.setProjectIdList(projectIdList);
-        return getQualityProfile;
-    }
-
-
-    /**
-     * QualityProfile 수정
-     *
-     * @param id
-     * @param qualityProfile
-     * @return
-     */
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public QualityProfile updateQualityProfile(@PathVariable Long id, @RequestBody QualityProfile qualityProfile) {
-        qualityProfile.setId(id);
-        QualityProfile updateQualityProfile = qualityProfileService.updateQualityProfile(qualityProfile);
-        return updateQualityProfile;
-    }
-
-
-    /**
-     * QualityProfile 삭제
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteQualityProfile(@PathVariable Long id) {
-        return qualityProfileService.deleteQualityProfile(id);
-    }
-
-
-    //////////////////////////////////////////////////////////
 
     /**
      * QualityProfile 목록 조회
      *
      * @return
      */
-//    @RequestMapping(value = "", method = RequestMethod.GET)
-//    public List<QualityProfile> getQualityProfileList(@RequestParam String serviceInstancesId) {
-//        List<QualityProfile> getQualityProfileList = qualityProfileService.getQualityProfileList(serviceInstancesId);
-//        return getQualityProfileList;
-//    }
-    //시연후 수정
     @RequestMapping(value = "/qualityProfileList", method = RequestMethod.GET)
     public List getQualityProfileList(String serviceInstancesId) {
         return qualityProfileService.getQualityProfileList(serviceInstancesId);
@@ -95,7 +42,7 @@ public class QualityProfileController {
      * @param qualityProfile
      * @return
      */
-    @RequestMapping(value = "/qualityProfilCreate", method = RequestMethod.PUT)
+    @RequestMapping(value = "/qualityProfilCreate", method = RequestMethod.POST)
     public QualityProfile createQualityProfile(@RequestBody QualityProfile qualityProfile) {
         QualityProfile newQualityProfile = qualityProfileService.createQualityProfile(qualityProfile);
         return newQualityProfile;
@@ -106,7 +53,7 @@ public class QualityProfileController {
      *
      * @return
      */
-    @RequestMapping(value = "/qualityProfileCopy", method = RequestMethod.PUT)
+    @RequestMapping(value = "/qualityProfileCopy", method = RequestMethod.POST)
     public QualityProfile qualityProfileCopy(@RequestBody QualityProfile qualityProfile) {
         return qualityProfileService.qualityProfileCopy(qualityProfile);
     }
@@ -116,7 +63,7 @@ public class QualityProfileController {
      *
      * @return
      */
-    @RequestMapping(value = "/qualityProfileDelete", method = RequestMethod.POST)
+    @RequestMapping(value = "/qualityProfileDelete", method = RequestMethod.DELETE)
     public String deleteQualityProfile(@RequestBody QualityProfile qualityProfile) {
         return qualityProfileService.deleteQualityProfile(qualityProfile);
     }
@@ -126,7 +73,7 @@ public class QualityProfileController {
      *
      * @return
      */
-    @RequestMapping(value = "/qualityProfileUpdate", method = RequestMethod.POST)
+    @RequestMapping(value = "/qualityProfileUpdate", method = RequestMethod.PUT)
     public QualityProfile updateQualityProfile(@RequestBody QualityProfile qualityProfile) {
         return qualityProfileService.updateQualityProfile(qualityProfile);
     }
@@ -136,10 +83,12 @@ public class QualityProfileController {
      *
      * @return
      */
+/*
     @RequestMapping(value = "/qualityProfilDefaultSetting",method = RequestMethod.PUT)
     public String qualityProfileDefaultSetting(@RequestBody QualityProfile qualityProfile){
         return qualityProfileService.qualityProfileDefaultSetting(qualityProfile);
     }
+*/
 
 
     @RequestMapping(value = "/getQualityProfile" ,method = RequestMethod.GET)

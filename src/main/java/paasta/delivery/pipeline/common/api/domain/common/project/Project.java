@@ -36,7 +36,7 @@ public class Project {
     // sonarqube에서 자동증가 되는 값을 리턴해주는데 이 값을 id 에 넣어줌.
     @Id
     @Column(name = "id")
-    private Long id;
+    private long id;
 
 
     @JsonProperty("sonarKey")
@@ -109,11 +109,11 @@ public class Project {
         this.sonarName = sonarName;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

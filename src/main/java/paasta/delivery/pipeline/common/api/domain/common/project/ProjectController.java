@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import paasta.delivery.pipeline.common.api.domain.common.projectRelation.ProjectRelationService;
 
 import java.util.List;
 
@@ -17,124 +16,13 @@ public class ProjectController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectController.class);
 
     private final ProjectService projectService;
-    private final ProjectRelationService projectRelationService;
 
 
     @Autowired
-    public ProjectController(ProjectService projectService, ProjectRelationService projectRelationService) {
+    public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
-        this.projectRelationService = projectRelationService;
     }
 
-
-    /**
-     *  Project 생성
-     *
-     * @param project
-     * @return
-     */
-/*
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public Project createProject(@RequestBody Project project){
-        Project newProject = projectService.createProject(project);
-
-        // ProjectRelation 생성
-        ProjectRelation newProjectRelation = projectRelationService.createProjectRelation(project);
-        LOGGER.info("create Project Relation : {}", newProjectRelation);
-        return newProject;
-    }
-    */
-
-
-    /**
-     * Project 목록 조회
-     *
-     * @return
-     */
-/*    @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Project> getProjectList(){
-        List<Project> getProjectList = projectService.getProjectList();
-
-        // ProjectRelation 전체 목록 조회
-        List<ProjectRelation> getProjectRelationList = projectRelationService.getProjectRelationList();
-        LOGGER.info("Project Relation List : {}", getProjectRelationList);
-
-        int i;
-        for(i = 0; i < getProjectRelationList.size(); i++) {
-
-            // ProjectRelation 목록 조회 후 qualityGate id가 존재하면 Project 에 qualityGateId 넣어줌.
-            if (getProjectRelationList.get(i).getQualityGateId() != 0) {
-                getProjectList.get(i).setQualityGateId(getProjectRelationList.get(i).getQualityGateId());
-            }
-
-            // ProjectRelation 목록 조회 후 qualityProfile id가 존재하면 Project 에 qualityProfileId 넣어줌.
-            if(getProjectRelationList.get(i).getQualityProfileId() != 0){
-                getProjectList.get(i).setQualityProfileId(getProjectRelationList.get(i).getQualityProfileId());
-            }
-        }
-        return getProjectList;
-    }*/
-
-
-    /**
-     *  Project 상세 조회
-     *
-     * @param id
-     * @return
-     */
-/*    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Project getProject(@PathVariable Long id){
-        Project project = projectService.getProject(id);
-
-        // ProjectRelation 상세 조회
-        ProjectRelation projectRelation = projectRelationService.getProjectRelation(id);
-        LOGGER.info("GET ONE Project Relation : {}", projectRelation);
-
-        // ProjectRelation 상세 조회 후 qualityGate id가 존재하면 Project 에 qualityGateId 넣어줌.
-        if(projectRelation.getQualityGateId() != 0){
-            project.setQualityGateId(projectRelation.getQualityGateId());
-        }
-
-        // ProjectRelation 상세 조회 후 qualityProfile id가 존재하면 Project 에 qualityProfileId 넣어줌.
-        if(projectRelation.getQualityProfileId() != 0){
-            project.setQualityProfileId(projectRelation.getQualityProfileId());
-        }
-
-        return project;
-    }*/
-
-
-    /**
-     *  Project 삭제
-     *
-     * @param id
-     * @return
-     */
-/*
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteProject(@PathVariable Long id){
-        projectService.deleteProject(id);
-        // ProjectRelation 삭제
-        projectRelationService.deleteProjectRelation(id);
-        return Constants.RESULT_STATUS_SUCCESS;
-    }
-*/
-
-
-/*    *//**
-     * Project 수정
-     *
-     * @param
-     * @param
-     * @return
-     *//*
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Project updateProject(@PathVariable Long id, @RequestBody Project reqProject) {
-        Project project = projectService.getProject(id);
-        project.setId(id);
-        project.setName(reqProject.getName());
-        return projectService.updateProject(project);
-    }*/
 
 
 

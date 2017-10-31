@@ -46,6 +46,7 @@ public class AuthorityServiceTest {
     private List<Authority> testAuthorityList;
     private List<GrantedAuthority> testGrantedAuthorityList;
 
+
     /**
      * Sets up.
      *
@@ -53,6 +54,7 @@ public class AuthorityServiceTest {
      */
     @Before
     public void setUp() throws Exception {
+
         authorityService = new AuthorityService(authorityRepository);
 
         auth = new Authority();
@@ -66,6 +68,9 @@ public class AuthorityServiceTest {
         auth.setGrantedAuthorities(testGrantedAuthorityList);
         testAuthorityList = setAuthorityList();
 
+
+        Authority authority = new Authority("ID");
+        authority = new Authority("ID","DISPLAYNAME");
     }
 
     private List<Authority> setAuthorityList() {

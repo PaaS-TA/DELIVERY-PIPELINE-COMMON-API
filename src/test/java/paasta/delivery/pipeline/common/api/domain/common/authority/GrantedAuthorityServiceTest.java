@@ -65,7 +65,9 @@ public class GrantedAuthorityServiceTest {
 
         testGrantedAuthorityList = setGrantedAuthorityList();
 
+        GrantedAuthority grantedAuthority = new GrantedAuthority("ID",instanceUseId_,"authorityId");
     }
+
 
     private List<Authority> setAuthorityList() {
         List<Authority> returnValue = new ArrayList<>();

@@ -162,25 +162,6 @@ public class PipelineServiceTest {
         gTestResultPipelineList.setTotalElements(TOTAL_ELEMENTS);
         gTestResultPipelineList.setLast(true);
 
-
-        /*gTestAuthority.setId("12345");
-        gTestAuthority.setAuthCode("001");
-        gTestAuthority.setAuthType("pipeline");
-        gTestAuthority.setDescription("manager");
-        gTestAuthority.setDisplayName("manager");
-        gTestAuthority.setCode("0001");
-        //gTestAuthority.setGrantedAuthorities(gTestGrantedAuthorityList);
-
-        gTestGrantedAuthorityModel.setId("aaa");
-        gTestGrantedAuthorityModel.setAuthority(gTestAuthority);
-        gTestGrantedAuthorityModel.setAuthCode((long) 11111111);
-        gTestGrantedAuthorityModel.setAuthorityId("12345");
-        gTestGrantedAuthorityModel.setCreated(created);
-        gTestGrantedAuthorityModel.setInstanceUseId((long) 1);
-
-        gTestGrantedAuthorityList.add(gTestGrantedAuthorityModel);*/
-
-
     }
 
     @After
@@ -190,7 +171,30 @@ public class PipelineServiceTest {
 
 
     @Test
-    public void getPipelineList_Valid_ReturnList() throws Exception{
+    public void getPipelineList_Valid_ReqNULL() throws Exception{
+        ServiceInstances serviceInstances = new ServiceInstances();
+        serviceInstances.setId("serviceInstance01");
+
+        when(pipelineRepository.findByServiceInstancesId(anyString(),any(Pageable.class))).thenReturn(pipelinePage);
+        when(pipelineRepository.findByServiceInstancesIdAndNameContaining(anyString(),anyString(),any(Pageable.class))).thenReturn(pipelinePage);
+        when(commonService.setPageInfo(any(Page.class), any(Object.class))).thenReturn(gTestResultPipelineList);
+        PipelineList resultList = pipelineService.getPipelineList(serviceInstances.getId(), "reqName", gTestPageable);
+
+        assertThat(resultList).isNotNull();
+        assertEquals(gTestResultPipelineList, resultList);
+        assertEquals(gTestPipelineList, resultList.getPipelines());
+        assertEquals(PAGE_COUNT, resultList.getPage());
+        assertEquals(PAGE_SIZE, resultList.getSize());
+        assertEquals(TOTAL_PAGES, resultList.getTotalPages());
+        assertEquals(TOTAL_ELEMENTS, resultList.getTotalElements());
+        assertEquals(true, resultList.isLast());
+        assertEquals(id, resultList.getPipelines().get(0).getId());
+        assertEquals(name, resultList.getPipelines().get(0).getName());
+    }
+
+
+    @Test
+    public void getPipelineList_Valid_Req() throws Exception{
         ServiceInstances serviceInstances = new ServiceInstances();
         serviceInstances.setId("serviceInstance01");
 

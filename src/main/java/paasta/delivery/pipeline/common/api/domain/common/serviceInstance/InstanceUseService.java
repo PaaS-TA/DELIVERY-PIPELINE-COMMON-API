@@ -58,13 +58,13 @@ public class InstanceUseService {
             pageList = instanceUseRepository.findByServiceInstancesId(serviceInstanceId, pageable);
         } else if (userName != null && authName == null) {
             pageList = instanceUseRepository.findByServiceInstancesIdAndUserNameContaining(serviceInstanceId, userName, pageable);
-        } else if (userName == null && authName != null) {
+        } else if (userName == null) {
             pageList = instanceUseRepository.findByServiceInstancesIdAndGrantedAuthorities_Authority_Id(serviceInstanceId, authName, pageable);
         } else {
             pageList = instanceUseRepository.findByServiceInstancesIdAndUserNameContainingAndGrantedAuthorities_Authority_Id(serviceInstanceId, userName, authName, pageable);
         }
 
-        instanceUseList = (InstanceUseList) commonService.setPageInfo(pageList, new InstanceUseList());
+        instanceUseList = (InstanceUseList) commonService.setPageInfo(pageList, InstanceUseList.class);
         instanceUseList.setInstanceUses(pageList.getContent());
 
         return instanceUseList;
@@ -82,7 +82,7 @@ public class InstanceUseService {
             instanceUsePage = instanceUseRepository.findAllByServiceInstancesIdAndUserNameContainingAndGrantedAuthoritiesAuthCode(suid, reqName, pipelineId, pageable);
         }
 
-        instanceUseList = (InstanceUseList) commonService.setPageInfo(instanceUsePage, new InstanceUseList());
+        instanceUseList = (InstanceUseList) commonService.setPageInfo(instanceUsePage, InstanceUseList.class);
         instanceUseList.setInstanceUses(instanceUsePage.getContent());
 
         LOGGER.info("###### getInstanceUseListByPipelineContributor {}", instanceUseList);

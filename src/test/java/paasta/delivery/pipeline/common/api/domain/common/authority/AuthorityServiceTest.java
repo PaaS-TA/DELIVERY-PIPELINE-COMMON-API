@@ -202,7 +202,7 @@ public class AuthorityServiceTest {
     }
 
     @Test
-    public void test_001_createAuthority() throws Exception {
+    public void test_createAuthority() throws Exception {
         when(authorityRepository.save(auth)).thenReturn(auth);
         Authority result = authorityService.createAuthority(auth);
         assertThat(result).isNotNull();

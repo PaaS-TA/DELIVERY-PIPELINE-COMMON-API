@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GrantedAuthorityServiceTest {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorityServiceTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GrantedAuthorityServiceTest.class);
 
     @InjectMocks
     private GrantedAuthorityService grantedAuthorityService;
@@ -133,7 +133,7 @@ public class GrantedAuthorityServiceTest {
 
 
     @Test
-    public void getGrantedAuthority() {
+    public void test_getGrantedAuthority() {
         GrantedAuthority grantedAuthority = getGrantedAuthority(1);
         when(grantedAuthorityRepository.findOne(anyString())).thenReturn(grantedAuthority);
 
@@ -149,7 +149,7 @@ public class GrantedAuthorityServiceTest {
     }
 
     @Test
-    public void getGrantedAuthorityByInstanceUseIdAndAuthorityId() {
+    public void test_getGrantedAuthorityByInstanceUseIdAndAuthorityId() {
 
         GrantedAuthority grantedAuthority = getGrantedAuthority(1);
         when(grantedAuthorityRepository.findTopByInstanceUseIdOrAuthority(anyLong(),any(Authority.class))).thenReturn(grantedAuthority);
@@ -167,7 +167,7 @@ public class GrantedAuthorityServiceTest {
     }
 
     @Test
-    public void findAll() {
+    public void test_findAll() {
         when(grantedAuthorityRepository.findAll()).thenReturn(testGrantedAuthorityList);
 
         List<GrantedAuthority> result = grantedAuthorityService.findAll();
@@ -184,7 +184,7 @@ public class GrantedAuthorityServiceTest {
 
 
     @Test
-    public void getGrantedAuthorityList() {
+    public void test_getGrantedAuthorityList() {
 
         when(grantedAuthorityRepository.findAll()).thenReturn(testGrantedAuthorityList);
 
@@ -202,7 +202,7 @@ public class GrantedAuthorityServiceTest {
 
 
     @Test
-    public void findByInstanceUseId() {
+    public void test_findByInstanceUseId() {
         GrantedAuthority grantedAuthority = getGrantedAuthority(1);
         when(grantedAuthorityRepository.findByInstanceUseId(anyLong())).thenReturn(testGrantedAuthorityList);
 
@@ -218,7 +218,7 @@ public class GrantedAuthorityServiceTest {
     }
 
     @Test
-    public void findByAuthCode() {
+    public void test_findByAuthCode() {
         GrantedAuthority grantedAuthority = getGrantedAuthority(1);
         when(grantedAuthorityRepository.findByAuthCode(anyLong())).thenReturn(testGrantedAuthorityList);
 
@@ -234,7 +234,7 @@ public class GrantedAuthorityServiceTest {
     }
 
     @Test
-    public void createGrantedAuthority() {
+    public void test_reateGrantedAuthority() {
         when(grantedAuthorityRepository.save(grantedauth)).thenReturn(grantedauth);
         GrantedAuthority result = grantedAuthorityService.createGrantedAuthority(grantedauth);
         assertThat(result).isNotNull();
@@ -243,7 +243,7 @@ public class GrantedAuthorityServiceTest {
     }
 
     @Test
-    public void deleteGrantedAuthority() {
+    public void test_deleteGrantedAuthority() {
         doNothing().when(grantedAuthorityRepository).delete(PARAM);
         String result = grantedAuthorityService.deleteGrantedAuthority(PARAM);
         assertThat(result).isNotNull();
@@ -251,7 +251,7 @@ public class GrantedAuthorityServiceTest {
     }
 
     @Test
-    public void deleteGrantedAuthorityRows() {
+    public void test_deleteGrantedAuthorityRows() {
         doNothing().when(grantedAuthorityRepository).delete(PARAM);
         grantedAuthorityService.deleteGrantedAuthorityRows(testGrantedAuthorityList);
     }

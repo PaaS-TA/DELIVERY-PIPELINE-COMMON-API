@@ -333,7 +333,6 @@ public class InstanceUseServiceTest {
         InstanceUseList resultList = instanceUseService.getInstanceUseListByPipelineContributor(SERVICE_INSTANCES_ID, PIPELINE_ID, null, gTestPageable);
 
         assertThat(resultList).isNotNull();
-
     }
 
 
@@ -352,7 +351,6 @@ public class InstanceUseServiceTest {
         InstanceUseList resultList = instanceUseService.getInstanceUseListByPipelineContributor(SERVICE_INSTANCES_ID, PIPELINE_ID, "", gTestPageable);
 
         assertThat(resultList).isNotNull();
-
     }
 
 
@@ -371,7 +369,6 @@ public class InstanceUseServiceTest {
         InstanceUseList resultList = instanceUseService.getInstanceUseListByPipelineContributor(SERVICE_INSTANCES_ID, PIPELINE_ID, REQUEST_NAME, gTestPageable);
 
         assertThat(resultList).isNotNull();
-
     }
 
 
@@ -394,12 +391,12 @@ public class InstanceUseServiceTest {
 
 
     /**
-     * Delete instance use valid model return model.
+     * Delete instance use valid model return string.
      *
      * @throws Exception the exception
      */
     @Test
-    public void deleteInstanceUse_ValidModel_ReturnModel() throws Exception {
+    public void deleteInstanceUse_ValidModel_ReturnString() throws Exception {
         doNothing().when(instanceUseRepository).delete(INSTANCE_USE_ID);
 
 

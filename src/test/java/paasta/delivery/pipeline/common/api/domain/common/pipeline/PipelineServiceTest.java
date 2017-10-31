@@ -58,6 +58,9 @@ public class PipelineServiceTest {
     private static final int PAGE_SIZE = 1;
     private static final int TOTAL_PAGES = 1;
     private static final long TOTAL_ELEMENTS = 1;
+    private static final int DISPLAY = 1;
+    private static final int TOTAL = 1;
+    private static final int START = 1;
 
     private static Pipeline gTestPipelineModel = null;
     private static Pipeline gTestResultPipelineModel = null;
@@ -161,6 +164,9 @@ public class PipelineServiceTest {
         gTestResultPipelineList.setTotalPages(TOTAL_PAGES);
         gTestResultPipelineList.setTotalElements(TOTAL_ELEMENTS);
         gTestResultPipelineList.setLast(true);
+        gTestResultPipelineList.setDisplay(DISPLAY);
+        gTestResultPipelineList.setTotal(TOTAL);
+        gTestResultPipelineList.setStart(START);
 
     }
 
@@ -188,6 +194,9 @@ public class PipelineServiceTest {
         assertEquals(TOTAL_PAGES, resultList.getTotalPages());
         assertEquals(TOTAL_ELEMENTS, resultList.getTotalElements());
         assertEquals(true, resultList.isLast());
+        assertEquals(DISPLAY, resultList.getDisplay());
+        assertEquals(TOTAL, resultList.getTotal());
+        assertEquals(START, resultList.getStart());
         assertEquals(id, resultList.getPipelines().get(0).getId());
         assertEquals(name, resultList.getPipelines().get(0).getName());
     }

@@ -27,6 +27,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.doNothing;
@@ -205,6 +206,15 @@ public class UserServiceTest {
 
         assertThat(resultModel).isNotNull();
         assertEquals(userTid, resultModel.getId());
+        assertEquals(tellPhone, resultModel.getTellPhone());
+        assertEquals(cellPhone, resultModel.getCellPhone());
+        assertEquals(email, resultModel.getEmail());
+        assertEquals(company, resultModel.getCompany());
+        assertEquals(description, resultModel.getDescription());
+        assertEquals(created, gTestResultUserModel.getCreated());
+        assertEquals(lastModified, gTestResultUserModel.getLastModified());
+        assertNotEquals(createdString, gTestResultUserModel.getCreatedString());
+        assertNotEquals(lastModifiedString, gTestResultUserModel.getLastModifiedString());
     }
 
 

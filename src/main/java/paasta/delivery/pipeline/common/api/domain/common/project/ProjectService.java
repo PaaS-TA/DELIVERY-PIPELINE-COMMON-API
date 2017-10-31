@@ -21,42 +21,13 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-/*    public Project createProject(Project project) {
-        return projectRepository.save(project);
-    }*/
-
-    public List<Project> getProjectList() {
-        return projectRepository.findAll();
-    }
-
-//    public Project updateProject(Project project) {
-//        return projectRepository.save(project);
-//    }
-
-    public Project getProject(Long id) {
-        return projectRepository.findOne(id);
-    }
-
-    // project 삭제 시 해당 id의 projectRelation 도 삭제
-/*
-    public String deleteProject(Long id) {
-        projectRepository.delete(id);
-        return Constants.RESULT_STATUS_SUCCESS;
-    }
-*/
-
-////////////////////////////////////////////////////////////////
-
-//    public List getProjectsList(String serviceInstancesId){
-//        return projectRepository.findAllByserviceInstancesId(serviceInstancesId);
-//    }
 
     //시연후 수정
-    public List getProjectsList(Project project) {
+    public List<Project> getProjectsList(Project project) {
         return projectRepository.findByserviceInstancesId(project.getServiceInstancesId());
     }
 
-    public List getProject(Project project){
+    public List<Project> getProject(Project project){
         return projectRepository.findByserviceInstancesIdAndPipelineId(project.getServiceInstancesId(), project.getPipelineId());
     }
 
@@ -71,16 +42,16 @@ public class ProjectService {
     }
 
     public Project updateProject(Project project) {
-        Project result = new Project();
+       /* Project result = new Project();
         result = projectRepository.findOne(project.getId());
 
         result.setName(project.getName());
         result.setProjectName(project.getProjectName());
         result.setQualityGateId(project.getQualityGateId());
         result.setQualityProfileId(project.getQualityProfileId());
-        result.setJobId(project.getJobId());
+        result.setJobId(project.getJobId());*/
 
-        return projectRepository.save(result);
+        return projectRepository.save(project);
     }
 
 

@@ -3,8 +3,7 @@ package paasta.delivery.pipeline.common.api.domain.common.qualityGate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paasta.delivery.pipeline.common.api.common.Constants;
-import paasta.delivery.pipeline.common.api.domain.common.projectRelation.ProjectRelationRepository;
-import paasta.delivery.pipeline.common.api.domain.common.projectRelation.ProjectRelationService;
+
 import paasta.delivery.pipeline.common.api.domain.common.qualityProfile.QualityProfile;
 
 import java.util.List;
@@ -50,28 +49,12 @@ public class QualityGateService {
     }
 
     public QualityGate updateQualityGate(QualityGate qualityGate) {
-        QualityGate result = new QualityGate();
+/*        QualityGate result = new QualityGate();
         result = qualityGateRepository.findOne(qualityGate.getId());
-        result.setName(qualityGate.getName());
-        return qualityGateRepository.save(result);
+        result.setName(qualityGate.getName());*/
+        return qualityGateRepository.save(qualityGate);
     }
 
-
-//    public String deleteQualityGate(Long id) {
-//        qualityGateRepository.delete(id);
-//
-//        // QualityGateId 가 삭제될 시 관련돼 있는 ProjectRelation id 리스트를 가져옴.
-//        List<Long> projectRelations = projectRelationRepository.findIdByQualityGateId(id);
-//
-//        int i;
-//        for(i = 0; i < projectRelations.size(); i++){
-//            ProjectRelation projectRelation = projectRelationService.getProjectRelation(projectRelations.get(i));
-//            projectRelation.setQualityGateId((long) 0);
-//            projectRelationService.updateProjectRelation(projectRelation);
-//        }
-//
-//        return Constants.RESULT_STATUS_SUCCESS;
-//    }
 
     public String deleteQualityGate(QualityGate qualityGate) {
         qualityGateRepository.delete(qualityGate.getId());
@@ -79,7 +62,8 @@ public class QualityGateService {
         return Constants.RESULT_STATUS_SUCCESS;
     }
 
-    public String qualityGateDefaultSetting(QualityGate qualityGate){
+    //기본 셋팅은 쓰지 않는걸로 결정
+/*    public String qualityGateDefaultSetting(QualityGate qualityGate){
         //삭제예정
         QualityGate result = new QualityGate();
         result.setGateDefaultYn("Y");
@@ -97,7 +81,7 @@ public class QualityGateService {
         qualityGateRepository.save(result);
 
         return Constants.RESULT_STATUS_SUCCESS;
-    }
+    }*/
 
 
 

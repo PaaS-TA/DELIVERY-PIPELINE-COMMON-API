@@ -61,6 +61,12 @@ public class InstanceUseServiceTest {
     private static final Long PIPELINE_ID = 1L;
     private static final Long INSTANCE_USE_ID = 1L;
 
+    private static final int PAGE = 1;
+    private static final int SIZE = 1;
+    private static final int TOTAL_PAGE = 10;
+    private static final long TOTAL_ELEMENTS = 10;
+    private static final boolean IS_LAST = true;
+
     private static InstanceUse gTestInstanceUse = null;
     private static InstanceUse gTestResultInstanceUse = null;
     private static List<InstanceUse> gTestInstanceUseArrayList = null;
@@ -105,8 +111,23 @@ public class InstanceUseServiceTest {
         gTestServiceInstances.setOwner(SERVICE_INSTANCES_OWNER);
         gTestServiceInstances.setCiServerUrl(SERVICE_INSTANCES_CI_SERVER_URL);
 
+        gTestInstanceUse.setUserDescription(USER_DESCRIPTION);
+        gTestInstanceUse.setAuthListStr(AUTHORITY_LIST_STRING);
+        gTestInstanceUse.setPipelineId(PIPELINE_ID);
+        gTestInstanceUse.setServiceInstances(gTestServiceInstances);
+        gTestInstanceUse.setUser(gTestUser);
+        gTestInstanceUse.setGrantedAuthorities(gTestGrantedAuthorityList);
+
         gTestInstanceUseArrayList = new ArrayList<>();
+        gTestInstanceUseArrayList.add(gTestInstanceUse);
+
         gTestInstanceUseList = new InstanceUseList();
+        gTestInstanceUseList.setPage(PAGE);
+        gTestInstanceUseList.setSize(SIZE);
+        gTestInstanceUseList.setTotalPages(TOTAL_PAGE);
+        gTestInstanceUseList.setTotalElements(TOTAL_ELEMENTS);
+        gTestInstanceUseList.setLast(IS_LAST);
+
         gTestUser = new User();
         gTestUser.setId(USER_ID);
         gTestUser.setName(USER_NAME);
@@ -128,13 +149,6 @@ public class InstanceUseServiceTest {
         grantedAuthority.setAuthorityId(AUTHORITY_ID);
         grantedAuthority.setCreated(new Date());
         gTestGrantedAuthorityList.add(grantedAuthority);
-
-        gTestInstanceUse.setUserDescription(USER_DESCRIPTION);
-        gTestInstanceUse.setAuthListStr(AUTHORITY_LIST_STRING);
-        gTestInstanceUse.setPipelineId(PIPELINE_ID);
-        gTestInstanceUse.setServiceInstances(gTestServiceInstances);
-        gTestInstanceUse.setUser(gTestUser);
-        gTestInstanceUse.setGrantedAuthorities(gTestGrantedAuthorityList);
 
         gTestResultInstanceUse.setId(INSTANCE_USE_ID);
         gTestResultInstanceUse.setUserDescription(USER_DESCRIPTION);
@@ -261,6 +275,12 @@ public class InstanceUseServiceTest {
         InstanceUseList resultList = instanceUseService.getInstanceUseList(SERVICE_INSTANCES_ID, null, null, gTestPageable);
 
         assertThat(resultList).isNotNull();
+        assertEquals(PAGE, resultList.getPage());
+        assertEquals(SIZE, resultList.getSize());
+        assertEquals(TOTAL_PAGE, resultList.getTotalPages());
+        assertEquals(TOTAL_ELEMENTS, resultList.getTotalElements());
+        assertEquals(IS_LAST, resultList.isLast());
+        assertEquals(gTestInstanceUseArrayList, resultList.getInstanceUses());
     }
 
 

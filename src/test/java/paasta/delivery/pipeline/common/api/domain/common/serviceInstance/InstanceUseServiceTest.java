@@ -344,6 +344,25 @@ public class InstanceUseServiceTest {
      */
     @Test
     public void getInstanceUseListByPipelineContributor_phase_02_ValidModel_ReturnList() throws Exception {
+        when(instanceUseRepository.findAllByServiceInstancesIdAndGrantedAuthoritiesAuthCode(SERVICE_INSTANCES_ID, PIPELINE_ID, gTestPageable)).thenReturn(gTestPage);
+        when(commonService.setPageInfo(gTestPage, InstanceUseList.class)).thenReturn(gTestInstanceUseList);
+
+
+        // TEST
+        InstanceUseList resultList = instanceUseService.getInstanceUseListByPipelineContributor(SERVICE_INSTANCES_ID, PIPELINE_ID, "", gTestPageable);
+
+        assertThat(resultList).isNotNull();
+
+    }
+
+
+    /**
+     * Gets instance use list by pipeline contributor phase 02 valid model return list.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void getInstanceUseListByPipelineContributor_phase_03_ValidModel_ReturnList() throws Exception {
         when(instanceUseRepository.findAllByServiceInstancesIdAndUserNameContainingAndGrantedAuthoritiesAuthCode(SERVICE_INSTANCES_ID, REQUEST_NAME, PIPELINE_ID, gTestPageable)).thenReturn(gTestPage);
         when(commonService.setPageInfo(gTestPage, InstanceUseList.class)).thenReturn(gTestInstanceUseList);
 

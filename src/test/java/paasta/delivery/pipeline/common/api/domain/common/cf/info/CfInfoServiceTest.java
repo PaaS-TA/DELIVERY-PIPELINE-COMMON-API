@@ -1,4 +1,4 @@
-package paasta.delivery.pipeline.common.api.domain.common.cfInfo;
+package paasta.delivery.pipeline.common.api.domain.common.cf.info;
 
 import org.junit.After;
 import org.junit.Before;

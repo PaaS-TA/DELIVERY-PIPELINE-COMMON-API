@@ -1,7 +1,8 @@
-package paasta.delivery.pipeline.common.api.domain.common.cfInfo;
+package paasta.delivery.pipeline.common.api.domain.common.cf.info;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class CfInfoService {
      * @param commonService    the common service
      * @param cfInfoRepository the cf info repository
      */
+    @Autowired
     public CfInfoService(CommonService commonService, CfInfoRepository cfInfoRepository) {
         this.commonService = commonService;
         this.cfInfoRepository = cfInfoRepository;

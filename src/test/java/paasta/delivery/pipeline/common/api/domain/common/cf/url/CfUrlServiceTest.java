@@ -28,13 +28,12 @@ import static org.mockito.Mockito.when;
  *
  * @author REX
  * @version 1.0
- * @since 11/7/2017
+ * @since 11 /7/2017
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CfUrlServiceTest {
-
 
     private static final long CF_URL_ID = 1L;
     private static final String SERVICE_INSTANCES_ID = "test-service-instances-id";
@@ -60,6 +59,11 @@ public class CfUrlServiceTest {
     private CfUrlService cfUrlService;
 
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp() throws Exception {
 
@@ -96,10 +100,21 @@ public class CfUrlServiceTest {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown() throws Exception {
     }
 
+
+    /**
+     * Gets cf url list valid return list.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void getCfUrlList_Valid_ReturnList() throws Exception {
         when(cfUrlRepository.findAllByServiceInstancesIdOrderByCreatedDesc(SERVICE_INSTANCES_ID)).thenReturn(gTestResultList);
@@ -121,8 +136,18 @@ public class CfUrlServiceTest {
         assertEquals(null, resultList.get(0).getLastModifiedString());
     }
 
+
+    /**
+     * Gets cf url by id valid return model.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void getCfUrlById_Valid_ReturnModel() throws Exception {
+        gTestResultCfUrlModel.setCreated(gTestCfUrlModel.getCreated());
+        gTestResultCfUrlModel.setLastModified(gTestCfUrlModel.getLastModified());
+
+
         when(cfUrlRepository.findOne(CF_URL_ID)).thenReturn(gTestResultCfUrlModel);
 
 
@@ -130,8 +155,16 @@ public class CfUrlServiceTest {
         CfUrl resultModel = cfUrlService.getCfUrlById((int) CF_URL_ID);
 
         assertThat(resultModel).isNotNull();
+        assertEquals(TEST_CREATED, resultModel.getCreated());
+        assertEquals(TEST_LAST_MODIFIED, resultModel.getLastModified());
     }
 
+
+    /**
+     * Create cf url valid return model.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void createCfUrl_Valid_ReturnModel() throws Exception {
         when(cfUrlRepository.save(gTestCfUrlModel)).thenReturn(gTestResultCfUrlModel);
@@ -145,9 +178,16 @@ public class CfUrlServiceTest {
         assertEquals(CF_URL_ID, resultModel.getId());
     }
 
+
+    /**
+     * Update cf url valid return model.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void updateCfUrl_Valid_ReturnModel() throws Exception {
         gTestCfUrlModel.setId(CF_URL_ID);
+
 
         when(cfUrlRepository.save(gTestCfUrlModel)).thenReturn(gTestResultCfUrlModel);
 
@@ -160,6 +200,12 @@ public class CfUrlServiceTest {
         assertEquals(CF_URL_ID, resultModel.getId());
     }
 
+
+    /**
+     * Delete cf ino by id valid return model.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void deleteCfInoById_Valid_ReturnModel() throws Exception {
         doNothing().when(cfUrlRepository).delete(CF_URL_ID);

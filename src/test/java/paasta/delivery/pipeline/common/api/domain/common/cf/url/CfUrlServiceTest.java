@@ -146,7 +146,8 @@ public class CfUrlServiceTest {
     public void getCfUrlById_Valid_ReturnModel() throws Exception {
         gTestResultCfUrlModel.setCreated(gTestCfUrlModel.getCreated());
         gTestResultCfUrlModel.setLastModified(gTestCfUrlModel.getLastModified());
-
+        gTestResultCfUrlModel.setCreatedString(gTestCfUrlModel.getCreatedString());
+        gTestResultCfUrlModel.setLastModifiedString(gTestCfUrlModel.getLastModifiedString());
 
         when(cfUrlRepository.findOne(CF_URL_ID)).thenReturn(gTestResultCfUrlModel);
 

@@ -99,6 +99,9 @@ public class InstanceUseServiceTest {
         gTestInstanceUse = new InstanceUse();
         gTestResultInstanceUse = new InstanceUse();
 
+        InstanceUse testModel = new InstanceUse(new ServiceInstances(), new User());
+        testModel.setId(INSTANCE_USE_ID);
+
         List<Pipeline> gTestPipelineList = new ArrayList<>();
         Pipeline pipeline = new Pipeline();
         pipeline.setId(PIPELINE_ID);

@@ -18,10 +18,6 @@ public class InstanceUseList {
     public InstanceUseList() {
     }
 
-    public InstanceUseList(List<InstanceUse> instanceUses) {
-        this.instanceUses = instanceUses;
-    }
-
     public List<InstanceUse> getInstanceUses() {
         return instanceUses;
     }

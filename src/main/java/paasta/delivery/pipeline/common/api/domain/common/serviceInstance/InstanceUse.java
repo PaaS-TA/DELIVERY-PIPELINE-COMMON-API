@@ -40,10 +40,6 @@ public class InstanceUse {
     public InstanceUse() {
     }
 
-    public InstanceUse(Long id) {
-        this.id = id;
-    }
-
     public InstanceUse(ServiceInstances serviceInstances, User user) {
         this.serviceInstances = serviceInstances;
         this.user = user;

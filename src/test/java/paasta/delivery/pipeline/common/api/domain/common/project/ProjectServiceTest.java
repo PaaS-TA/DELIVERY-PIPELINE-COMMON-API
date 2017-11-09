@@ -132,6 +132,7 @@ public class ProjectServiceTest {
         when(projectRepository.findByserviceInstancesIdAndPipelineId(testModel.getServiceInstancesId(),testModel.getPipelineId())).thenReturn(testResultList);
 
         List<Project> resultList = projectService.getProject(testModel);
+
         assertThat(resultList).isNotNull();
         assertEquals(testResultList , resultList);
         assertEquals(SERVICE_INSTANCES_ID, resultList.get(0).getServiceInstancesId());
@@ -180,6 +181,7 @@ public class ProjectServiceTest {
      */
     @Test
     public void updateProject_Valid_Return() throws Exception{
+        when(projectRepository.findOne(testModel.getId())).thenReturn(resultModel);
         when(projectRepository.save(testModel)).thenReturn(resultModel);
 
         Project result = projectService.updateProject(testModel);

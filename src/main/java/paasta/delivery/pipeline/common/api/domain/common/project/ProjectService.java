@@ -42,14 +42,14 @@ public class ProjectService {
     }
 
     public Project updateProject(Project project) {
-       /* Project result = new Project();
+        Project result = new Project();
         result = projectRepository.findOne(project.getId());
 
         result.setName(project.getName());
         result.setProjectName(project.getProjectName());
         result.setQualityGateId(project.getQualityGateId());
         result.setQualityProfileId(project.getQualityProfileId());
-        result.setJobId(project.getJobId());*/
+        result.setJobId(project.getJobId());
 
         return projectRepository.save(project);
     }

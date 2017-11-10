@@ -44,12 +44,13 @@ public class ProjectService {
     public Project updateProject(Project project) {
         Project result = new Project();
         result = projectRepository.findOne(project.getId());
-        project.setSonarName(result.getSonarName());
-        project.setProjectName(result.getProjectName());
-        project.setSonarKey(result.getSonarKey());
 
+        result.setProjectName(project.getProjectName());
+        result.setQualityProfileId(project.getQualityProfileId());
+        result.setQualityGateId(project.getQualityGateId());
+        result.setJobId(project.getJobId());
 
-        return projectRepository.save(project);
+        return projectRepository.save(result);
     }
 
 

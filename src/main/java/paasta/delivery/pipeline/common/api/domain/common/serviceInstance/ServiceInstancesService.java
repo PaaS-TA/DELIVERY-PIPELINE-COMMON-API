@@ -38,7 +38,8 @@ public class ServiceInstancesService {
     public ServiceInstances getServiceInstance(String id) {
         ServiceInstances serviceInstance = serviceInstancesRepository.findOne(id);
         // TODO :: REMOVE TEMPORARY VALUE
-        serviceInstance.setCiServerUrl("http://115.68.46.29");
+//        serviceInstance.setCiServerUrl("http://115.68.46.29");
+        serviceInstance.setCiServerUrl("http://115.68.46.216:8088");
         return serviceInstance;
     }
 }

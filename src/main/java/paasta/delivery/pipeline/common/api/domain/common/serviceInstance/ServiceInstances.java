@@ -33,6 +33,10 @@ public class ServiceInstances {
     @Column(name = "ci_server_url")
     private String ciServerUrl;
 
+    @Transient
+    private String service_type;
+
+
     public String getId() {
         return id;
     }
@@ -73,4 +77,11 @@ public class ServiceInstances {
         this.ciServerUrl = ciServerUrl;
     }
 
+    public String getService_type() {
+        return service_type;
+    }
+
+    public void setService_type(String service_type) {
+        this.service_type = service_type;
+    }
 }

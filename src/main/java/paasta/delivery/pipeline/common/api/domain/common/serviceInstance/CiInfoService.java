@@ -37,10 +37,10 @@ public class CiInfoService {
         List<CiInfo> ciInfos;
         if (type.equals("Shared")) {
             LOGGER.info("################### SHARED");
-            ciInfos = ciInfoRepository.findByTypeOrderByUsedcount(type);
+            ciInfos = ciInfoRepository.findByStatusAndTypeOrderByUsedcount(NOT_USED_SERVER, type);
         } else {
             LOGGER.info("################### DEDICATED");
-            ciInfos = ciInfoRepository.findByStatusAndTypeOrderByUsedcount(NOT_USED_SERVER, type);
+            ciInfos = ciInfoRepository.findByTypeOrderByUsedcount(type);
         }
 
 

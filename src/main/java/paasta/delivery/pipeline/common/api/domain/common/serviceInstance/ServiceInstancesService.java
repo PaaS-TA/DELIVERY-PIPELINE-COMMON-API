@@ -46,7 +46,7 @@ public class ServiceInstancesService {
             serviceInstances.setCiServerUrl(ciInfo.getServerUrl());
             serviceInstances.setService_type(serviceInstances.getService_type());
             ServiceInstances newInstances = serviceInstancesRepository.save(serviceInstances);
-
+            newInstances.setService_type(serviceInstances.getService_type());
             ciInfo.setUsedcount(ciInfo.getUsedcount()+1);
             ciInfo.setStatus(USED_SERVER);
             ciInfoService.update(ciInfo);

@@ -35,7 +35,7 @@ public class CiInfoService {
     public CiInfo getNotUsedCfinfo(String type) {
 
         List<CiInfo> ciInfos;
-        if (type.equals("shared")) {
+        if (type.equals("Shared")) {
             LOGGER.info("################### SHARED");
             ciInfos = ciInfoRepository.findByTypeOrderByUsedcount(type);
         } else {

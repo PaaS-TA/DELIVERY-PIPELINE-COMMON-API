@@ -21,8 +21,7 @@ public class ServiceInstancesService {
     private final ServiceInstancesRepository serviceInstancesRepository;
 
 
-    private static final String SHARED = "Shared";
-    private static final String DEDICATED = "Dedicated";
+
 
     private final String USED_SERVER = "Y";
 
@@ -37,11 +36,8 @@ public class ServiceInstancesService {
     public ServiceInstances createInstances(@RequestBody ServiceInstances serviceInstances) {
         CiInfo ciInfo;
 
-        if (DEDICATED.equals(serviceInstances.getService_type())) {
-            ciInfo = ciInfoService.getNotUsedCfinfo(DEDICATED);
-        } else {
-            ciInfo = ciInfoService.getNotUsedCfinfo(SHARED);
-        }
+        ciInfo = ciInfoService.getNotUsedCfinfo(serviceInstances.getService_type());
+
         if (ciInfo != null) {
             serviceInstances.setCiServerUrl(ciInfo.getServerUrl());
             serviceInstances.setService_type(serviceInstances.getService_type());

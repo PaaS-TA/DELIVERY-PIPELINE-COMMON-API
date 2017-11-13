@@ -2,10 +2,6 @@ package paasta.delivery.pipeline.common.api.domain.common.serviceInstance;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import paasta.delivery.pipeline.common.api.common.CommonService;
 
@@ -25,6 +21,10 @@ public class CiInfoService {
 
     private final String NOT_USED_SERVER = "N";
 
+    private static final String SHARED = "Shared";
+    private static final String DEDICATED = "Dedicated";
+
+
     @Autowired
     public CiInfoService(CommonService commonService, CiInfoRepository ciInfoRepository) {
         this.commonService = commonService;
@@ -35,12 +35,13 @@ public class CiInfoService {
     public CiInfo getNotUsedCfinfo(String type) {
 
         List<CiInfo> ciInfos;
-        if (type.equals("Shared")) {
+        if (type.equals(SHARED)) {
             LOGGER.info("################### SHARED");
-            ciInfos = ciInfoRepository.findByStatusAndTypeOrderByUsedcount(NOT_USED_SERVER, type);
+            ciInfos = ciInfoRepository.findByTypeOrderByUsedcount(type);
+
         } else {
             LOGGER.info("################### DEDICATED");
-            ciInfos = ciInfoRepository.findByTypeOrderByUsedcount(type);
+            ciInfos = ciInfoRepository.findByStatusAndTypeOrderByUsedcount(NOT_USED_SERVER, type);
         }
 
 

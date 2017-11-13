@@ -47,7 +47,7 @@ public class ServiceInstancesService {
             serviceInstances.setService_type(serviceInstances.getService_type());
             ServiceInstances newInstances = serviceInstancesRepository.save(serviceInstances);
             newInstances.setService_type(serviceInstances.getService_type());
-            ciInfo.setUsedcount(ciInfo.getUsedcount()+1);
+            ciInfo.setUsedcount(ciInfo.getUsedcount() + 1);
             ciInfo.setStatus(USED_SERVER);
             ciInfoService.update(ciInfo);
 
@@ -58,10 +58,14 @@ public class ServiceInstancesService {
     }
 
     public String deleteInstance(String id) {
-        ServiceInstances serviceInstances = serviceInstancesRepository.getOne(id);
-        String ci_server = serviceInstances.getCiServerUrl();
-        serviceInstancesRepository.delete(id);
-        ciInfoService.recovery(ci_server);
+        try {
+            ServiceInstances serviceInstances = serviceInstancesRepository.getOne(id);
+            String ci_server = serviceInstances.getCiServerUrl();
+            serviceInstancesRepository.delete(id);
+            ciInfoService.recovery(ci_server);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Constants.RESULT_STATUS_SUCCESS;
     }
 

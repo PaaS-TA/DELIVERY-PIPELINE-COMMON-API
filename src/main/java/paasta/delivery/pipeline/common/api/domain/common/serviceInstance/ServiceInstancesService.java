@@ -21,8 +21,8 @@ public class ServiceInstancesService {
     private final ServiceInstancesRepository serviceInstancesRepository;
 
 
-    private static final String SHARED = "shared";
-    private static final String DEDICATED = "dedicated";
+    private static final String SHARED = "Shared";
+    private static final String DEDICATED = "Dedicated";
 
     private final String USED_SERVER = "Y";
 

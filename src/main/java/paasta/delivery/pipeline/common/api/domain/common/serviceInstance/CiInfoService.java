@@ -35,21 +35,14 @@ public class CiInfoService {
     public CiInfo getNotUsedCfinfo(String type) {
 
         List<CiInfo> ciInfos;
-        LOGGER.info("########### " + type);
-        if (type.equals(SHARED)) {
-            LOGGER.info("################### SHARED");
-            ciInfos = ciInfoRepository.findByTypeOrderByUsedcount(type);
-
-        } else {
-            LOGGER.info("################### DEDICATED");
+        if (type.equals(DEDICATED)) {
             ciInfos = ciInfoRepository.findByStatusAndTypeOrderByUsedcount(NOT_USED_SERVER, type);
+        } else {
+            ciInfos = ciInfoRepository.findByTypeOrderByUsedcount(type);
         }
 
 
         if (ciInfos.size() > 0) {
-            for (CiInfo ci : ciInfos) {
-                LOGGER.info(ci.getServerUrl());
-            }
             return ciInfos.get(0);
         } else {
             return null;

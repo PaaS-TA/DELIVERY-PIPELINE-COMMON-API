@@ -69,8 +69,8 @@ public class ProjectServiceTest {
 
         testModel.setId(ID);
         testModel.setSonarName(SONAR_NAME);
-        testModel.setName(NAME);
-        testModel.setKey(KEY);
+//        testModel.setName(NAME);
+//        testModel.setKey(KEY);
         testModel.setProjectName(PROJECT_NAME);
         testModel.setJobId(JOB_ID);
         testModel.setQualityProfileId(QUALITY_PROFILE_ID);
@@ -87,8 +87,8 @@ public class ProjectServiceTest {
 
         resultModel.setId(ID);
         resultModel.setSonarName(SONAR_NAME);
-        resultModel.setName(NAME);
-        resultModel.setKey(KEY);
+//        resultModel.setName(NAME);
+//        resultModel.setKey(KEY);
         resultModel.setProjectName(PROJECT_NAME);
         resultModel.setJobId(JOB_ID);
         resultModel.setQualityProfileId(QUALITY_PROFILE_ID);

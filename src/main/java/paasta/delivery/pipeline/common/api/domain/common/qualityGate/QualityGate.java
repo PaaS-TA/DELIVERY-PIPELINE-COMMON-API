@@ -17,26 +17,23 @@ import java.util.Locale;
 @Table(name = "quality_gate")
 public class QualityGate {
 
-    // QualityGate id는 자동증가가 아님.
-    // sonarqube에서 자동증가 되는 값을 리턴해주는데 이 값을 id 에 넣어줌.
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private long id; // pid
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    /*@Column(nullable = false)
-    private Long sonarQgId;*/
-    @Column(name = "gate_default_yn")
-    private String gateDefaultYn;
-
-    @Transient
-    private List<Long> projectIdList;
-    //게이트 추가
-
-    @Column(name = "service_instances_id")
+    @Column(name = "service_instances_id", nullable = false)
     private String serviceInstancesId;
+
+    // sonarqube에서 자동증가 되는 값을 리턴해주는데 이 값을 id 에 넣어줌.
+    @Column(name = "quality_gate_id", nullable = false)
+    private int qualityGateId; // id -> qualityGateId
+
+    @Column(name = "quality_gate_name", nullable = false)
+    private String qualityGateName; // name -> qualityGateName
+
+    @Column(name = "gate_default_yn", nullable = false)
+    private String gateDefaultYn;
 
     @CreationTimestamp
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false)
@@ -54,10 +51,8 @@ public class QualityGate {
     @Transient
     private String lastModifiedString;
 
-
-    //삭제 예정
-    @Column(name = "default_yn")
-    private String defaultYn;
+    @Transient
+    private List<Long> projectIdList;
 
     public long getId() {
         return id;
@@ -67,28 +62,36 @@ public class QualityGate {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Long> getProjectIdList() {
-        return projectIdList;
-    }
-
-    public void setProjectIdList(List<Long> projectIdList) {
-        this.projectIdList = projectIdList;
-    }
-
     public String getServiceInstancesId() {
         return serviceInstancesId;
     }
 
     public void setServiceInstancesId(String serviceInstancesId) {
         this.serviceInstancesId = serviceInstancesId;
+    }
+
+    public int getQualityGateId() {
+        return qualityGateId;
+    }
+
+    public void setQualityGateId(int qualityGateId) {
+        this.qualityGateId = qualityGateId;
+    }
+
+    public String getQualityGateName() {
+        return qualityGateName;
+    }
+
+    public void setQualityGateName(String qualityGateName) {
+        this.qualityGateName = qualityGateName;
+    }
+
+    public String getGateDefaultYn() {
+        return gateDefaultYn;
+    }
+
+    public void setGateDefaultYn(String gateDefaultYn) {
+        this.gateDefaultYn = gateDefaultYn;
     }
 
     public Date getCreated() {
@@ -123,36 +126,12 @@ public class QualityGate {
         this.lastModifiedString = lastModifiedString;
     }
 
-    public String getGateDefaultYn() {
-        return gateDefaultYn;
+    public List<Long> getProjectIdList() {
+        return projectIdList;
     }
 
-    public void setGateDefaultYn(String gateDefaultYn) {
-        this.gateDefaultYn = gateDefaultYn;
-    }
-
-    public String getDefaultYn() {
-        return defaultYn;
-    }
-
-    public void setDefaultYn(String defaultYn) {
-        this.defaultYn = defaultYn;
-    }
-
-    @Override
-    public String toString() {
-        return "QualityGate{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", gateDefaultYn='" + gateDefaultYn + '\'' +
-                ", projectIdList=" + projectIdList +
-                ", serviceInstancesId='" + serviceInstancesId + '\'' +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                ", createdString='" + createdString + '\'' +
-                ", lastModifiedString='" + lastModifiedString + '\'' +
-                ", defaultYn='" + defaultYn + '\'' +
-                '}';
+    public void setProjectIdList(List<Long> projectIdList) {
+        this.projectIdList = projectIdList;
     }
 
 }

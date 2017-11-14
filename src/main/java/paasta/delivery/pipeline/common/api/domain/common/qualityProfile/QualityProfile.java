@@ -1,6 +1,5 @@
 package paasta.delivery.pipeline.common.api.domain.common.qualityProfile;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import paasta.delivery.pipeline.common.api.common.Constants;
@@ -18,21 +17,23 @@ import java.util.Locale;
 @Table(name = "quality_profile")
 public class QualityProfile {
 
-
-    @Transient
-    private String resultStatus;
-    // QualityProfile id는 자동증가
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private long id; // pid
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "service_instances_id", nullable = false)
+    private String serviceInstancesId;
 
-    @Column(name = "sonar_key", nullable = false)
-    @JsonProperty("key")
-    private String sonarKey;
+    @Column(name = "quality_profile_id", nullable = false)
+    private int qualityProfileId; // id -> qualityProfileId
+
+    @Column(name = "quality_profile_name", nullable = false)
+    private String qualityProfileName; // name -> qualityProfileName
+
+    //    @JsonProperty("key")
+    @Column(name = "quality_profile_key", nullable = false)
+    private String qualityProfileKey; // sonarKey -> qualityProfileKey
 
     @Column(name = "language", nullable = false)
     private String language;
@@ -40,19 +41,13 @@ public class QualityProfile {
     @Column(name = "language_name", nullable = false)
     private String languageName;
 
-    @Column(name = "profile_default_yn")
+    @Column(name = "profile_default_yn", nullable = false)
     private String profileDefaultYn;
 
-    @Column(name = "service_instances_id", nullable = false)
-    private String serviceInstancesId;
-
-    @Transient
-    private List<Long> projectIdList;
-
-    @Column(name = "active_rule_count")
+    @Column(name = "active_rule_count", nullable = false)
     private int activeRuleCount;
 
-    @Column(name = "active_deprecated_rule_count")
+    @Column(name = "active_deprecated_rule_count", nullable = false)
     private int activeDeprecatedRuleCount;
 
     @CreationTimestamp
@@ -71,9 +66,11 @@ public class QualityProfile {
     @Transient
     private String lastModifiedString;
 
-    //삭제 예정
-    @Column(name = "default_yn")
-    private String defaultYn;
+    @Transient
+    private String resultStatus;
+
+    @Transient
+    private List<Long> projectIdList;
 
     public long getId() {
         return id;
@@ -83,20 +80,36 @@ public class QualityProfile {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getServiceInstancesId() {
+        return serviceInstancesId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setServiceInstancesId(String serviceInstancesId) {
+        this.serviceInstancesId = serviceInstancesId;
     }
 
-    public String getSonarKey() {
-        return sonarKey;
+    public int getQualityProfileId() {
+        return qualityProfileId;
     }
 
-    public void setSonarKey(String sonarKey) {
-        this.sonarKey = sonarKey;
+    public void setQualityProfileId(int qualityProfileId) {
+        this.qualityProfileId = qualityProfileId;
+    }
+
+    public String getQualityProfileName() {
+        return qualityProfileName;
+    }
+
+    public void setQualityProfileName(String qualityProfileName) {
+        this.qualityProfileName = qualityProfileName;
+    }
+
+    public String getQualityProfileKey() {
+        return qualityProfileKey;
+    }
+
+    public void setQualityProfileKey(String qualityProfileKey) {
+        this.qualityProfileKey = qualityProfileKey;
     }
 
     public String getLanguage() {
@@ -115,12 +128,12 @@ public class QualityProfile {
         this.languageName = languageName;
     }
 
-    public List<Long> getProjectIdList() {
-        return projectIdList;
+    public String getProfileDefaultYn() {
+        return profileDefaultYn;
     }
 
-    public void setProjectIdList(List<Long> projectIdList) {
-        this.projectIdList = projectIdList;
+    public void setProfileDefaultYn(String profileDefaultYn) {
+        this.profileDefaultYn = profileDefaultYn;
     }
 
     public int getActiveRuleCount() {
@@ -171,14 +184,6 @@ public class QualityProfile {
         this.lastModifiedString = lastModifiedString;
     }
 
-    public String getServiceInstancesId() {
-        return serviceInstancesId;
-    }
-
-    public void setServiceInstancesId(String serviceInstancesId) {
-        this.serviceInstancesId = serviceInstancesId;
-    }
-
     public String getResultStatus() {
         return resultStatus;
     }
@@ -187,42 +192,12 @@ public class QualityProfile {
         this.resultStatus = resultStatus;
     }
 
-    public String getProfileDefaultYn() {
-        return profileDefaultYn;
+    public List<Long> getProjectIdList() {
+        return projectIdList;
     }
 
-    public void setProfileDefaultYn(String profileDefaultYn) {
-        this.profileDefaultYn = profileDefaultYn;
-    }
-
-    public String getDefaultYn() {
-        return defaultYn;
-    }
-
-    public void setDefaultYn(String defaultYn) {
-        this.defaultYn = defaultYn;
-    }
-
-    @Override
-    public String toString() {
-        return "QualityProfile{" +
-                "resultStatus='" + resultStatus + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", sonarKey='" + sonarKey + '\'' +
-                ", language='" + language + '\'' +
-                ", languageName='" + languageName + '\'' +
-                ", profileDefaultYn='" + profileDefaultYn + '\'' +
-                ", serviceInstancesId='" + serviceInstancesId + '\'' +
-                ", projectIdList=" + projectIdList +
-                ", activeRuleCount=" + activeRuleCount +
-                ", activeDeprecatedRuleCount=" + activeDeprecatedRuleCount +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                ", createdString='" + createdString + '\'' +
-                ", lastModifiedString='" + lastModifiedString + '\'' +
-                ", defaultYn='" + defaultYn + '\'' +
-                '}';
+    public void setProjectIdList(List<Long> projectIdList) {
+        this.projectIdList = projectIdList;
     }
 
 }

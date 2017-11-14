@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import paasta.delivery.pipeline.common.api.common.Constants;
-import paasta.delivery.pipeline.common.api.domain.common.qualityProfile.QualityProfile;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,25 +64,25 @@ public class QualityGateServiceTest {
         testResultList = new ArrayList<>();
 
         testModel.setId(ID);
-        testModel.setName(NAME);
+//        testModel.setName(NAME);
         testModel.setGateDefaultYn(GATE_DEFAULT_YN);
         testModel.setServiceInstancesId(SERVICE_INSTANCES_ID);
         testModel.setCreated(TEST_CREATED);
         testModel.setLastModified(TEST_LAST_MODIFIED);
         testModel.setCreatedString(CREATED_STRING);
         testModel.setLastModifiedString(LAST_MODIFIED_STRING);
-        testModel.setDefaultYn(GATE_DEFAULT_YN);
+//        testModel.setDefaultYn(GATE_DEFAULT_YN);
         testModel.setProjectIdList(PROJECT_ID_LIST);
 
         resultModel.setId(ID);
-        resultModel.setName(NAME);
+//        resultModel.setName(NAME);
         resultModel.setGateDefaultYn(GATE_DEFAULT_YN);
         resultModel.setServiceInstancesId(SERVICE_INSTANCES_ID);
         resultModel.setLastModifiedString(LAST_MODIFIED_STRING);
         resultModel.setLastModified(testModel.getLastModified());
         resultModel.setCreatedString(CREATED_STRING);
         resultModel.setCreated(testModel.getCreated());
-        resultModel.setDefaultYn(GATE_DEFAULT_YN);
+//        resultModel.setDefaultYn(GATE_DEFAULT_YN);
         resultModel.setProjectIdList(testModel.getProjectIdList());
 
 

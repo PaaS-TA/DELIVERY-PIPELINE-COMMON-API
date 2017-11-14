@@ -10,10 +10,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import paasta.delivery.pipeline.common.api.common.Constants;
-import paasta.delivery.pipeline.common.api.domain.common.qualityGate.QualityGate;
-import paasta.delivery.pipeline.common.api.domain.common.qualityGate.QualityGateRepository;
-import paasta.delivery.pipeline.common.api.domain.common.qualityGate.QualityGateService;
-import static org.mockito.BDDMockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.when;
 import static org.mockito.Mockito.doNothing;
 
 /**
@@ -70,8 +67,8 @@ public class QualityProfileServiceTest {
         testResultList = new ArrayList<>();
 
         testModel.setId(ID);
-        testModel.setName(NAME);
-        testModel.setSonarKey(SONAR_KEY);
+//        testModel.setName(NAME);
+//        testModel.setSonarKey(SONAR_KEY);
         testModel.setServiceInstancesId(SERVICE_INSTANCES_ID);
         testModel.setProfileDefaultYn(PROFILE_DEFAULT_YN);
         testModel.setLanguage(LANGUAGE);
@@ -85,8 +82,8 @@ public class QualityProfileServiceTest {
         testModel.setProjectIdList(PROJECT_ID_LIST);
 
         resultModel.setId(ID);
-        resultModel.setName(NAME);
-        resultModel.setSonarKey(SONAR_KEY);
+//        resultModel.setName(NAME);
+//        resultModel.setSonarKey(SONAR_KEY);
         resultModel.setServiceInstancesId(SERVICE_INSTANCES_ID);
         resultModel.setProfileDefaultYn(PROFILE_DEFAULT_YN);
         resultModel.setLanguage(LANGUAGE);

@@ -1,12 +1,13 @@
 package paasta.delivery.pipeline.common.api.domain.common.project;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
+import paasta.delivery.pipeline.common.api.common.Constants;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by hrjin on 2017-06-23.
@@ -15,58 +16,38 @@ import java.util.Date;
 @Table(name = "sonar_project")
 public class Project {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id; // pid
 
-    @Transient
-    private String key;
-    @Transient
-    private String resultStatus;
-    //프로젝트 연결상태
-    @Transient
-    private Boolean linked;
+    @Column(name = "service_instances_id", nullable = false)
+    private String serviceInstancesId;
 
-
-
-
-    @Transient
-    private String gateDefaultYn;
-
-    @Transient
-    private String profileDefaultYn;
+    @Column(name = "project_name", nullable = false)
+    private String projectName;
 
     // sonarqube에서 자동증가 되는 값을 리턴해주는데 이 값을 id 에 넣어줌.
-    @Id
-    @Column(name = "id")
-    private long id;
+    @Column(name = "sonar_id", nullable = false)
+    private long sonarId; // id -> sonarId
 
+    @Column(name = "sonar_name", nullable = false)
+    private String sonarName;
 
-    @JsonProperty("sonarKey")
+    //    @JsonProperty("sonarKey")
     @Column(name = "sonar_key", nullable = false)
     private String sonarKey; // sonarqube의 key 값
 
-    @Column(name = "project_name")
-    private String projectName;
-
-    @Column(name = "sonar_name")
-    private String sonarName;
-
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "quality_profile_id")
+    @Column(name = "quality_profile_id", nullable = false)
     private int qualityProfileId;
 
-    @Column(name = "quality_gate_id")
+    @Column(name = "quality_gate_id", nullable = false)
     private int qualityGateId;
 
-    @Column(name = "service_instances_id")
-    private String serviceInstancesId;
-
-    @Column(name = "pipeline_id")
+    @Column(name = "pipeline_id", nullable = false)
     private int pipelineId;
 
-
-    @Column(name = "job_id")
+    @Column(name = "job_id", nullable = false)
     private long jobId;
 
     @CreationTimestamp
@@ -79,19 +60,43 @@ public class Project {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
 
+    @Transient
+    private String createdString;
 
-    /*@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<ProjectQualityGate> projectQualityGateList;*/
+    @Transient
+    private String lastModifiedString;
 
-    /*@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "quality_gate_id", updatable = true , nullable = true)
-    private QualityGate qualityGate;
+    @Transient
+    private String qualityProfileKey; // key -> qualityProfileKey
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "quality_profile_id", updatable = true, nullable = true)
-    private QualityProfile qualityProfile;*/
+    @Transient
+    private String resultStatus;
 
+    //프로젝트 연결상태
+    @Transient
+    private Boolean linked;
+
+    @Transient
+    private String gateDefaultYn;
+
+    @Transient
+    private String profileDefaultYn;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getServiceInstancesId() {
+        return serviceInstancesId;
+    }
+
+    public void setServiceInstancesId(String serviceInstancesId) {
+        this.serviceInstancesId = serviceInstancesId;
+    }
 
     public String getProjectName() {
         return projectName;
@@ -101,20 +106,20 @@ public class Project {
         this.projectName = projectName;
     }
 
+    public long getSonarId() {
+        return sonarId;
+    }
+
+    public void setSonarId(long sonarId) {
+        this.sonarId = sonarId;
+    }
+
     public String getSonarName() {
         return sonarName;
     }
 
     public void setSonarName(String sonarName) {
         this.sonarName = sonarName;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getSonarKey() {
@@ -141,38 +146,6 @@ public class Project {
         this.qualityGateId = qualityGateId;
     }
 
-    public String getServiceInstancesId() {
-        return serviceInstancesId;
-    }
-
-    public void setServiceInstancesId(String serviceInstancesId) {
-        this.serviceInstancesId = serviceInstancesId;
-    }
-
-    public String getResultStatus() {
-        return resultStatus;
-    }
-
-    public void setResultStatus(String resultStatus) {
-        this.resultStatus = resultStatus;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public Boolean getLinked() {
-        return linked;
-    }
-
-    public void setLinked(Boolean linked) {
-        this.linked = linked;
-    }
-
     public int getPipelineId() {
         return pipelineId;
     }
@@ -187,31 +160,6 @@ public class Project {
 
     public void setJobId(long jobId) {
         this.jobId = jobId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public String getGateDefaultYn() {
-        return gateDefaultYn;
-    }
-
-    public String getProfileDefaultYn() {
-        return profileDefaultYn;
-    }
-
-    public void setProfileDefaultYn(String profileDefaultYn) {
-        this.profileDefaultYn = profileDefaultYn;
-    }
-
-    public void setGateDefaultYn(String gateDefaultYn) {
-        this.gateDefaultYn = gateDefaultYn;
     }
 
     public Date getCreated() {
@@ -230,28 +178,59 @@ public class Project {
         this.lastModified = lastModified;
     }
 
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "key='" + key + '\'' +
-                ", resultStatus='" + resultStatus + '\'' +
-                ", linked=" + linked +
-                ", gateDefaultYn='" + gateDefaultYn + '\'' +
-                ", profileDefaultYn='" + profileDefaultYn + '\'' +
-                ", id=" + id +
-                ", sonarKey='" + sonarKey + '\'' +
-                ", projectName='" + projectName + '\'' +
-                ", sonarName='" + sonarName + '\'' +
-                ", name='" + name + '\'' +
-                ", qualityProfileId=" + qualityProfileId +
-                ", qualityGateId=" + qualityGateId +
-                ", serviceInstancesId='" + serviceInstancesId + '\'' +
-                ", pipelineId=" + pipelineId +
-                ", jobId=" + jobId +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                '}';
+    public String getCreatedString() {
+        return (created != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE, Locale.KOREA).format(created) : null;
     }
 
+    public void setCreatedString(String createdString) {
+        this.createdString = createdString;
+    }
+
+    public String getLastModifiedString() {
+        return (lastModified != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE, Locale.KOREA).format(lastModified) : null;
+    }
+
+    public void setLastModifiedString(String lastModifiedString) {
+        this.lastModifiedString = lastModifiedString;
+    }
+
+    public String getQualityProfileKey() {
+        return qualityProfileKey;
+    }
+
+    public void setQualityProfileKey(String qualityProfileKey) {
+        this.qualityProfileKey = qualityProfileKey;
+    }
+
+    public String getResultStatus() {
+        return resultStatus;
+    }
+
+    public void setResultStatus(String resultStatus) {
+        this.resultStatus = resultStatus;
+    }
+
+    public Boolean getLinked() {
+        return linked;
+    }
+
+    public void setLinked(Boolean linked) {
+        this.linked = linked;
+    }
+
+    public String getGateDefaultYn() {
+        return gateDefaultYn;
+    }
+
+    public void setGateDefaultYn(String gateDefaultYn) {
+        this.gateDefaultYn = gateDefaultYn;
+    }
+
+    public String getProfileDefaultYn() {
+        return profileDefaultYn;
+    }
+
+    public void setProfileDefaultYn(String profileDefaultYn) {
+        this.profileDefaultYn = profileDefaultYn;
+    }
 }

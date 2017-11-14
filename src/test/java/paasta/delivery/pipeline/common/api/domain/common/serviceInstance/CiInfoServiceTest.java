@@ -1,5 +1,6 @@
 package paasta.delivery.pipeline.common.api.domain.common.serviceInstance;
 
+import javafx.beans.binding.When;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -16,11 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -35,7 +36,7 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ServiceInstancesServiceTest {
+public class CiInfoServiceTest {
 
     private static final String SERVICE_INSTANCES_ID = "test-service-Instances-id";
     private static final String SERVICE_INSTANCES_OWNER = "test-service-Instances-owner";
@@ -45,7 +46,6 @@ public class ServiceInstancesServiceTest {
     private static ServiceInstances gTestResultServiceInstances = null;
     private static CiInfo CI_INFO;
     private static List<CiInfo> CI_INFOS;
-    private static List<ServiceInstances> gTestServiceInstancesList = null;
 
     @Mock
     private ServiceInstancesRepository serviceInstancesRepository;
@@ -53,12 +53,11 @@ public class ServiceInstancesServiceTest {
     @Mock
     private CiInfoRepository ciInfoRepository;
 
-    @Mock
+    @InjectMocks
     private CiInfoService ciInfoService;
 
 
-    @InjectMocks
-    private ServiceInstancesService serviceInstancesService;
+
 
 
     /**
@@ -70,7 +69,7 @@ public class ServiceInstancesServiceTest {
     public void setUp() throws Exception {
         gTestServiceInstances = new ServiceInstances();
         gTestResultServiceInstances = new ServiceInstances();
-        gTestServiceInstancesList = new ArrayList<>();
+
 
         gTestServiceInstances.setPipelineList(new ArrayList<>());
         gTestServiceInstances.setInstanceUseList(new ArrayList<>());
@@ -84,7 +83,7 @@ public class ServiceInstancesServiceTest {
         gTestResultServiceInstances.setOwner(SERVICE_INSTANCES_OWNER);
         gTestResultServiceInstances.setCiServerUrl(SERVICE_INSTANCES_CI_SERVER_URL);
 
-        gTestServiceInstancesList.add(gTestResultServiceInstances);
+
 
         CI_INFO = new CiInfo();
         CI_INFO.setUsedcount(0);
@@ -117,6 +116,7 @@ public class ServiceInstancesServiceTest {
             ciInfos.add(ciInfo);
         }
         return ciInfos;
+
     }
 
 
@@ -135,49 +135,20 @@ public class ServiceInstancesServiceTest {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
+
     /**
-     * Create instances valid model return model.
+     * Gets service instances valid model return list.
      *
      * @throws Exception the exception
      */
     @Test
-    public void createInstances_ValidModel_ReturnModel() throws Exception {
-//        when(ciInfoRepository.findByStatusAndTypeOrderByUsedcount("N", eq("Dedicated"))).thenReturn(CI_INFOS);
-//        when(ciInfoRepository.findByTypeOrderByUsedcount(eq("Shared"))).thenReturn(CI_INFOS);
-//        when(ciInfoService.getNotUsedCfinfo(eq("Shared"))).thenReturn(CI_INFOS.get(0));
-//
-//
-//        when(serviceInstancesRepository.save(gTestServiceInstances)).thenReturn(gTestResultServiceInstances);
-//        when(ciInfoService.update(any(CiInfo.class))).thenReturn(true);
-//
-//        // TEST
-//        ServiceInstances resultModel = serviceInstancesService.createInstances(gTestServiceInstances);
-//
-//
-//        assertThat(resultModel).isNotNull();
-//        assertEquals(gTestResultServiceInstances.getId(), resultModel.getId());
-//        assertEquals(gTestResultServiceInstances.getOwner(), resultModel.getOwner());
-//        assertEquals(gTestResultServiceInstances.getCiServerUrl(), resultModel.getCiServerUrl());
-//        assertFalse(0 < resultModel.getPipelineList().size());
-//        assertFalse(0 < resultModel.getInstanceUseList().size());
-    }
-
-
-    /**
-     * Delete instance valid model return string.
-     *
-     * @throws Exception the exception
-     */
-    @Test
-    public void deleteInstance_ValidModel_ReturnString() throws Exception {
-        doNothing().when(serviceInstancesRepository).delete(SERVICE_INSTANCES_ID);
-
-
-        // TEST
-        String result = serviceInstancesService.deleteInstance(SERVICE_INSTANCES_ID);
-
-        assertThat(result).isNotNull();
-        assertEquals(Constants.RESULT_STATUS_SUCCESS, result);
+    public void test_getCiServer_1() throws Exception {
+        when(ciInfoRepository.findByTypeOrderByUsedcount(anyString())).thenReturn(CI_INFOS);
+        List<CiInfo> resultList = ciInfoRepository.findByTypeOrderByUsedcount("Shared");
+        assertThat(resultList).isNotNull();
     }
 
 
@@ -187,32 +158,43 @@ public class ServiceInstancesServiceTest {
      * @throws Exception the exception
      */
     @Test
-    public void getServiceInstances_ValidModel_ReturnList() throws Exception {
-        when(serviceInstancesRepository.findAll()).thenReturn(gTestServiceInstancesList);
-
-
-        // TEST
-        List<ServiceInstances> resultList = serviceInstancesService.getServiceInstances();
-
+    public void test_getCiServer_2() throws Exception {
+        when(ciInfoRepository.findByStatusAndTypeOrderByUsedcount(anyString(),anyString())).thenReturn(CI_INFOS);
+        List<CiInfo> resultList = ciInfoRepository.findByStatusAndTypeOrderByUsedcount("N","Shared");
         assertThat(resultList).isNotNull();
     }
 
 
-    /**
-     * Gets service instance valid model return model.
-     *
-     * @throws Exception the exception
-     */
     @Test
-    public void getServiceInstance_ValidModel_ReturnModel() throws Exception {
-        when(serviceInstancesRepository.findOne(SERVICE_INSTANCES_ID)).thenReturn(gTestResultServiceInstances);
+    public void test_getCiServer_3() throws Exception {
+        when(ciInfoRepository.findByStatusAndTypeOrderByUsedcount(anyString(),anyString())).thenReturn(CI_INFOS);
+        when(ciInfoRepository.findByTypeOrderByUsedcount(anyString())).thenReturn(CI_INFOS);
+        CiInfo resultList = ciInfoService.getNotUsedCfinfo(anyString());
+        assertEquals(CI_INFOS.get(0).getServerUrl(),resultList.getServerUrl());
+        assertEquals(CI_INFOS.get(0).getUsedcount(),resultList.getUsedcount());
+        assertEquals(CI_INFOS.get(0).getId(),resultList.getId());
+        assertEquals(CI_INFOS.get(0).getStatus(),resultList.getStatus());
+        assertEquals(CI_INFOS.get(0).getType(),resultList.getType());
 
-
-        // TEST
-        ServiceInstances resultModel = serviceInstancesService.getServiceInstance(SERVICE_INSTANCES_ID);
-
-        assertThat(resultModel).isNotNull();
-        assertEquals(gTestResultServiceInstances.getId(), resultModel.getId());
     }
 
+    @Test
+    public void test_update() throws Exception {
+        when(ciInfoRepository.save(any(CiInfo.class))).thenReturn(CI_INFO);
+        when(ciInfoService.update(any(CiInfo.class))).thenReturn(true);
+        boolean result = ciInfoService.update(CI_INFO);
+        assertEquals(result,true);
+    }
+
+
+
+
+    @Test
+    public void test_recovery() throws Exception {
+        when(ciInfoRepository.findByServerUrl(anyString())).thenReturn(CI_INFO);
+        when(ciInfoRepository.save(any(CiInfo.class))).thenReturn(CI_INFO);
+        when(ciInfoService.recovery(anyString())).thenReturn(true);
+        boolean result = ciInfoService.recovery(CI_INFO.getServerUrl());
+        assertEquals(result,true);
+    }
 }

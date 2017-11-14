@@ -20,7 +20,7 @@ public class ServiceInstancesService {
 
     private final ServiceInstancesRepository serviceInstancesRepository;
 
-
+    private static final String SHARED = "Shared";
 
 
     private final String USED_SERVER = "Y";
@@ -35,6 +35,10 @@ public class ServiceInstancesService {
 
     public ServiceInstances createInstances(@RequestBody ServiceInstances serviceInstances) {
         CiInfo ciInfo;
+        if(serviceInstances.getService_type() == null || serviceInstances.getService_type() == ""){
+            serviceInstances.setService_type(SHARED);
+        }
+
 
         ciInfo = ciInfoService.getNotUsedCfinfo(serviceInstances.getService_type());
 

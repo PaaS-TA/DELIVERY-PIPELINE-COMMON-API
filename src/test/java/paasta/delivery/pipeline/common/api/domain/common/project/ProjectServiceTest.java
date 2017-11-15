@@ -68,7 +68,7 @@ public class ProjectServiceTest {
         testResultList = new ArrayList<>();
 
         testModel.setId(ID);
-        testModel.setSonarName(SONAR_NAME);
+//        testModel.setSonarName(SONAR_NAME);
 //        testModel.setName(NAME);
 //        testModel.setKey(KEY);
         testModel.setProjectName(PROJECT_NAME);
@@ -79,14 +79,14 @@ public class ProjectServiceTest {
         testModel.setGateDefaultYn(GATE_DEFAULT_YN);
         testModel.setLinked(LINKED);
         testModel.setServiceInstancesId(SERVICE_INSTANCES_ID);
-        testModel.setSonarKey(SONAR_KEY);
+//        testModel.setSonarKey(SONAR_KEY);
         testModel.setPipelineId(PIPELINE_ID);
         testModel.setProfileDefaultYn(PROFILE_DEFAULT_YN);
         testModel.setCreated(TEST_CREATED);
         testModel.setLastModified(TEST_LAST_MODIFIED);
 
         resultModel.setId(ID);
-        resultModel.setSonarName(SONAR_NAME);
+//        resultModel.setSonarName(SONAR_NAME);
 //        resultModel.setName(NAME);
 //        resultModel.setKey(KEY);
         resultModel.setProjectName(PROJECT_NAME);
@@ -97,7 +97,7 @@ public class ProjectServiceTest {
         resultModel.setGateDefaultYn(GATE_DEFAULT_YN);
         resultModel.setLinked(LINKED);
         resultModel.setServiceInstancesId(SERVICE_INSTANCES_ID);
-        resultModel.setSonarKey(SONAR_KEY);
+//        resultModel.setSonarKey(SONAR_KEY);
         resultModel.setPipelineId(PIPELINE_ID);
         resultModel.setProfileDefaultYn(PROFILE_DEFAULT_YN);
         resultModel.setCreated(testModel.getCreated());
@@ -170,7 +170,7 @@ public class ProjectServiceTest {
         assertThat(result).isNotNull();
         assertEquals(SERVICE_INSTANCES_ID,result.getServiceInstancesId());
         assertEquals(PROJECT_NAME,result.getProjectName());
-        assertEquals(SONAR_KEY,result.getSonarKey());
+//        assertEquals(SONAR_KEY,result.getSonarKey());
     }
 
 

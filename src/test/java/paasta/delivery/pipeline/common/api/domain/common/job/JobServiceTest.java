@@ -70,7 +70,7 @@ public class JobServiceTest {
     private static final String INSPECTION_PROJECT_ID = "test-inspection-project-id";
     private static final String INSPECTION_PROJECT_NAME = "test-inspection-project-name";
     private static final String INSPECTION_PROJECT_KEY = "test-inspection-project-key";
-    private static final String INSPECTION_PROFILE_ID = "test-inspection-profile-id";
+    private static final String INSPECTION_PROFILE_KEY = "test-inspection-profile-id";
     private static final String INSPECTION_GATE_ID = "test-inspection-gate-id";
     private static final String USER_ID = "test-user-id";
     private static final Date TEST_CREATED = new Date();
@@ -158,7 +158,7 @@ public class JobServiceTest {
         gTestResultJobModel.setInspectionProjectId(INSPECTION_PROJECT_ID);
         gTestResultJobModel.setInspectionProjectName(INSPECTION_PROJECT_NAME);
         gTestResultJobModel.setInspectionProjectKey(INSPECTION_PROJECT_KEY);
-        gTestResultJobModel.setInspectionProfileId(INSPECTION_PROFILE_ID);
+        gTestResultJobModel.setInspectionProfileKey(INSPECTION_PROFILE_KEY);
         gTestResultJobModel.setInspectionGateId(INSPECTION_GATE_ID);
         gTestResultJobModel.setUserId(USER_ID);
         gTestResultJobModel.setCreated(gTestJobModel.getCreated());
@@ -338,7 +338,7 @@ public class JobServiceTest {
         assertEquals(INSPECTION_PROJECT_ID, resultModel.getInspectionProjectId());
         assertEquals(INSPECTION_PROJECT_NAME, resultModel.getInspectionProjectName());
         assertEquals(INSPECTION_PROJECT_KEY, resultModel.getInspectionProjectKey());
-        assertEquals(INSPECTION_PROFILE_ID, resultModel.getInspectionProfileId());
+        assertEquals(INSPECTION_PROFILE_KEY, resultModel.getInspectionProfileKey());
         assertEquals(INSPECTION_GATE_ID, resultModel.getInspectionGateId());
         assertEquals(USER_ID, resultModel.getUserId());
         assertEquals(TEST_CREATED, resultModel.getCreated());

@@ -1,8 +1,6 @@
 package paasta.delivery.pipeline.common.api.domain.common.project;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,7 +19,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
      * @param serviceInstancesId , qualityProfileId
      * @return the list
      */
-    List<Project> findByServiceInstancesIdAndQualityProfileId(String serviceInstancesId, int qualityProfileId);
+    List<Project> findByServiceInstancesIdAndQualityProfileKey(String serviceInstancesId, String qualityProfileKey);
 
 
     /**

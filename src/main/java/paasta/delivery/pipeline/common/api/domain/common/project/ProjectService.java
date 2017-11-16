@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paasta.delivery.pipeline.common.api.common.Constants;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hrjin on 2017-06-23.
@@ -27,7 +26,7 @@ public class ProjectService {
         return projectRepository.findByserviceInstancesId(project.getServiceInstancesId());
     }
 
-    public List<Project> getProject(Project project){
+    public List<Project> getProject(Project project) {
         return projectRepository.findByserviceInstancesIdAndPipelineId(project.getServiceInstancesId(), project.getPipelineId());
     }
 
@@ -41,17 +40,19 @@ public class ProjectService {
         return project;
     }
 
-    public Project updateProject(Project project) {
-        Project result = new Project();
-        result = projectRepository.findOne(project.getId());
-
-        result.setProjectName(project.getProjectName());
-        result.setQualityProfileId(project.getQualityProfileId());
-        result.setQualityGateId(project.getQualityGateId());
-        result.setJobId(project.getJobId());
-
-        return projectRepository.save(result);
-    }
+    // TODO
+//    public Project updateProject(Project project) {
+//        Project result = new Project();
+//        result = projectRepository.findOne(project.getId());
+//
+//        result.setProjectName(project.getProjectName());
+//        // TODO
+////        result.setQualityProfileId(project.getQualityProfileId());
+//        result.setQualityGateId(project.getQualityGateId());
+//        result.setJobId(project.getJobId());
+//
+//        return projectRepository.save(result);
+//    }
 
 
     public Project qualityGateProjectLiked(Project project) {
@@ -69,41 +70,43 @@ public class ProjectService {
 
     public Project qualityProfileProjectLiked(Project project) {
         Project result = new Project();
-        if (project.getLinked().equals(false)) {
-            project.setQualityProfileId(0);
-        }
+        // TODO
+//        if (project.getLinked().equals(false)) {
+//            project.setQualityProfileId(0);
+//        }
 
         result = projectRepository.findOne(project.getId());
-        result.setQualityProfileId(project.getQualityProfileId());
+        result.setQualityProfileKey(project.getQualityProfileKey());
 
         return projectRepository.save(result);
     }
 
-    public String qualityProfileDelete(Project project){
-        List<Project> result = new ArrayList<>();
-        int profileId = (int)(long)project.getId();
-        project.setQualityProfileId(profileId);
-        result = projectRepository.findByServiceInstancesIdAndQualityProfileId(project.getServiceInstancesId(), project.getQualityProfileId());
-
-        if(result.size() > 0){
-            for(int i=0;i<result.size();i++){
-                result.get(i).setQualityProfileId(0);
-                projectRepository.save(result.get(i));
-            }
-        }
+    public String qualityProfileDelete(Project project) {
+        // TODO
+//        List<Project> result = new ArrayList<>();
+//        int profileId = (int)(long)project.getId();
+//        project.setQualityProfileId(profileId);
+//        result = projectRepository.findByServiceInstancesIdAndQualityProfileId(project.getServiceInstancesId(), project.getQualityProfileId());
+//
+//        if(result.size() > 0){
+//            for(int i=0;i<result.size();i++){
+//                result.get(i).setQualityProfileId(0);
+//                projectRepository.save(result.get(i));
+//            }
+//        }
 
         return Constants.RESULT_STATUS_SUCCESS;
     }
 
-    public String qualityGateDelete(Project project){
+    public String qualityGateDelete(Project project) {
         List<Project> result = new ArrayList<>();
-        int gateId = (int)(long)project.getId();
+        int gateId = (int) (long) project.getId();
         project.setQualityGateId(gateId);
 
         result = projectRepository.findByServiceInstancesIdAndQualityGateId(project.getServiceInstancesId(), project.getQualityGateId());
 
-        if(result.size() > 0){
-            for(int i = 0; i<result.size(); i++){
+        if (result.size() > 0) {
+            for (int i = 0; i < result.size(); i++) {
                 result.get(i).setQualityGateId(0);
                 projectRepository.save(result.get(i));
             }
@@ -112,9 +115,36 @@ public class ProjectService {
     }
 
     //projectKey 값 가져오기
-    public Project getProjectKey(Project project){
+    public Project getProjectKey(Project project) {
         return projectRepository.findOne(project.getId());
     }
 
+
+    /**
+     * Sets update project.
+     *
+     * @param project the project
+     * @return the update project
+     */
+    public Project setUpdateProject(Project project) {
+        Project projectDetail = projectRepository.findOne(project.getId());
+
+        projectDetail.setQualityProfileKey(project.getQualityProfileKey());
+        projectDetail.setQualityGateId(project.getQualityGateId());
+        projectDetail.setJobId(project.getJobId());
+
+        return projectRepository.save(projectDetail);
+    }
+
+
+    /**
+     * Get project by id project.
+     *
+     * @param id the id
+     * @return the project
+     */
+    public Project getProjectById(long id) {
+        return projectRepository.findOne(id);
+    }
 
 }

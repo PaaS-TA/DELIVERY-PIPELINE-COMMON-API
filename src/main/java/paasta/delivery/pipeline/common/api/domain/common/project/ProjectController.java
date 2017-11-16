@@ -24,8 +24,6 @@ public class ProjectController {
     }
 
 
-
-
     @RequestMapping(value = "/projectsList", method = RequestMethod.POST)
     public List getProjectsList(@RequestBody Project project) {
         return projectService.getProjectsList(project);
@@ -33,7 +31,7 @@ public class ProjectController {
 
 
     @RequestMapping(value = "/getProject", method = RequestMethod.POST)
-    public List getProject(@RequestBody Project project){
+    public List getProject(@RequestBody Project project) {
         return projectService.getProject(project);
     }
 
@@ -69,7 +67,9 @@ public class ProjectController {
      */
     @RequestMapping(value = "/projectsUpdate", method = RequestMethod.PUT)
     public Project updateProjects(@RequestBody Project project) {
-        return projectService.updateProject(project);
+        // TODO
+//        return projectService.updateProject(project);
+        return projectService.setUpdateProject(project);
     }
 
     /**
@@ -101,8 +101,8 @@ public class ProjectController {
      * @param project
      * @return
      */
-    @RequestMapping(value = "/qualityGateDelete",method = RequestMethod.PUT)
-    public String qualityGateDelete(@RequestBody Project project){
+    @RequestMapping(value = "/qualityGateDelete", method = RequestMethod.PUT)
+    public String qualityGateDelete(@RequestBody Project project) {
         return projectService.qualityGateDelete(project);
     }
 
@@ -113,7 +113,7 @@ public class ProjectController {
      * @return
      */
     @RequestMapping(value = "/qualityProfileDelete", method = RequestMethod.PUT)
-    public String qualityProfileDelete(@RequestBody Project project){
+    public String qualityProfileDelete(@RequestBody Project project) {
         return projectService.qualityProfileDelete(project);
     }
 
@@ -124,9 +124,21 @@ public class ProjectController {
      * @param project
      * @return Project
      */
-    @RequestMapping(value = "/projectKey" , method = RequestMethod.POST)
-    public Project getProjectKey(@RequestBody Project project){
+    @RequestMapping(value = "/projectKey", method = RequestMethod.POST)
+    public Project getProjectKey(@RequestBody Project project) {
         return projectService.getProjectKey(project);
+    }
+
+
+    /**
+     * Gets project by id.
+     *
+     * @param id the id
+     * @return the project by id
+     */
+    @GetMapping(value = "/{id:.+}")
+    public Project getProjectById(@PathVariable("id") int id) {
+        return projectService.getProjectById(id);
     }
 
 }

@@ -105,16 +105,4 @@ public class Authority {
         this.authCode = authCode;
     }
 
-    @Override
-    public String toString() {
-        return "Authority{" +
-                "id='" + id + '\'' +
-                ", displayName='" + displayName + '\'' +
-                ", description='" + description + '\'' +
-                ", authType='" + authType + '\'' +
-                ", code='" + code + '\'' +
-                ", authCode='" + authCode + '\'' +
-                ", grantedAuthorities=" + grantedAuthorities +
-                '}';
-    }
 }

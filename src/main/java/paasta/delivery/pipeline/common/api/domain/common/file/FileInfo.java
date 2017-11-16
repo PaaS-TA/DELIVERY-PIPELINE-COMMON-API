@@ -76,14 +76,4 @@ public class FileInfo {
         this.created = created;
     }
 
-    @Override
-    public String toString() {
-        return "FileInfo{" +
-                "id=" + id +
-                ", originalFileName='" + originalFileName + '\'' +
-                ", storedFileName='" + storedFileName + '\'' +
-                ", fileUrl='" + fileUrl + '\'' +
-                ", created=" + created +
-                '}';
-    }
 }

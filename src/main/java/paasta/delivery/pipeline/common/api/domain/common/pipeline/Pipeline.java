@@ -99,7 +99,6 @@ public class Pipeline {
         this.lastModified = lastModified;
     }
 
-
     public ServiceInstances getServiceInstances() {
         return serviceInstances;
     }
@@ -124,17 +123,4 @@ public class Pipeline {
         this.lastModifiedString = lastModifiedString;
     }
 
-    @Override
-    public String toString() {
-        return "Pipeline{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", serviceInstances=" + serviceInstances +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                ", createdString='" + createdString + '\'' +
-                ", lastModifiedString='" + lastModifiedString + '\'' +
-                '}';
-    }
 }

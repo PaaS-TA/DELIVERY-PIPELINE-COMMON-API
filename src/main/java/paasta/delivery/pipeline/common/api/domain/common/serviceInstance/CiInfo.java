@@ -1,10 +1,9 @@
 package paasta.delivery.pipeline.common.api.domain.common.serviceInstance;
 
-import paasta.delivery.pipeline.common.api.domain.common.authority.GrantedAuthority;
-import paasta.delivery.pipeline.common.api.domain.common.user.User;
-
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by hrjin on 2017-05-29.
@@ -30,6 +29,7 @@ public class CiInfo {
     private String status;
 
     public CiInfo() {
+        // DO NOTHING
     }
 
     public Long getId() {

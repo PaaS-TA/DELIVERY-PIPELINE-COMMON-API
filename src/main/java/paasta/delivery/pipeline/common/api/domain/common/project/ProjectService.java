@@ -83,6 +83,7 @@ public class ProjectService {
 
     public String qualityProfileDelete(Project project) {
         // TODO
+        project.setId(1L);
 //        List<Project> result = new ArrayList<>();
 //        int profileId = (int)(long)project.getId();
 //        project.setQualityProfileId(profileId);
@@ -94,7 +95,7 @@ public class ProjectService {
 //                projectRepository.save(result.get(i));
 //            }
 //        }
-
+//
         return Constants.RESULT_STATUS_SUCCESS;
     }
 

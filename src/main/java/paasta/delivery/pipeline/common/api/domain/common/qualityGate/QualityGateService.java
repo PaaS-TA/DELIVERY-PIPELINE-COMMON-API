@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paasta.delivery.pipeline.common.api.common.Constants;
 
-import paasta.delivery.pipeline.common.api.domain.common.qualityProfile.QualityProfile;
-
 import java.util.List;
 
 /**
@@ -82,7 +80,6 @@ public class QualityGateService {
 
         return Constants.RESULT_STATUS_SUCCESS;
     }*/
-
 
 
 }

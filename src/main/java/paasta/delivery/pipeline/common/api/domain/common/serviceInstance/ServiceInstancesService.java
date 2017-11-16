@@ -1,6 +1,5 @@
 package paasta.delivery.pipeline.common.api.domain.common.serviceInstance;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,22 +7,18 @@ import paasta.delivery.pipeline.common.api.common.Constants;
 
 import java.util.List;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 /**
  * Created by hrjin on 2017-05-29.
  */
 @Service
 public class ServiceInstancesService {
 
-    private final Logger LOGGER = getLogger(getClass());
-
     private final ServiceInstancesRepository serviceInstancesRepository;
 
     private static final String SHARED = "Shared";
 
 
-    private final String USED_SERVER = "Y";
+    private static final String USED_SERVER = "Y";
 
     @Autowired
     private CiInfoService ciInfoService;
@@ -35,18 +30,18 @@ public class ServiceInstancesService {
 
     public ServiceInstances createInstances(@RequestBody ServiceInstances serviceInstances) {
         CiInfo ciInfo;
-        if(serviceInstances.getService_type() == null || serviceInstances.getService_type() == ""){
-            serviceInstances.setService_type(SHARED);
+        if(serviceInstances.getServiceType() == null || serviceInstances.getServiceType() == ""){
+            serviceInstances.setServiceType(SHARED);
         }
 
 
-        ciInfo = ciInfoService.getNotUsedCfinfo(serviceInstances.getService_type());
+        ciInfo = ciInfoService.getNotUsedCfinfo(serviceInstances.getServiceType());
 
         if (ciInfo != null) {
             serviceInstances.setCiServerUrl(ciInfo.getServerUrl());
-            serviceInstances.setService_type(serviceInstances.getService_type());
+            serviceInstances.setServiceType(serviceInstances.getServiceType());
             ServiceInstances newInstances = serviceInstancesRepository.save(serviceInstances);
-            newInstances.setService_type(serviceInstances.getService_type());
+            newInstances.setServiceType(serviceInstances.getServiceType());
             ciInfo.setUsedcount(ciInfo.getUsedcount() + 1);
             ciInfo.setStatus(USED_SERVER);
             ciInfoService.update(ciInfo);
@@ -60,9 +55,9 @@ public class ServiceInstancesService {
     public String deleteInstance(String id) {
         try {
             ServiceInstances serviceInstances = serviceInstancesRepository.getOne(id);
-            String ci_server = serviceInstances.getCiServerUrl();
+            String ciServerUrl = serviceInstances.getCiServerUrl();
             serviceInstancesRepository.delete(id);
-            ciInfoService.recovery(ci_server);
+            ciInfoService.recovery(ciServerUrl);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,6 +74,7 @@ public class ServiceInstancesService {
         // TODO :: REMOVE TEMPORARY VALUE
 //        serviceInstance.setCiServerUrl("http://115.68.46.29");
         serviceInstance.setCiServerUrl("http://115.68.46.216:8088");
+//        serviceInstance.setCiServerUrl("http://115.68.46.184:8088");
         return serviceInstance;
     }
 }

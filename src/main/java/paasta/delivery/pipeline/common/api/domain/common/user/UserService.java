@@ -17,7 +17,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Service
 public class UserService {
 
-    private final Logger LOGGER = getLogger(getClass());
+    private final Logger logger = getLogger(getClass());
     private final CommonService commonService;
     private final UserRepository userRepository;
 
@@ -29,13 +29,13 @@ public class UserService {
 
 
     public UserList getUserList(String reqName, Pageable pageable) {
-        LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        LOGGER.info("  - PageNumber :: {}", pageable.getPageNumber());
-        LOGGER.info("  - PageSize :: {}", pageable.getPageSize());
-        LOGGER.info("  - Sort :: {}", pageable.getSort());
-        LOGGER.info("  - Offset :: {}", pageable.getOffset());
-        LOGGER.info("  - HasPrevious :: {}", pageable.hasPrevious());
-        LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        logger.info("  - PageNumber :: {}", pageable.getPageNumber());
+        logger.info("  - PageSize :: {}", pageable.getPageSize());
+        logger.info("  - Sort :: {}", pageable.getSort());
+        logger.info("  - Offset :: {}", pageable.getOffset());
+        logger.info("  - HasPrevious :: {}", pageable.hasPrevious());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
         UserList userList;
         Page<User> userListPage;
@@ -49,7 +49,7 @@ public class UserService {
         userList = (UserList) commonService.setPageInfo(userListPage, new UserList());
         userList.setUsers(userListPage.getContent());
 
-        LOGGER.info("###### {}", userList);
+        logger.info("###### {}", userList);
         return userList;
     }
 
@@ -61,9 +61,9 @@ public class UserService {
 
 
     public User createUser(@RequestBody User reqUser) {
-        LOGGER.info("####### add :: {}", reqUser.toString());
+        logger.info("####### add :: {}", reqUser.toString());
         User newUser = userRepository.save(reqUser);
-        LOGGER.info("####### add :: result ::{}", newUser.toString());
+        logger.info("####### add :: result ::{}", newUser.toString());
         return newUser;
     }
 

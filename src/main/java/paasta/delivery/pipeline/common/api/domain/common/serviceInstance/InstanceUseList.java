@@ -16,6 +16,7 @@ public class InstanceUseList {
     boolean isLast;
 
     public InstanceUseList() {
+        // DO NOTHING
     }
 
     public List<InstanceUse> getInstanceUses() {

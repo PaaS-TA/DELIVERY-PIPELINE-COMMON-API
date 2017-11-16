@@ -19,7 +19,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Service
 public class InstanceUseService {
 
-    private final Logger LOGGER = getLogger(getClass());
+    private final Logger logger = getLogger(getClass());
     private final CommonService commonService;
     private final InstanceUseRepository instanceUseRepository;
 
@@ -42,13 +42,13 @@ public class InstanceUseService {
 
 
     public InstanceUseList getInstanceUseList(String serviceInstanceId, String userName, String authName, Pageable pageable) {
-        LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        LOGGER.info("  - PageNumber :: {}", pageable.getPageNumber());
-        LOGGER.info("  - PageSize :: {}", pageable.getPageSize());
-        LOGGER.info("  - Sort :: {}", pageable.getSort());
-        LOGGER.info("  - Offset :: {}", pageable.getOffset());
-        LOGGER.info("  - HasPrevious :: {}", pageable.hasPrevious());
-        LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        logger.info("  - PageNumber :: {}", pageable.getPageNumber());
+        logger.info("  - PageSize :: {}", pageable.getPageSize());
+        logger.info("  - Sort :: {}", pageable.getSort());
+        logger.info("  - Offset :: {}", pageable.getOffset());
+        logger.info("  - HasPrevious :: {}", pageable.hasPrevious());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
         InstanceUseList instanceUseList;
         Page<InstanceUse> pageList;
@@ -85,7 +85,7 @@ public class InstanceUseService {
         instanceUseList = (InstanceUseList) commonService.setPageInfo(instanceUsePage, InstanceUseList.class);
         instanceUseList.setInstanceUses(instanceUsePage.getContent());
 
-        LOGGER.info("###### getInstanceUseListByPipelineContributor {}", instanceUseList);
+        logger.info("###### getInstanceUseListByPipelineContributor {}", instanceUseList);
         return instanceUseList;
     }
 

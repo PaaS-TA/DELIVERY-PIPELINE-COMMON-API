@@ -39,7 +39,9 @@ public class GrantedAuthority {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
-    public GrantedAuthority() {}
+    public GrantedAuthority() {
+        // DO NOTHING
+    }
 
     public GrantedAuthority(String id, Long instanceUseId, String authorityId) {
         this.id = id;

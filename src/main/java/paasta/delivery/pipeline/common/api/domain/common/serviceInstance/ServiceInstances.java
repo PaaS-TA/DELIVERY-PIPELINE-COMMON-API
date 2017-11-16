@@ -34,7 +34,7 @@ public class ServiceInstances {
     private String ciServerUrl;
 
     @Transient
-    private String service_type;
+    private String serviceType;
 
 
     public String getId() {
@@ -77,11 +77,11 @@ public class ServiceInstances {
         this.ciServerUrl = ciServerUrl;
     }
 
-    public String getService_type() {
-        return service_type;
+    public String getServiceType() {
+        return serviceType;
     }
 
-    public void setService_type(String service_type) {
-        this.service_type = service_type;
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 }

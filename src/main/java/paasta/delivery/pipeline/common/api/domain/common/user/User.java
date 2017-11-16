@@ -69,6 +69,7 @@ public class User {
 
 
     public User() {
+        // DO NOTHING
     }
 
 

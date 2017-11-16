@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paasta.delivery.pipeline.common.api.common.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +22,6 @@ public class QualityProfileService {
     public QualityProfile createQualityProfile(QualityProfile qualityProfile) {
         return qualityProfileRepository.save(qualityProfile);
     }
-
 
 
     public List<QualityProfile> getQualityProfileList(String serviceInstancesId) {
@@ -83,9 +81,7 @@ public class QualityProfileService {
         qualityProfileRepository.save(result);
         return Constants.RESULT_STATUS_SUCCESS;
     }*/
-
-
-    public QualityProfile getQualityProfile(long id){
+    public QualityProfile getQualityProfile(long id) {
         return qualityProfileRepository.findOne(id);
     }
 }

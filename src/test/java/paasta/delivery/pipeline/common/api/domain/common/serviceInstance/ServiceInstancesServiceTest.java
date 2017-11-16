@@ -17,10 +17,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -76,8 +72,8 @@ public class ServiceInstancesServiceTest {
         gTestServiceInstances.setInstanceUseList(new ArrayList<>());
         gTestServiceInstances.setOwner(SERVICE_INSTANCES_OWNER);
         gTestServiceInstances.setCiServerUrl(SERVICE_INSTANCES_CI_SERVER_URL);
-        gTestServiceInstances.setService_type("Shared");
-        gTestResultServiceInstances.setService_type("Shared");
+        gTestServiceInstances.setServiceType("Shared");
+        gTestResultServiceInstances.setServiceType("Shared");
         gTestResultServiceInstances.setId(SERVICE_INSTANCES_ID);
         gTestResultServiceInstances.setPipelineList(new ArrayList<>());
         gTestResultServiceInstances.setInstanceUseList(new ArrayList<>());

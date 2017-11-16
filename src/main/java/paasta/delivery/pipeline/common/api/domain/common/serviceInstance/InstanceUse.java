@@ -38,6 +38,7 @@ public class InstanceUse {
     private List<GrantedAuthority> grantedAuthorities;
 
     public InstanceUse() {
+        // DO NOTHING
     }
 
     public InstanceUse(ServiceInstances serviceInstances, User user) {

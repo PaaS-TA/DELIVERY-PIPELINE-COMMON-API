@@ -18,6 +18,7 @@ public class PipelineList {
     boolean isLast;
 
     public PipelineList() {
+        // DO NOTHING
     }
 
     public PipelineList(List<Pipeline> pipelines) {

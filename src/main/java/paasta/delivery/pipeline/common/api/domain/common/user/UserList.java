@@ -16,6 +16,7 @@ public class UserList {
     boolean isLast;
 
     public UserList() {
+        // DO NOTHING
     }
 
     public UserList(List<User> users) {

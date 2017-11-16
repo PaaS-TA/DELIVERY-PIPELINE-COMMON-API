@@ -38,7 +38,9 @@ public class Authority {
     @Transient
     private List<GrantedAuthority> grantedAuthorities;
 
-    public Authority() {}
+    public Authority() {
+        // DO NOTHING
+    }
 
     public Authority(String id) {
         this.id = id;

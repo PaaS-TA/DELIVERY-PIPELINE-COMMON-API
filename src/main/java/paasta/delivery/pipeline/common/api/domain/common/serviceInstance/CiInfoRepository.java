@@ -1,6 +1,5 @@
 package paasta.delivery.pipeline.common.api.domain.common.serviceInstance;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +15,5 @@ public interface CiInfoRepository extends JpaRepository<CiInfo, Long> {
 
     List<CiInfo> findByTypeOrderByUsedcount(String type);
 
-    CiInfo findByServerUrl(String server_Url);
+    CiInfo findByServerUrl(String serverUrl);
 }

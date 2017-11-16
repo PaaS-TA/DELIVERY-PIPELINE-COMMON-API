@@ -51,6 +51,7 @@ public class Pipeline {
     private String lastModifiedString;
 
     public Pipeline() {
+        // DO NOTHING
     }
 
     public Pipeline(String name, String description, ServiceInstances serviceInstances) {

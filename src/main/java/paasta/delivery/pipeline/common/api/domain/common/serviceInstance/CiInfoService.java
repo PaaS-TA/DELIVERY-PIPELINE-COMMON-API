@@ -3,7 +3,6 @@ package paasta.delivery.pipeline.common.api.domain.common.serviceInstance;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import paasta.delivery.pipeline.common.api.common.CommonService;
 
 import java.util.List;
 
@@ -15,19 +14,14 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Service
 public class CiInfoService {
 
-    private final Logger LOGGER = getLogger(getClass());
-    private final CommonService commonService;
-    private final CiInfoRepository ciInfoRepository;
-
-    private final String NOT_USED_SERVER = "N";
-
-    private static final String SHARED = "Shared";
+    private final Logger logger = getLogger(getClass());
     private static final String DEDICATED = "Dedicated";
+    private final CiInfoRepository ciInfoRepository;
+    private static final String NOT_USED_SERVER = "N";
 
 
     @Autowired
-    public CiInfoService(CommonService commonService, CiInfoRepository ciInfoRepository) {
-        this.commonService = commonService;
+    public CiInfoService(CiInfoRepository ciInfoRepository) {
         this.ciInfoRepository = ciInfoRepository;
     }
 
@@ -54,14 +48,15 @@ public class CiInfoService {
         return true;
     }
 
-    public boolean recovery(String server_url) {
+    public boolean recovery(String serverUrl) {
         try {
-            CiInfo ciInfo = ciInfoRepository.findByServerUrl(server_url);
+            CiInfo ciInfo = ciInfoRepository.findByServerUrl(serverUrl);
             if (ciInfo != null) {
                 ciInfo.setStatus(NOT_USED_SERVER);
                 ciInfoRepository.save(ciInfo);
             }
         } catch (Exception e) {
+            logger.error("Exception :: {}", e);
 
         }
         return true;

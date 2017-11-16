@@ -32,14 +32,18 @@ public class ProjectServiceTest {
     private static final Boolean LINKED = true;
     private static final String GATE_DEFAULT_YN = "N";
     private static final String PROFILE_DEFAULT_YN = "N";
+    private static final long PROJECT_ID = 2L;
     private static final String PROJECT_NAME = "test-project-name";
+    private static final String PROJECT_KEY = "test-project-key";
     private static final String QUALITY_PROFILE_KEY = "test-quality-profile-key";
     private static final int QUALITY_GATE_ID = 1;
     private static final String SERVICE_INSTANCES_ID = "test-service-instances-id";
     private static final int PIPELINE_ID = 1;
     private static final long JOB_ID = 1L;
     private static final Date TEST_CREATED = new Date();
+    private static final String TEST_CREATED_STRING = "test-created-string";
     private static final Date TEST_LAST_MODIFIED = new Date();
+    private static final String TEST_LAST_MODIFIED_STRING = "test-last-modified-string";
     private static final String RESULT_STATUS = "SUCCESS";
 
     private static Project testModel = null;
@@ -64,7 +68,9 @@ public class ProjectServiceTest {
         testResultList = new ArrayList<>();
 
         testModel.setId(ID);
+        testModel.setProjectId(PROJECT_ID);
         testModel.setProjectName(PROJECT_NAME);
+        testModel.setProjectKey(PROJECT_KEY);
         testModel.setJobId(JOB_ID);
         testModel.setQualityProfileKey(QUALITY_PROFILE_KEY);
         testModel.setQualityGateId(QUALITY_GATE_ID);
@@ -76,24 +82,30 @@ public class ProjectServiceTest {
         testModel.setProfileDefaultYn(PROFILE_DEFAULT_YN);
         testModel.setCreated(TEST_CREATED);
         testModel.setLastModified(TEST_LAST_MODIFIED);
+        testModel.setCreatedString(TEST_CREATED_STRING);
+        testModel.setLastModifiedString(TEST_LAST_MODIFIED_STRING);
 
         resultModel.setId(ID);
+        resultModel.setProjectId(PROJECT_ID);
         resultModel.setProjectName(PROJECT_NAME);
+        resultModel.setProjectKey(PROJECT_KEY);
         resultModel.setJobId(JOB_ID);
         resultModel.setQualityProfileKey(QUALITY_PROFILE_KEY);
         resultModel.setQualityGateId(QUALITY_GATE_ID);
         resultModel.setResultStatus(RESULT_STATUS);
-        resultModel.setGateDefaultYn(GATE_DEFAULT_YN);
-        resultModel.setLinked(LINKED);
+        resultModel.setGateDefaultYn(testModel.getGateDefaultYn());
+        resultModel.setLinked(testModel.getLinked());
         resultModel.setServiceInstancesId(SERVICE_INSTANCES_ID);
         resultModel.setPipelineId(PIPELINE_ID);
-        resultModel.setProfileDefaultYn(PROFILE_DEFAULT_YN);
+        resultModel.setProfileDefaultYn(testModel.getProfileDefaultYn());
         resultModel.setCreated(testModel.getCreated());
         resultModel.setLastModified(testModel.getLastModified());
+        resultModel.setCreatedString(testModel.getCreatedString());
+        resultModel.setLastModifiedString(testModel.getLastModifiedString());
 
         testResultList.add(resultModel);
-
     }
+
 
     /**
      * ProjectsList model valid return List.
@@ -141,7 +153,6 @@ public class ProjectServiceTest {
         Project result = projectService.getProjectKey(testModel);
         assertThat(result).isNotNull();
         assertEquals(ID, result.getId());
-
     }
 
 
@@ -209,7 +220,6 @@ public class ProjectServiceTest {
         assertThat(result).isNotNull();
         assertEquals(ID, result.getId());
         assertEquals(QUALITY_GATE_ID, result.getQualityGateId());
-
     }
 
 
@@ -230,7 +240,6 @@ public class ProjectServiceTest {
 
         assertThat(result).isNotNull();
         assertEquals(ID, result.getId());
-
     }
 
 
@@ -269,7 +278,6 @@ public class ProjectServiceTest {
         Project result = projectService.qualityProfileProjectLiked(testModel);
         assertThat(result).isNotNull();
         assertEquals(ID, result.getId());
-
     }
 
 
@@ -305,7 +313,6 @@ public class ProjectServiceTest {
         String resultString = projectService.qualityProfileDelete(testModel);
         assertThat(resultString).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultString);
-
     }
 
 
@@ -319,9 +326,24 @@ public class ProjectServiceTest {
         when(projectRepository.findOne(testModel.getId())).thenReturn(resultModel);
         when(projectRepository.save(resultModel)).thenReturn(resultModel);
 
-        Project result = projectService.setUpdateProject(testModel);
-        assertThat(result).isNotNull();
-        assertEquals(ID, result.getId());
+        Project resultModel = projectService.setUpdateProject(testModel);
+        assertThat(resultModel).isNotNull();
+        assertEquals(ID, resultModel.getId());
+    }
+
+
+    /**
+     * Gets project by id valid return.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void getProjectById_Valid_Return() throws Exception {
+        when(projectRepository.findOne(ID)).thenReturn(resultModel);
+
+        Project resultModel = projectService.getProjectById(ID);
+        assertThat(resultModel).isNotNull();
+        assertEquals(ID, resultModel.getId());
     }
 
 }

@@ -25,14 +25,14 @@ public class QualityGateController {
 
 
     /**
-     * QualityGate 목록 조회
+     * QualityGate 목록 조회 -> sona에서 정보 추출로 변경
      *
      * @return QualityGate List
      */
-    @RequestMapping(value = "/qualityGateList", method = RequestMethod.GET)
-    public List getQualityGateList(@RequestParam String serviceInstancesId) {
-        return qualityGateService.getQualityGateList(serviceInstancesId);
-    }
+//    @RequestMapping(value = "/qualityGateList", method = RequestMethod.GET)
+//    public List getQualityGateList(@RequestParam String serviceInstancesId) {
+//        return qualityGateService.getQualityGateList(serviceInstancesId);
+//    }
 
 
     /**

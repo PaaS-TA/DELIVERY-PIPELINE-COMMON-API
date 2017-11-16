@@ -117,8 +117,8 @@ public class Job {
     @Column(name = "inspection_project_key")
     private String inspectionProjectKey;
 
-    @Column(name = "inspection_profile_id")
-    private String inspectionProfileId;
+    @Column(name = "inspection_profile_key")
+    private String inspectionProfileKey;
 
     @Column(name = "inspection_gate_id")
     private String inspectionGateId;
@@ -422,12 +422,12 @@ public class Job {
         this.inspectionProjectKey = inspectionProjectKey;
     }
 
-    public String getInspectionProfileId() {
-        return inspectionProfileId;
+    public String getInspectionProfileKey() {
+        return inspectionProfileKey;
     }
 
-    public void setInspectionProfileId(String inspectionProfileId) {
-        this.inspectionProfileId = inspectionProfileId;
+    public void setInspectionProfileKey(String inspectionProfileKey) {
+        this.inspectionProfileKey = inspectionProfileKey;
     }
 
     public String getInspectionGateId() {

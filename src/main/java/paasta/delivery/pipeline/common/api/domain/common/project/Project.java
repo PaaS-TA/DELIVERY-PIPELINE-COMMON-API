@@ -41,8 +41,8 @@ public class Project {
     @Column(name = "project_key", nullable = false)
     private String projectKey; // sonarqube의 key 값
 
-    @Column(name = "quality_profile_id", nullable = false)
-    private int qualityProfileId;
+    @Column(name = "quality_profile_key", nullable = false)
+    private String qualityProfileKey; // key -> qualityProfileKey
 
     @Column(name = "quality_gate_id", nullable = false)
     private int qualityGateId;
@@ -62,9 +62,6 @@ public class Project {
 
     @Transient
     private String lastModifiedString;
-
-    @Transient
-    private String qualityProfileKey; // key -> qualityProfileKey
 
     @Transient
     private String resultStatus;
@@ -135,12 +132,12 @@ public class Project {
         this.projectKey = projectKey;
     }
 
-    public int getQualityProfileId() {
-        return qualityProfileId;
+    public String getQualityProfileKey() {
+        return qualityProfileKey;
     }
 
-    public void setQualityProfileId(int qualityProfileId) {
-        this.qualityProfileId = qualityProfileId;
+    public void setQualityProfileKey(String qualityProfileKey) {
+        this.qualityProfileKey = qualityProfileKey;
     }
 
     public int getQualityGateId() {
@@ -181,14 +178,6 @@ public class Project {
 
     public void setLastModifiedString(String lastModifiedString) {
         this.lastModifiedString = lastModifiedString;
-    }
-
-    public String getQualityProfileKey() {
-        return qualityProfileKey;
-    }
-
-    public void setQualityProfileKey(String qualityProfileKey) {
-        this.qualityProfileKey = qualityProfileKey;
     }
 
     public String getResultStatus() {

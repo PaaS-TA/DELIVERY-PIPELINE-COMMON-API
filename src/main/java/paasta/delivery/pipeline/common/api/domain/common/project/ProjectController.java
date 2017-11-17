@@ -1,9 +1,12 @@
 package paasta.delivery.pipeline.common.api.domain.common.project;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Created by hrjin on 2017-06-23.
@@ -13,7 +16,7 @@ import java.util.List;
 public class ProjectController {
     private final ProjectService projectService;
 
-
+    private final Logger LOGGER = getLogger(getClass());
     @Autowired
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
@@ -21,7 +24,7 @@ public class ProjectController {
 
 
     @RequestMapping(value = "/projectsList", method = RequestMethod.POST)
-    public List getProjectsList(@RequestBody Project project) {
+    public List<Project> getProjectsList(@RequestBody Project project) {
         return projectService.getProjectsList(project);
     }
 
@@ -76,7 +79,7 @@ public class ProjectController {
      */
     @RequestMapping(value = "/qualityGateProjectLiked", method = RequestMethod.PUT)
     public Project qualityGateProjectLiked(@RequestBody Project project) {
-        return projectService.qualityGateProjectLiked(project);
+        return projectService.setqualityGateProjectLiked(project);
     }
 
 

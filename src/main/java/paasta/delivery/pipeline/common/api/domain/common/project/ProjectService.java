@@ -1,5 +1,6 @@
 package paasta.delivery.pipeline.common.api.domain.common.project;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paasta.delivery.pipeline.common.api.common.Constants;
@@ -7,11 +8,14 @@ import paasta.delivery.pipeline.common.api.common.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 /**
  * Created by hrjin on 2017-06-23.
  */
 @Service
 public class ProjectService {
+    private final Logger LOGGER = getLogger(getClass());
 
     private final ProjectRepository projectRepository;
 
@@ -55,6 +59,19 @@ public class ProjectService {
 //    }
 
 
+    public Project setqualityGateProjectLiked(Project project) {
+
+        Project result = projectRepository.findOne(project.getId());
+        if(!project.getLinked()){
+            result.setQualityGateId(0);
+        }else{
+            result.setQualityGateId(project.getQualityGateId());
+        }
+        return projectRepository.save(result);
+    }
+
+
+
     public Project qualityGateProjectLiked(Project project) {
         Project result = new Project();
         if (project.getLinked().equals(false)) {
@@ -62,21 +79,17 @@ public class ProjectService {
         }
 
         result = projectRepository.findOne(project.getId());
-        result.setQualityGateId(project.getQualityGateId());
 
         return projectRepository.save(result);
     }
 
 
+
     public Project qualityProfileProjectLiked(Project project) {
         Project result = new Project();
-        // TODO
-//        if (project.getLinked().equals(false)) {
-//            project.setQualityProfileId(0);
-//        }
-
+        LOGGER.info("COMMON : " + project.getId());;
         result = projectRepository.findOne(project.getId());
-        result.setQualityProfileKey(project.getQualityProfileKey());
+        //result.setQualityProfileKey(project.getQualityProfileKey());
 
         return projectRepository.save(result);
     }

@@ -1,6 +1,7 @@
 package paasta.delivery.pipeline.common.api.domain.common.project;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 import paasta.delivery.pipeline.common.api.common.Constants;
 
@@ -75,6 +76,10 @@ public class Project {
 
     @Transient
     private String profileDefaultYn;
+
+    @Formula("(SELECT concat((SELECT p.name FROM pipeline p WHERE p.id = sp.pipeline_id), '_', (SELECT j.job_name FROM job j WHERE j.id = sp.job_id)) FROM sonar_project sp WHERE sp.id = id)")
+    private String projectViewName;
+
 
     public long getId() {
         return id;
@@ -210,6 +215,14 @@ public class Project {
 
     public void setProfileDefaultYn(String profileDefaultYn) {
         this.profileDefaultYn = profileDefaultYn;
+    }
+
+    public String getProjectViewName() {
+        return projectViewName;
+    }
+
+    public void setProjectViewName(String projectViewName) {
+        this.projectViewName = projectViewName;
     }
 
 }

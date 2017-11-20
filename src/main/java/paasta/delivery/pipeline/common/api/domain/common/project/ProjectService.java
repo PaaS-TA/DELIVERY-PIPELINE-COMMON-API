@@ -140,7 +140,7 @@ public class ProjectService {
      * @param project the project
      * @return the update project
      */
-    public Project setUpdateProject(Project project) {
+    Project setUpdateProject(Project project) {
         Project projectDetail = projectRepository.findOne(project.getId());
 
         projectDetail.setQualityProfileKey(project.getQualityProfileKey());
@@ -157,7 +157,7 @@ public class ProjectService {
      * @param id the id
      * @return the project
      */
-    public Project getProjectById(long id) {
+    Project getProjectById(long id) {
         return projectRepository.findOne(id);
     }
 

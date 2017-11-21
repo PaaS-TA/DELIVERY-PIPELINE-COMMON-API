@@ -25,12 +25,7 @@ public class ProjectController {
 
 
     @RequestMapping(value = "/projectsList", method = RequestMethod.GET)
-    public List<Project> getProjectsList(@RequestParam Long projectId, @RequestParam String projectName, @RequestParam String serviceInstancesId, @RequestParam String projectKey) {
-        Project project = new Project();
-        project.setProjectId(projectId);
-        project.setProjectName(projectName);
-        project.setServiceInstancesId(serviceInstancesId);
-        project.setProjectKey(projectKey);
+    public List<Project> getProjectsList(Project project) {
         return projectService.getProjectsList(project);
     }
 

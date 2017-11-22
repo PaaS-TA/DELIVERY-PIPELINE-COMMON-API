@@ -63,8 +63,10 @@ public class ProjectService {
 
         Project result = projectRepository.findOne(project.getId());
         if(!project.getLinked()){
+            LOGGER.info("GATE REMOVE");
             result.setQualityGateId(0);
         }else{
+            LOGGER.info("GATE UPDATE");
             result.setQualityGateId(project.getQualityGateId());
         }
         return projectRepository.save(result);

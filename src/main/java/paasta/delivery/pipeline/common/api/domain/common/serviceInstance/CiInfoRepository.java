@@ -16,4 +16,6 @@ public interface CiInfoRepository extends JpaRepository<CiInfo, Long> {
     List<CiInfo> findByTypeOrderByUsedcount(String type);
 
     CiInfo findByServerUrl(String serverUrl);
+
+    List<CiInfo> findByServerUrlNotIn(List<String> serverUrls);
 }

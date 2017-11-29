@@ -21,7 +21,7 @@ public class ServiceInstancesController {
     }
 
     /*
-    * 나중에 broker 에서 서비스 인스턴스 생성하도록 연결
+    * 서비스 인스턴스 생성
     *
     * */
     @RequestMapping(value = "", method = RequestMethod.POST)

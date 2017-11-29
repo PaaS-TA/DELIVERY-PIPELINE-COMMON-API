@@ -1,9 +1,6 @@
 package paasta.delivery.pipeline.common.api.domain.common.serviceInstance;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by hrjin on 2017-05-29.
@@ -13,6 +10,7 @@ import javax.persistence.Table;
 public class CiInfo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

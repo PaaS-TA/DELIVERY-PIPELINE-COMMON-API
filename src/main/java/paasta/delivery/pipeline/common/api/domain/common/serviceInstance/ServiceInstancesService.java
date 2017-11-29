@@ -71,7 +71,6 @@ public class ServiceInstancesService {
 
     public ServiceInstances getServiceInstance(String id) {
         ServiceInstances serviceInstance = serviceInstancesRepository.findOne(id);
-        serviceInstance.setCiServerUrl("http://115.68.46.220:8088");
         return serviceInstance;
     }
 }

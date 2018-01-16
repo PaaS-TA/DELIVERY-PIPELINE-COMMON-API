@@ -102,4 +102,8 @@ public class InstanceUseService {
     public InstanceUse updateInstanceUse(InstanceUse updateInstanceUse) {
         return instanceUseRepository.save(updateInstanceUse);
     }
+
+    public List<InstanceUse> findByServiceInstancesId(String id) {
+        return instanceUseRepository.findByServiceInstancesId(id);
+    }
 }

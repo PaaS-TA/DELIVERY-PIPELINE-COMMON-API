@@ -184,7 +184,7 @@ public class InstanceUseController {
             grantedAuthority.setAuthorityId(authList.get(i));
             grantedAuthority.setInstanceUseId(updateInstanceUse.getId());
 
-            if (instanceUse.getPipelineId() != null) {
+            if (instanceUse.getPipelineId() != null && instanceUse.getPipelineId().intValue() != 0) {
                 grantedAuthority.setAuthCode(instanceUse.getPipelineId());
             }
             //grantedAuthority.setAuthCode(instanceUse.getPipelineId());

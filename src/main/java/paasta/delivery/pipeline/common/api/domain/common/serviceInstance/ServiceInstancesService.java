@@ -92,6 +92,30 @@ public class ServiceInstancesService {
             ServiceInstances serviceInstances = serviceInstancesRepository.getOne(id);
             String ciServerUrl = serviceInstances.getCiServerUrl();
 
+            // 1. cf url 삭제
+            List<CfUrl> cfUrlList = cfUrlRepository.findByServiceInstancesId(id);
+            if(cfUrlList.size() > 0) {
+                for (int i = 0; i < cfUrlList.size(); i++) {
+                    cfInfoRepository.delete(cfUrlList.get(i).getId());
+                }
+            }
+
+            // 1. cf info 삭제
+            List<CfInfo> cfInfoList = cfInfoRepository.findByServiceInstancesId(id);
+            if(cfInfoList.size() > 0) {
+                for (int i = 0; i < cfInfoList.size(); i++) {
+                    cfInfoRepository.deleteCfInoById(cfInfoList.get(i).getId());
+                }
+            }
+
+            // 1. 프로젝트 삭제
+            List<Project> projects = projectRepository.findByserviceInstancesId(id);
+            if(projects.size() > 0) {
+                for (int i = 0; i < projects.size(); i++) {
+                    projectService.deleteProject(projects.get(i));
+                }
+            }
+
             // 1.  서비스 인스턴스가 삭제되기 전 관련 Granted_Authority 먼저 삭제.
             List<InstanceUse> instanceUseList = instanceUseService.findByServiceInstancesId(serviceInstances.getId());
             for(int i = 0; i < instanceUseList.size(); i++){
@@ -110,30 +134,6 @@ public class ServiceInstancesService {
             if(deletePipelineList.size() > 0) {
                 for (int i = 0; i < deletePipelineList.size(); i++) {
                     pipelineService.deletePipeline(deletePipelineList.get(i).getId());
-                }
-            }
-
-            // 1. 프로젝트 삭제
-            List<Project> projects = projectRepository.findByserviceInstancesId(id);
-            if(projects.size() > 0) {
-                for (int i = 0; i < projects.size(); i++) {
-                    projectService.deleteProject(projects.get(i));
-                }
-            }
-
-            // 1. cf info 삭제
-            List<CfInfo> cfInfoList = cfInfoRepository.findByServiceInstancesId(id);
-            if(cfInfoList.size() > 0) {
-                for (int i = 0; i < cfInfoList.size(); i++) {
-                    cfInfoRepository.deleteCfInoById(cfInfoList.get(i).getId());
-                }
-            }
-
-            // 1. cf url 삭제
-            List<CfUrl> cfUrlList = cfUrlRepository.findByServiceInstancesId(id);
-            if(cfUrlList.size() > 0) {
-                for (int i = 0; i < cfUrlList.size(); i++) {
-                    cfInfoRepository.delete(cfUrlList.get(i).getId());
                 }
             }
 

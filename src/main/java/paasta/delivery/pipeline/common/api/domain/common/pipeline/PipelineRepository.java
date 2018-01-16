@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by user on 2017-05-16.
  */
@@ -14,4 +16,6 @@ public interface PipelineRepository extends JpaRepository<Pipeline, Long>, JpaSp
     Page<Pipeline> findByServiceInstancesId(String suid, Pageable pageable);
 
     Page<Pipeline> findByServiceInstancesIdAndNameContaining(String suid, String reqName, Pageable pageable);
+
+    List<Pipeline> findByServiceInstancesId(String id);
 }

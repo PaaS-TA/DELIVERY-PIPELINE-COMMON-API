@@ -25,4 +25,6 @@ public interface CfUrlRepository extends JpaRepository<CfUrl, Long> {
      * @return the list
      */
     List<CfUrl> findAllByServiceInstancesIdOrderByCreatedDesc(String serviceInstancesId);
+
+    List<CfUrl> findByServiceInstancesId(String id);
 }

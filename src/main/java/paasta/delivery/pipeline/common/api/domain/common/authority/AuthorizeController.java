@@ -44,9 +44,15 @@ public class AuthorizeController {
      */
     @RequestMapping(value = "", method = RequestMethod.POST)
     public GrantedAuthority authorize(HttpServletResponse response, @RequestBody GrantedAuthority newGrantedAuthority) throws IOException {
+
+        LOGGER.info("############# newGrantedAuthority:::{}", newGrantedAuthority.getAuthCode());
+
         newGrantedAuthority.setId(UUID.randomUUID().toString());
         newGrantedAuthority.setAuthority(new Authority(newGrantedAuthority.getAuthorityId()));
 
+        if(newGrantedAuthority.getAuthCode() == null) {
+            newGrantedAuthority.setAuthCode((long) 0);
+        }
         return grantedAuthorityService.createGrantedAuthority(newGrantedAuthority);
     }
 

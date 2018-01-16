@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * paastaDeliveryPipelineApi
  * paasta.delivery.pipeline.common.api.cfInfo
@@ -47,4 +49,8 @@ public interface CfInfoRepository extends JpaRepository<CfInfo, Long> {
      * @return the int
      */
     int countByServiceInstancesIdAndCfName(String serviceInstancesId, String cfName);
+
+    List<CfInfo> findByServiceInstancesId(String id);
+
+    void deleteCfInoById(long id);
 }

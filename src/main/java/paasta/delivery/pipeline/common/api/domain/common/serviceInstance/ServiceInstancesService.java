@@ -3,6 +3,7 @@ package paasta.delivery.pipeline.common.api.domain.common.serviceInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import paasta.delivery.pipeline.common.api.common.Constants;
@@ -96,7 +97,7 @@ public class ServiceInstancesService {
             List<CfUrl> cfUrlList = cfUrlRepository.findByServiceInstancesId(id);
             if(cfUrlList.size() > 0) {
                 for (int i = 0; i < cfUrlList.size(); i++) {
-                    cfInfoRepository.delete(cfUrlList.get(i).getId());
+                    cfUrlRepository.delete(cfUrlList.get(i).getId());
                 }
             }
 
@@ -136,11 +137,10 @@ public class ServiceInstancesService {
                     pipelineService.deletePipeline(deletePipelineList.get(i).getId());
                 }
             }
-
             serviceInstancesRepository.delete(id);
             ciInfoService.recovery(ciServerUrl);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (EmptyResultDataAccessException e){
+
         }
         return Constants.RESULT_STATUS_SUCCESS;
     }

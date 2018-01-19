@@ -40,14 +40,6 @@ public class RestTemplateService {
         @Value("${deliveryPipelineApi.url}")
         private String deliveryPipelineApiUrl;
 
-        //  INSPECTION API
-        @Value("${inspectionApi.url}")
-        private String inspectionApiUrl;
-
-        //  BINARY STORAGE API
-        @Value("${binaryStorageApi.url}")
-        private String binaryStorageApiUrl;
-
 
         /**
          * Instantiates a new Rest template service.
@@ -55,19 +47,11 @@ public class RestTemplateService {
          * @param restTemplate                             the rest template
          * @param deliveryPipelineApiAuthorizationId       the delivery pipeline api authorization id
          * @param deliveryPipelineApiAuthorizationPassword the delivery pipeline api authorization password
-         * @param inspectionApiAuthorizationId             the inspection api authorization id
-         * @param inspectionApiAuthorizationPassword       the inspection api authorization password
-         * @param binaryStorageApiAuthorizationId          the binary storage api authorization id
-         * @param binaryStorageApiAuthorizationPassword    the binary storage api authorization password
          */
         @Autowired
         public RestTemplateService(RestTemplate restTemplate,
                                    @Value("${deliveryPipelineApi.authorization.id}") String deliveryPipelineApiAuthorizationId,
-                                   @Value("${deliveryPipelineApi.authorization.password}") String deliveryPipelineApiAuthorizationPassword,
-                                   @Value("${inspectionApi.authorization.id}") String inspectionApiAuthorizationId,
-                                   @Value("${inspectionApi.authorization.password}") String inspectionApiAuthorizationPassword,
-                                   @Value("${binaryStorageApi.authorization.id}") String binaryStorageApiAuthorizationId,
-                                   @Value("${binaryStorageApi.authorization.password}") String binaryStorageApiAuthorizationPassword) {
+                                   @Value("${deliveryPipelineApi.authorization.password}") String deliveryPipelineApiAuthorizationPassword) {
             this.restTemplate = restTemplate;
 
             this.deliveryPipelineApiBase64Authorization = "Basic "

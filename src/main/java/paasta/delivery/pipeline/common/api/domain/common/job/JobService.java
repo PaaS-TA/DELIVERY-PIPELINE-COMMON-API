@@ -40,7 +40,7 @@ public class JobService {
      * @param pipelineId the pipeline id
      * @return the job list by pipeline id order by group order asc job order asc
      */
-    List<Job> getJobListByPipelineIdOrderByGroupOrderAscJobOrderAsc(int pipelineId) {
+    public List<Job> getJobListByPipelineIdOrderByGroupOrderAscJobOrderAsc(int pipelineId) {
         return jobRepository.findAllByPipelineIdOrderByGroupOrderAscJobOrderAsc(pipelineId);
     }
 
@@ -53,7 +53,7 @@ public class JobService {
      * @param jobType    the job type
      * @return the job list pageable
      */
-    List<Job> getJobListPageable(Pageable pageable, int pipelineId, String jobType) {
+    public List<Job> getJobListPageable(Pageable pageable, int pipelineId, String jobType) {
         List<Job> resultList;
 
         if (pipelineId > 0) {

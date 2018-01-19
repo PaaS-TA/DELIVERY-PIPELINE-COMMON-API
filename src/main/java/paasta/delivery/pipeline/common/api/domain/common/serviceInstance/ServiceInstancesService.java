@@ -134,7 +134,8 @@ public class ServiceInstancesService {
             // 2. deletePipelineList 가 존재하면 해당 파이프라인 목록으로 for 문을 작성한다. 이 때 PipelineService 를 이용하여 Pipeline 를 차례대로 삭제한다.
             if(deletePipelineList.size() > 0) {
                 for (int i = 0; i < deletePipelineList.size(); i++) {
-                    pipelineService.deletePipeline(deletePipelineList.get(i).getId());
+                    //pipelineService.deletePipeline(deletePipelineList.get(i).getId());
+                    pipelineService.setDeletePipeline(deletePipelineList.get(i).getId());
                 }
             }
             serviceInstancesRepository.delete(id);

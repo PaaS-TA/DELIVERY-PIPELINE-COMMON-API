@@ -14,6 +14,11 @@ public class Constants {
     public static final String STRING_DATE_TYPE = "yyyy-MM-dd HH:mm:ss";
     public static final String EMPTY_VALUE = "EMPTY_VALUE";
 
+    /**
+     * The constant TARGET_DELIVERY_PIPELINE_API.
+     */
+    public static final String TARGET_DELIVERY_PIPELINE_API = "deliveryPipelineApi";
+
 
     /**
      * The enum Aes 256 type.

@@ -98,7 +98,6 @@ public class ServiceInstancesService {
                 List<CfUrl> cfUrlList = cfUrlRepository.findByServiceInstancesId(serviceInstances.getId());
                 if (cfUrlList.size() > 0) {
                     for (int i = 0; i < cfUrlList.size(); i++) {
-                        LOGGER.info("######### 1111111111111 :::::: " + cfUrlList.get(i).getId());
                         cfUrlRepository.delete(cfUrlList.get(i).getId());
                     }
                 }
@@ -107,7 +106,6 @@ public class ServiceInstancesService {
                 List<CfInfo> cfInfoList = cfInfoRepository.findByServiceInstancesId(serviceInstances.getId());
                 if (cfInfoList.size() > 0) {
                     for (int i = 0; i < cfInfoList.size(); i++) {
-                        LOGGER.info("######### 222222222222 :::::::: " + cfInfoList.get(i).getId());
                         cfInfoRepository.deleteCfInoById(cfInfoList.get(i).getId());
                     }
                 }
@@ -116,7 +114,6 @@ public class ServiceInstancesService {
                 List<Project> projects = projectRepository.findByserviceInstancesId(serviceInstances.getId());
                 if (projects.size() > 0) {
                     for (int i = 0; i < projects.size(); i++) {
-                        LOGGER.info("######### 33333333333333 :::::::: " + projects.get(i));
                         projectService.deleteProject(projects.get(i));
                     }
                 }
@@ -125,11 +122,7 @@ public class ServiceInstancesService {
                 List<InstanceUse> instanceUseList = instanceUseService.findByServiceInstancesId(serviceInstances.getId());
                 for (int i = 0; i < instanceUseList.size(); i++) {
                     List<GrantedAuthority> grantedAuthorityList = grantedAuthorityService.findByInstanceUseId(instanceUseList.get(i).getId());
-                    LOGGER.info("######### 4444444444444444 지워질 grantedAuthority 목록 :::::::::: " + grantedAuthorityList.size());
                     if (grantedAuthorityList.size() > 0) {
-                        for(int j = 0; j < grantedAuthorityList.size(); j++){
-                            LOGGER.info("######### 555555555555 :::::::::: " + grantedAuthorityList.get(j).getId());
-                        }
                         grantedAuthorityService.deleteGrantedAuthorityRows(grantedAuthorityList);
                     }
                 }
@@ -140,8 +133,6 @@ public class ServiceInstancesService {
                 // 2. deletePipelineList 가 존재하면 해당 파이프라인 목록으로 for 문을 작성한다. 이 때 PipelineService 를 이용하여 Pipeline 를 차례대로 삭제한다.
                 if (deletePipelineList.size() > 0) {
                     for (int i = 0; i < deletePipelineList.size(); i++) {
-                        //pipelineService.deletePipeline(deletePipelineList.get(i).getId());
-                        LOGGER.info("######### 66666666666666 :::::::::: " + deletePipelineList.get(i).getId());
                         pipelineService.setDeletePipeline((int)(long)deletePipelineList.get(i).getId());
                     }
                 }

@@ -99,18 +99,15 @@ public class PipelineService {
         // GET JOB LIST BY PIPELINE ID
         Job job = new Job();
         job.setPipelineId(pipelineId);
-
-        // Gets db job list.
-        int pipelineId2 = job.getPipelineId();
         String jobType = job.getJobType();
 
+        // GETS DB JOB LIST
         List<Job> jobList = null;
-
-        if (pipelineId2 != 0) {
-            jobList = jobService.getJobListByPipelineIdOrderByGroupOrderAscJobOrderAsc(pipelineId2);
+        if (job.getPipelineId() != 0) {
+            jobList = jobService.getJobListByPipelineIdOrderByGroupOrderAscJobOrderAsc(job.getPipelineId());
 
             if (null != jobType && !"".equals(jobType)) {
-                jobList = jobService.getJobListPageable(null, pipelineId2, jobType);
+                jobList = jobService.getJobListPageable(null, job.getPipelineId(), jobType);
             }
         }
 

@@ -92,13 +92,13 @@ public class PipelineService {
         return Constants.RESULT_STATUS_SUCCESS;
     }
 
-    public String setDeletePipeline(long pipelineId) {
+    public String setDeletePipeline(int pipelineId) {
 
-        deletePipeline(pipelineId);
+        deletePipeline((long) pipelineId);
 
         // GET JOB LIST BY PIPELINE ID
         Job job = new Job();
-        job.setPipelineId((int) pipelineId);
+        job.setPipelineId(pipelineId);
 
         // Gets db job list.
         int pipelineId2 = job.getPipelineId();

@@ -142,7 +142,7 @@ public class ServiceInstancesService {
                     for (int i = 0; i < deletePipelineList.size(); i++) {
                         //pipelineService.deletePipeline(deletePipelineList.get(i).getId());
                         LOGGER.info("######### 66666666666666 :::::::::: " + deletePipelineList.get(i).getId());
-                        pipelineService.setDeletePipeline(deletePipelineList.get(i).getId());
+                        pipelineService.setDeletePipeline((int)(long)deletePipelineList.get(i).getId());
                     }
                 }
                 serviceInstancesRepository.delete(id);

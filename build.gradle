@@ -39,7 +39,8 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
 	compile("commons-codec:commons-codec:${commonsCodecVersion}")
 
-	runtime("mysql:mysql-connector-java:${mysqlConnectorJavaVersion}")
+	//runtime("mysql:mysql-connector-java:${mysqlConnectorJavaVersion}")
+	runtime("org.mariadb.jdbc:mariadb-java-client:2.2.6")
 	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 

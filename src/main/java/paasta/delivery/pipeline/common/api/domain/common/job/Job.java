@@ -48,8 +48,17 @@ public class Job {
     @Column(name = "job_order", nullable = false)
     private int jobOrder;
 
+    @Column(name = "language_type")
+    private String languageType;
+
+    @Column(name = "language_type_version")
+    private String languageTypeVersion;
+
     @Column(name = "builder_type")
     private String builderType;
+
+    @Column(name = "builder_type_version")
+    private String builderTypeVersion;
 
     @Column(name = "build_job_id")
     private int buildJobId;
@@ -237,6 +246,18 @@ public class Job {
     public void setJobOrder(int jobOrder) {
         this.jobOrder = jobOrder;
     }
+
+    public String getLanguageType() { return languageType; }
+
+    public void setLanguageType(String languageType) { this.languageType = languageType; }
+
+    public String getLanguageTypeVersion() { return languageTypeVersion; }
+
+    public void setLanguageTypeVersion(String languageTypeVersion) { this.languageTypeVersion = languageTypeVersion; }
+
+    public String getBuilderTypeVersion() { return builderTypeVersion; }
+
+    public void setBuilderTypeVersion(String builderTypeVersion) { this.builderTypeVersion = builderTypeVersion; }
 
     public String getBuilderType() {
         return builderType;
